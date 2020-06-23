@@ -12,6 +12,15 @@ except:
     print("stopwords not found download it from web")
     pass
 
+name = []
+try:
+    with open("../datasets/name.txt", "r") as f:
+        for line in f.readlines():
+            line=line.lower()
+            name.append(line.strip())
+except:
+    print("not use person name")
+    pass
 
 def remove_stopwords(text):
     new_tokens = []
@@ -70,5 +79,8 @@ def remove_email(text):
 
 
 def remove_person_names(text):
-    # TODO: Turkce isimlerin oldugu bir kaynak var. Bir cumle icinde turkce kisi ismi geciyorsa kisi isimlerini silip return et.
-    pass
+    new_names = []
+    for names in text.split(" "):
+        if names.strip() not in name:
+            new_names.append(names.strip())
+    return " ".join(new_names).strip()
