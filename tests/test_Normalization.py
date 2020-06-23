@@ -31,8 +31,8 @@ class TestNormalization(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_remove_email(self):
-        actual=normalization.remove_email("beyzanın mail adresi olduğu için beyzacanbay34@gmail")
-        expected="beyzanın mail adresi olduğu için "
+        actual=normalization.remove_email("beyzanın mail adresi olduğu için beyzacanbay34@gmail ve beyza@gotmail.com")
+        expected="beyzanın mail adresi olduğu için ve "
         self.assertEqual(actual,expected)
 
 if __name__ == '__main__':
