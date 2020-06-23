@@ -39,6 +39,10 @@ class TestNormalization(unittest.TestCase):
         actual = normalization.remove_person_names("beyza bilgisayar mühendisi")
         expected = "bilgisayar mühendisi"
         self.assertEqual(actual,expected)
+    def test_remove_url(self):
+        actual = normalization.remove_url("beyzanın internet adresi http:beyzacanbay")
+        expected = "beyzanın internet adresi "
+        self.assertEqual(actual,expected)
 
 if __name__ == '__main__':
     unittest.main()

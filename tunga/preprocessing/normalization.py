@@ -84,3 +84,7 @@ def remove_person_names(text):
         if names.strip() not in name:
             new_names.append(names.strip())
     return " ".join(new_names).strip()
+
+def remove_url(text):
+    text = re.sub(r'http\S+', '', text)
+    return text
