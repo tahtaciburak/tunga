@@ -92,3 +92,7 @@ def remove_url(text):
 def remove_mentions(text):
     text = re.sub(r'@\S+', '', text)
     return text
+
+def remove_hastag(text):
+    text = re.sub(r'#\S+', '', text)
+    return text

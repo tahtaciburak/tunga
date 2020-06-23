@@ -50,5 +50,10 @@ class TestNormalization(unittest.TestCase):
         expected = "  birlikte çalışıyor"
         self.assertEqual(actual,expected)
 
+    def test_remove_hastag(self):
+        actual = normalization.remove_hastag("#beyza çalışıyor #CRYPTTECH")
+        expected = " çalışıyor "
+        self.assertEqual(actual,expected)
+
 if __name__ == '__main__':
     unittest.main()
