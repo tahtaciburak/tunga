@@ -61,8 +61,13 @@ def remove_emojis(text):
 
 
 def remove_email(text):
-    # TODO: Text icinde gecen email adreslerini sil
-    pass
+    removing = ""
+    lst = re.findall('\S+@\S+', text)
+    for word in lst:
+        if word in text:
+            removing+=text.replace(word,"")
+    return removing
+
 
 
 def remove_person_names(text):
