@@ -25,6 +25,15 @@ class TestNormalization(unittest.TestCase):
         expected = "sen ben ayni duvarda asili duran bir civi fotograf gibiyiz"
         self.assertEqual(actual, expected)
 
-
+    def test_remove_emojis(self):
+        actual = normalization.remove_emojis("bugün biraz hastayım 🦸🏻‍♀️🦸‍♂️🙅🧿🧧")
+        expected = "bugün biraz hastayım "
+        self.assertEqual(actual, expected)
+"""
+    def test_remove_email(self):
+        actual=normalization.remove_email("beyzanın mail adresi olduğu için beyzacanbay34@gmail dir")
+        expected="beyzanın mail adresi olduğu için dir "
+        self.assertEqual(actual,expected)
+"""
 if __name__ == '__main__':
     unittest.main()
