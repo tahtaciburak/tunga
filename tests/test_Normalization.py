@@ -31,29 +31,34 @@ class TestNormalization(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_remove_email(self):
-        actual=normalization.remove_email("beyzanın mail adresi olduğu için beyzacanbay34@gmail")
-        expected="beyzanın mail adresi olduğu için "
-        self.assertEqual(actual,expected)
+        actual = normalization.remove_email("beyzanın mail adresi olduğu için beyzacanbay34@gmail")
+        expected = "beyzanın mail adresi olduğu için "
+        self.assertEqual(actual, expected)
 
     def test_remove_person_names(self):
         actual = normalization.remove_person_names("beyza bilgisayar mühendisi")
         expected = "bilgisayar mühendisi"
-        self.assertEqual(actual,expected)
+        self.assertEqual(actual, expected)
 
     def test_remove_url(self):
         actual = normalization.remove_url("beyzanın internet adresi http:beyzacanbay")
         expected = "beyzanın internet adresi "
-        self.assertEqual(actual,expected)
+        self.assertEqual(actual, expected)
 
     def test_remove_mentions(self):
         actual = normalization.remove_mentions("@beyzacanbay @buraktahtaci birlikte çalışıyor")
         expected = "  birlikte çalışıyor"
-        self.assertEqual(actual,expected)
+        self.assertEqual(actual, expected)
 
     def test_remove_hastag(self):
         actual = normalization.remove_hastag("#beyza çalışıyor #CRYPTTECH")
         expected = " çalışıyor "
-        self.assertEqual(actual,expected)
+        self.assertEqual(actual, expected)
+
+    def test_asciify(self):
+        actual = normalization.asciify("çok güzel çalışıyor")
+        expected = "cok guzel calisiyor"
+
 
 if __name__ == '__main__':
     unittest.main()
