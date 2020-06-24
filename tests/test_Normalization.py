@@ -78,5 +78,16 @@ class TestNormalization(unittest.TestCase):
         expected = "veri kümesi idare eder ancak daha güzel olabilir"
         self.assertEqual(actual,expected)
 
+
+    def test_stem(self):
+        actual = normalization.stem("sonra ekmek aldım")
+        expected = "sonra ekmek al"
+        self.assertEqual(actual,expected)
+
+"""   def test_syllable(self):
+        actual = normalization.syllable("merhaba")
+        expected= "mer ha ba"
+        self.assertEqual(actual, expected)
+"""
 if __name__ == '__main__':
     unittest.main()

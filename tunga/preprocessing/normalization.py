@@ -5,6 +5,7 @@ from Dictionary.Word import Word
 from turkish.deasciifier import Deasciifier
 from Deasciifier.SimpleAsciifier import SimpleAsciifier
 from turkishnlp import detector
+from snowballstemmer import TurkishStemmer
 
 obj = detector.TurkishNLP()
 obj.create_word_set()
@@ -123,13 +124,14 @@ def correct_typo(text):
     lwords = obj.list_words(text)
     return " ".join(obj.auto_correct(lwords))
 
-
-def stem(text):
-    return text
-
-
 def syllable(text):
     return text
+
+def stem(text):
+    turkStem= TurkishStemmer()
+    result =turkStem.stemWord(text)
+    return result
+
 
 
 def deasciify(text):
