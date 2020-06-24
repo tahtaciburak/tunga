@@ -1,8 +1,10 @@
 from bs4 import BeautifulSoup
 import re
+from Corpus.Sentence import Sentence
+from Dictionary.Word import Word
 from turkish.deasciifier import Deasciifier
-from unicode_tr.extras import slugify
-from turkishnlp import detector
+from Deasciifier.SimpleAsciifier import SimpleAsciifier
+
 
 __remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
 __remove_digits = str.maketrans('', '', '0123456789')
@@ -107,8 +109,11 @@ def remove_hastag(text):
 
 
 def asciify(text):
-    asci = slugify(text)
-    return asci
+    asciifier = SimpleAsciifier()
+    result = []
+    for word in text.split(" "):
+        result.append(asciifier.asciifyWord(Word(word)))
+    return " ".join(result)
 
 
 def correct_misspellings(text):

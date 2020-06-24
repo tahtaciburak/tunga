@@ -22,7 +22,7 @@ class TestNormalization(unittest.TestCase):
 
     def test_remove_stopwords(self):
         actual = normalization.remove_stopwords("sen ve ben ayni duvarda asili duran bir civi ve fotograf gibiyiz")
-        expected = "sen ben ayni duvarda asili duran bir civi fotograf gibiyiz"
+        expected = "ayni duvarda asili duran civi fotograf gibiyiz"
         self.assertEqual(actual, expected)
 
     def test_remove_emojis(self):
@@ -57,13 +57,12 @@ class TestNormalization(unittest.TestCase):
 
     def test_asciify(self):
         actual = normalization.asciify("çok çalışmak")
-        expected = "cok-calismak"
+        expected = "cok calismak"
         self.assertEqual(actual, expected)
 
         actual = normalization.asciify("Koşarcasına eğlenen çocuklar gibi şendik")
-        expected = "kosarcasina-eglenen-cocuklar-gibi-sendik"
+        expected = "Kosarcasina eglenen cocuklar gibi sendik"
         self.assertEqual(actual, expected)
-
 
     def test_deasciify(self):
         actual = normalization.deasciify("Cok calisiyor")
