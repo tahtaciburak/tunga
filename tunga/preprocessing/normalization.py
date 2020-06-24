@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import re
 from turkish.deasciifier import Deasciifier
+from unicode_tr import unicode_tr
 
 __remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
 __remove_digits = str.maketrans('', '', '0123456789')
@@ -105,9 +106,9 @@ def remove_hastag(text):
 
 
 def asciify(text):
-    # asciidata = text.encode("ascii", "ignore")
-    # return asciidata
-    return text
+    asci=unicode_tr(u"{}".format(text))
+    new_asci=asci.capitalize()
+    return new_asci
 
 
 def correct_misspellings(text):
