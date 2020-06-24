@@ -60,9 +60,18 @@ class TestNormalization(unittest.TestCase):
         expected = "Cok calismak"
         self.assertEqual(actual, expected)
 
+        actual = normalization.asciify("Koşarcasına eğlenen çocuklar gibi şendik")
+        expected = "Kosarcasina eglenen cocuklar gibi sendik"
+        self.assertEqual(actual, expected)
+
+
     def test_deasciify(self):
         actual = normalization.deasciify("Cok calisiyor")
         expected = "Çok çalışıyor"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.deasciify("Aydinlik yarinlarimizin acik zihinleri")
+        expected = "Aydınlık yarınlarımızın açık zihinleri"
         self.assertEqual(actual, expected)
 
 
