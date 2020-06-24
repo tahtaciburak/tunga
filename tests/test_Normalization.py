@@ -56,8 +56,14 @@ class TestNormalization(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_asciify(self):
-        actual = normalization.asciify("çok güzel çalışıyor")
-        expected = "cok guzel calisiyor"
+        actual = normalization.asciify("Çok güzel çalışıyor")
+        expected = "Cok guzel calisiyor"
+        self.assertEqual(actual, expected)
+
+    def test_deasciify(self):
+        actual = normalization.deasciify("Cok calisiyor")
+        expected = "Çok çalışıyor"
+        self.assertEqual(actual, expected)
 
 
 if __name__ == '__main__':
