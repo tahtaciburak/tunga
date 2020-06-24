@@ -50,8 +50,8 @@ class TestNormalization(unittest.TestCase):
         expected = "  birlikte çalışıyor"
         self.assertEqual(actual, expected)
 
-    def test_remove_hastag(self):
-        actual = normalization.remove_hastag("#beyza çalışıyor #CRYPTTECH")
+    def test_remove_hashtag(self):
+        actual = normalization.remove_hashtag("#beyza çalışıyor #CRYPTTECH")
         expected = " çalışıyor "
         self.assertEqual(actual, expected)
 
@@ -73,6 +73,10 @@ class TestNormalization(unittest.TestCase):
         expected = "Aydınlık yarınlarımızın açık zihinleri"
         self.assertEqual(actual, expected)
 
+    def test_correct_typo(self):
+        actual = normalization.correct_typo("vri kümsi idrae edre ancaka daha güezl oalbilir")
+        expected = "veri kümesi idare eder ancak daha güzel olabilir"
+        self.assertEqual(actual,expected)
 
 if __name__ == '__main__':
     unittest.main()

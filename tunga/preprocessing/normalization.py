@@ -4,7 +4,10 @@ from Corpus.Sentence import Sentence
 from Dictionary.Word import Word
 from turkish.deasciifier import Deasciifier
 from Deasciifier.SimpleAsciifier import SimpleAsciifier
+from turkishnlp import detector
 
+obj = detector.TurkishNLP()
+obj.create_word_set()
 
 __remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
 __remove_digits = str.maketrans('', '', '0123456789')
@@ -103,7 +106,7 @@ def remove_mentions(text):
     return text
 
 
-def remove_hastag(text):
+def remove_hashtag(text):
     text = re.sub(r'#\S+', '', text)
     return text
 
@@ -116,8 +119,9 @@ def asciify(text):
     return " ".join(result)
 
 
-def correct_misspellings(text):
-    return text
+def correct_typo(text):
+    lwords = obj.list_words(text)
+    return " ".join(obj.auto_correct(lwords))
 
 
 def stem(text):
