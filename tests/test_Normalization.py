@@ -10,9 +10,26 @@ class TestNormalization(unittest.TestCase):
         expected = "Ahmet Pazardan gelirken domates peynir biber ve kimyon al Kalmazsa patates al"
         self.assertEqual(actual, expected)
 
+        actual = normalization.remove_punctuations("-Bu anahtar köşkü de açar, dedi.")
+        expected = "Bu anahtar köşkü de açar dedi"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_punctuations(
+            "Doğduğu yere, Erzurum'a gitmişti")
+        expected = "Doğduğu yere Erzuruma gitmişti"
+        self.assertEqual(actual, expected)
+
     def test_remove_digits(self):
         actual = normalization.remove_digits("24 yaşında 1.86 boyunda harbiyeden mezun bir komutan vardı sene 2012ydi")
         expected = "yaşında . boyunda harbiyeden mezun bir komutan vardı sene ydi"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_digits("2012 yılında 10 Temmuzda saat 13:40 da gördüm")
+        expected = "yılında  Temmuzda saat : da gördüm"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_digits("42 yaşındaki adam evine gidiyordu.3 küçük çocuğu yanındaydı")
+        expected = "yaşındaki adam evine gidiyordu. küçük çocuğu yanındaydı"
         self.assertEqual(actual, expected)
 
     def test_remove_digits_type_mismatch(self):
@@ -20,9 +37,21 @@ class TestNormalization(unittest.TestCase):
         expected = ""
         self.assertEqual(actual, expected)
 
+        actual = normalization.remove_digits("Bu sene onuncu yaş gününü kutladı")
+        expected = "Bu sene onuncu yaş gününü kutladı"
+        self.assertEqual(actual, expected)
+
     def test_remove_stopwords(self):
         actual = normalization.remove_stopwords("sen ve ben ayni duvarda asili duran bir civi ve fotograf gibiyiz")
         expected = "ayni duvarda asili duran civi fotograf gibiyiz"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_stopwords("Ne kralların tacı, ne kısa günün kazancı")
+        expected = "kralların tacı, kısa günün kazancı"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_stopwords("Ya bende sevdiğin şeyden dolayı benden nefret ediyorsan")
+        expected = "bende sevdiğin nefret ediyorsan"
         self.assertEqual(actual, expected)
 
     def test_remove_emojis(self):
@@ -30,14 +59,35 @@ class TestNormalization(unittest.TestCase):
         expected = "bugün biraz hastayım "
         self.assertEqual(actual, expected)
 
+        actual = normalization.remove_emojis("geçen gün bahçeden meyve 🍏🍎🍐🍋🍌🍉🍇🍓🍈🍒🍑 topladım")
+        expected = "geçen gün bahçeden meyve  topladım"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_emojis("Bu sene yurtdışına 🧳✈️🛄 tatile 👙🏖️⛵ gideceğim ")
+        expected = "Bu sene yurtdışına  tatile  gideceğim "
+        self.assertEqual(actual, expected)
+
     def test_remove_email(self):
         actual = normalization.remove_email("beyzanın mail adresi olduğu için beyzacanbay34@gmail")
         expected = "beyzanın mail adresi olduğu için "
         self.assertEqual(actual, expected)
 
+        actual = normalization.remove_email("beyza@gmail.com burak@gmail ayşe@gmail.com")
+        expected = "  "
+        self.assertEqual(actual, expected)
+
     def test_remove_person_names(self):
         actual = normalization.remove_person_names("beyza bilgisayar mühendisi")
         expected = "bilgisayar mühendisi"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_person_names("ali ayşe ahmet ve mehmet yakın arkadaş")
+        expected = "ve yakın arkadaş"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_person_names(
+            "fatma arkadaşları gül ve yağmur birlikte oyun oynarken düştü annesi semiha hanım hastaneye götürdü")
+        expected = "arkadaşları ve birlikte oyun oynarken düştü annesi hanım hastaneye götürdü"
         self.assertEqual(actual, expected)
 
     def test_remove_url(self):
@@ -76,15 +126,16 @@ class TestNormalization(unittest.TestCase):
     def test_correct_typo(self):
         actual = normalization.correct_typo("vri kümsi idrae edre ancaka daha güezl oalbilir")
         expected = "veri kümesi idare eder ancak daha güzel olabilir"
-        self.assertEqual(actual,expected)
-
+        self.assertEqual(actual, expected)
 
     def test_stem(self):
         actual = normalization.stem("sonra ekmek aldım")
         expected = "sonra ekmek al"
-        self.assertEqual(actual,expected)
+        self.assertEqual(actual, expected)
 
-"""   def test_syllable(self):
+
+"""   
+    def test_syllable(self):
         actual = normalization.syllable("merhaba")
         expected= "mer ha ba"
         self.assertEqual(actual, expected)

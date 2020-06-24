@@ -36,7 +36,7 @@ except:
 def remove_stopwords(text):
     new_tokens = []
     for token in text.split(" "):
-        if token.strip() not in stopwords:
+        if token.strip().lower() not in stopwords:
             new_tokens.append(token.strip())
     return " ".join(new_tokens).strip()
 
@@ -50,7 +50,11 @@ def remove_punctuations(text):
     text = str(text)
     if len(text) == 0:
         return text
-    return text.translate(__remove_punctuations).strip()
+    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    for punc in text.lower():
+        if punc in punctuations:
+            text = text.replace(punc, "")
+    return text
 
 
 def remove_html_tags(text):
@@ -81,12 +85,8 @@ def remove_emojis(text):
 
 
 def remove_email(text):
-    removing = ""
-    lst = re.findall('\S+@\S+', text)
-    for word in lst:
-        if word in text:
-            removing += text.replace(word, "")
-    return removing
+    text = re.sub(r'\S+@\S+', '', text)
+    return text
 
 
 def remove_person_names(text):
@@ -124,14 +124,15 @@ def correct_typo(text):
     lwords = obj.list_words(text)
     return " ".join(obj.auto_correct(lwords))
 
+
 def syllable(text):
     return text
 
-def stem(text):
-    turkStem= TurkishStemmer()
-    result =turkStem.stemWord(text)
-    return result
 
+def stem(text):
+    turkStem = TurkishStemmer()
+    result = turkStem.stemWord(text)
+    return result
 
 
 def deasciify(text):
