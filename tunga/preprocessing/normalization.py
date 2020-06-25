@@ -8,6 +8,8 @@ from TurkishStemmer import TurkishStemmer
 import grpc
 import zemberek_grpc.preprocess_pb2_grpc as z_preprocess_g
 import zemberek_grpc.preprocess_pb2 as z_preprocess
+import zemberek_grpc.morphology_pb2_grpc as z_morphology_g
+import zemberek_grpc.morphology_pb2 as z_morphology
 import sys
 
 obj = detector.TurkishNLP()
@@ -15,6 +17,7 @@ obj.create_word_set()
 
 channel = grpc.insecure_channel('localhost:6789')
 preprocess_stub = z_preprocess_g.PreprocessingServiceStub(channel)
+morphology_stub = z_morphology_g.MorphologyServiceStub(channel)
 
 __remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
 __remove_digits = str.maketrans('', '', '0123456789')
@@ -185,7 +188,26 @@ def tokenize(text):
 
 def tokenization(text):
     tokens = tokenize(text)
-    new_txt=""
+    new_txt = ""
     for t in tokens:
-        new_txt+= t.token + ':' + t.type + " "
+        new_txt += t.token + ':' + t.type + " "
+    return new_txt
+
+
+def _analyze(text):
+    response = morphology_stub.AnalyzeSentence(z_morphology.SentenceAnalysisRequest(input=text))
+    return response
+
+
+def lemmatization(text):
+    fix_text = fix_decode(text)
+    analysis_result = _analyze(fix_text)
+    new_txt = ""
+    for a in analysis_result.results:
+        best = a.best
+        lemmas = ""
+        for l in best.lemmas:
+            lemmas = lemmas + " " + l
+        new_txt += "Word = " + a.token + ", Lemmas = " + lemmas + ", POS = [" + best.pos + "], Full Analysis = {" + best.analysis + "}"
+
     return new_txt

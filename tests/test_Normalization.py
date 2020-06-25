@@ -194,9 +194,16 @@ class TestNormalization(unittest.TestCase):
         expected = "Baharda:Word kırlara:Word gidip:Word kır:Word çiçeklerinden:Word bir:Word demet:Word yaparız:Word .:Punctuation "
         self.assertEqual(actual, expected)
 
-        actual = normalization.tokenization("Düğünde, doğum günlerinde, ziyaretlerde, törenlerde hediye olarak bir buket çiçek ya da çelenk götürürler")
+        actual = normalization.tokenization(
+            "Düğünde, doğum günlerinde, ziyaretlerde, törenlerde hediye olarak bir buket çiçek ya da çelenk götürürler")
         expected = "Düğünde:Word ,:Punctuation doğum:Word günlerinde:Word ,:Punctuation ziyaretlerde:Word ,:Punctuation törenlerde:Word hediye:Word olarak:Word bir:Word buket:Word çiçek:Word ya:Word da:Word çelenk:Word götürürler:Word "
         self.assertEqual(actual, expected)
+
+    def test_lemmatization(self):
+        actual = normalization.lemmatization("O kavanozun kapağını açamayan dengesiz bir insandı.")
+        expected = "Word = O, Lemmas =  o, POS = [Det], Full Analysis = {[o:Det] o:Det}Word = kavanozun, Lemmas =  kavanoz, POS = [Noun], Full Analysis = {[kavanoz:Noun] kavanoz:Noun+A3sg+un:Gen}Word = kapağını, Lemmas =  kapak, POS = [Noun], Full Analysis = {[kapak:Noun] kapağ:Noun+A3sg+ı:P3sg+nı:Acc}Word = açamayan, Lemmas =  aç açamayan, POS = [Adj], Full Analysis = {[açmak:Verb] aç:Verb+ama:Unable|yan:PresPart→Adj}Word = dengesiz, Lemmas =  denge dengesiz, POS = [Adj], Full Analysis = {[denge:Noun] denge:Noun+A3sg|siz:Without→Adj}Word = bir, Lemmas =  bir, POS = [Det], Full Analysis = {[bir:Det] bir:Det}Word = insandı, Lemmas =  insan, POS = [Verb], Full Analysis = {[insan:Noun] insan:Noun+A3sg|Zero→Verb+dı:Past+A3sg}Word = ., Lemmas =  ., POS = [Punc], Full Analysis = {[.:Punc] .:Punc}"
+        self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
