@@ -105,6 +105,14 @@ class TestNormalization(unittest.TestCase):
         expected = " çalışıyor "
         self.assertEqual(actual, expected)
 
+        actual = normalization.remove_hashtag("#parkta #oturuyoruz #köpek #seviyoruz")
+        expected = "   "
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_hashtag("dışarıda #kar ve #yağmur var")
+        expected = "dışarıda  ve  var"
+        self.assertEqual(actual, expected)
+
     def test_asciify(self):
         actual = normalization.asciify("çok çalışmak")
         expected = "cok calismak"
@@ -129,8 +137,16 @@ class TestNormalization(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_stem(self):
-        actual = normalization.stem("sonra ekmek aldım")
-        expected = "sonra ekmek al"
+        actual = normalization.stem("arkadaşları aralarında konuşuyorlar")
+        expected = "arkadaş ara konuşuyor"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.stem("sınıftakiler ve okuldakiler")
+        expected = "sınıf ve okul"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.stem("aşağıdakilerden biri midir")
+        expected = "aşağı bir mi"
         self.assertEqual(actual, expected)
 
 

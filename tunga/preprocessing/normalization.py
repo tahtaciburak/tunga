@@ -5,7 +5,7 @@ from Dictionary.Word import Word
 from turkish.deasciifier import Deasciifier
 from Deasciifier.SimpleAsciifier import SimpleAsciifier
 from turkishnlp import detector
-from snowballstemmer import TurkishStemmer
+from TurkishStemmer import TurkishStemmer
 
 obj = detector.TurkishNLP()
 obj.create_word_set()
@@ -131,8 +131,10 @@ def syllable(text):
 
 def stem(text):
     turkStem = TurkishStemmer()
-    result = turkStem.stemWord(text)
-    return result
+    result = []
+    for word in text.split(" "):
+        result.append(turkStem.stem(word))
+    return " ".join(result)
 
 
 def deasciify(text):
