@@ -158,6 +158,15 @@ class TestNormalization(unittest.TestCase):
         expected = "hep ama bunu izlerim"
         self.assertEqual(actual, expected)
 
+    def test_remove_outlier(self):
+        actual = normalization.remove_outlier(1, 2, "Merhaba bugün hava çok güzel")
+        expected = "Metin istediğiniz karakter boyutunda değil"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.remove_outlier(15, 35, "Merhaba bugün hava çok güzel")
+        expected = "Merhaba bugün hava çok güzel"
+        self.assertEqual(actual, expected)
+
 
 """   
     def test_syllable(self):

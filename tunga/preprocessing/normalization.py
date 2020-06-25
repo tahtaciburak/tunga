@@ -148,3 +148,12 @@ def deduplication(text):
         result.append(word)
     new_text=list(dict.fromkeys(result))
     return " ".join(new_text)
+
+def remove_outlier(min,max,text):
+    counter=0
+    for char in text:
+        counter +=1
+    if counter>min and counter<max:
+        return text
+    else:
+        return "Metin istediğiniz karakter boyutunda değil"
