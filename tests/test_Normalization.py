@@ -132,8 +132,13 @@ class TestNormalization(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_correct_typo(self):
-        actual = normalization.correct_typo("vri kümsi idrae edre ancaka daha güezl oalbilir")
-        expected = "veri kümesi idare eder ancak daha güzel olabilir"
+        actual = normalization.correct_typo("idrae edre ancaka daha güezl oalbilir")
+        expected = "idare eder ancak daha güzel olabilir"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.correct_typo(
+            "yrmi birinçi yüzyilin bu ilkk güünlerinde bilgisayarlar hepimisin yakin ilkisini çekemektedir")
+        expected = "yirmi birinci yüzyılın bu ilk günlerinde bilgisayarlar hepimizin yakın ilgisini çekmektedir"
         self.assertEqual(actual, expected)
 
     def test_stem(self):

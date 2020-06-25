@@ -4,7 +4,6 @@ import sys
 from Dictionary.Word import Word
 from turkish.deasciifier import Deasciifier
 from Deasciifier.SimpleAsciifier import SimpleAsciifier
-from turkishnlp import detector
 from TurkishStemmer import TurkishStemmer
 import grpc
 import zemberek_grpc.preprocess_pb2_grpc as z_preprocess_g
@@ -13,14 +12,14 @@ import zemberek_grpc.morphology_pb2_grpc as z_morphology_g
 import zemberek_grpc.morphology_pb2 as z_morphology
 import zemberek_grpc.language_id_pb2_grpc as z_langid_g
 import zemberek_grpc.language_id_pb2 as z_langid
-
-obj = detector.TurkishNLP()
-obj.create_word_set()
+import zemberek_grpc.normalization_pb2 as z_normalization
+import zemberek_grpc.normalization_pb2_grpc as z_normalization_g
 
 channel = grpc.insecure_channel('localhost:6789')
 preprocess_stub = z_preprocess_g.PreprocessingServiceStub(channel)
 morphology_stub = z_morphology_g.MorphologyServiceStub(channel)
 langid_stub = z_langid_g.LanguageIdServiceStub(channel)
+normalization_stub = z_normalization_g.NormalizationServiceStub(channel)
 
 __remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
 __remove_digits = str.maketrans('', '', '0123456789')
@@ -133,11 +132,6 @@ def asciify(text):
     return " ".join(result)
 
 
-def correct_typo(text):
-    lwords = obj.list_words(text)
-    return " ".join(obj.auto_correct(lwords))
-
-
 def syllable(text):
     return text
 
@@ -197,14 +191,14 @@ def tokenization(text):
     return new_txt
 
 
-def _analyze(text):
+def analyze(text):
     response = morphology_stub.AnalyzeSentence(z_morphology.SentenceAnalysisRequest(input=text))
     return response
 
 
 def lemmatization(text):
     fix_text = fix_decode(text)
-    analysis_result = _analyze(fix_text)
+    analysis_result = analyze(fix_text)
     new_txt = ""
     for a in analysis_result.results:
         best = a.best
@@ -224,3 +218,17 @@ def find_lang_id(text):
 def find_lang(text):
     lang_id = find_lang_id(text)
     return lang_id
+
+
+def normalize(text):
+    response = normalization_stub.Normalize(z_normalization.NormalizationRequest(input=text))
+    return response
+
+
+def correct_typo(text):
+    normalization_input = fix_decode(text)
+    n_response = normalize(normalization_input)
+    if n_response.normalized_input:
+        return n_response.normalized_input
+    else:
+        return 'Problem normalizing input : ' + n_response.error
