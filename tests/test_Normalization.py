@@ -149,6 +149,15 @@ class TestNormalization(unittest.TestCase):
         expected = "aşağı bir mi"
         self.assertEqual(actual, expected)
 
+    def test_deduplication(self):
+        actual = normalization.deduplication("merhaba merhaba nasılsın")
+        expected = "merhaba nasılsın"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.deduplication("hep ama hep bunu izlerim")
+        expected = "hep ama bunu izlerim"
+        self.assertEqual(actual, expected)
+
 
 """   
     def test_syllable(self):

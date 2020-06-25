@@ -141,3 +141,10 @@ def deasciify(text):
     deasci = Deasciifier(text)
     result = deasci.convert_to_turkish()
     return result
+
+def deduplication(text):
+    result = []
+    for word in text.split(" "):
+        result.append(word)
+    new_text=list(dict.fromkeys(result))
+    return " ".join(new_text)
