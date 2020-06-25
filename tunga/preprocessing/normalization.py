@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import re
+import sys
 from Dictionary.Word import Word
 from turkish.deasciifier import Deasciifier
 from Deasciifier.SimpleAsciifier import SimpleAsciifier
@@ -10,7 +11,8 @@ import zemberek_grpc.preprocess_pb2_grpc as z_preprocess_g
 import zemberek_grpc.preprocess_pb2 as z_preprocess
 import zemberek_grpc.morphology_pb2_grpc as z_morphology_g
 import zemberek_grpc.morphology_pb2 as z_morphology
-import sys
+import zemberek_grpc.language_id_pb2_grpc as z_langid_g
+import zemberek_grpc.language_id_pb2 as z_langid
 
 obj = detector.TurkishNLP()
 obj.create_word_set()
@@ -18,6 +20,7 @@ obj.create_word_set()
 channel = grpc.insecure_channel('localhost:6789')
 preprocess_stub = z_preprocess_g.PreprocessingServiceStub(channel)
 morphology_stub = z_morphology_g.MorphologyServiceStub(channel)
+langid_stub = z_langid_g.LanguageIdServiceStub(channel)
 
 __remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
 __remove_digits = str.maketrans('', '', '0123456789')
@@ -211,3 +214,13 @@ def lemmatization(text):
         new_txt += "Word = " + a.token + ", Lemmas = " + lemmas + ", POS = [" + best.pos + "], Full Analysis = {" + best.analysis + "}"
 
     return new_txt
+
+
+def find_lang_id(text):
+    response = langid_stub.Detect(z_langid.LanguageIdRequest(input=text))
+    return response.langId
+
+
+def find_lang(text):
+    lang_id = find_lang_id(text)
+    return lang_id

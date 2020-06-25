@@ -204,6 +204,15 @@ class TestNormalization(unittest.TestCase):
         expected = "Word = O, Lemmas =  o, POS = [Det], Full Analysis = {[o:Det] o:Det}Word = kavanozun, Lemmas =  kavanoz, POS = [Noun], Full Analysis = {[kavanoz:Noun] kavanoz:Noun+A3sg+un:Gen}Word = kapağını, Lemmas =  kapak, POS = [Noun], Full Analysis = {[kapak:Noun] kapağ:Noun+A3sg+ı:P3sg+nı:Acc}Word = açamayan, Lemmas =  aç açamayan, POS = [Adj], Full Analysis = {[açmak:Verb] aç:Verb+ama:Unable|yan:PresPart→Adj}Word = dengesiz, Lemmas =  denge dengesiz, POS = [Adj], Full Analysis = {[denge:Noun] denge:Noun+A3sg|siz:Without→Adj}Word = bir, Lemmas =  bir, POS = [Det], Full Analysis = {[bir:Det] bir:Det}Word = insandı, Lemmas =  insan, POS = [Verb], Full Analysis = {[insan:Noun] insan:Noun+A3sg|Zero→Verb+dı:Past+A3sg}Word = ., Lemmas =  ., POS = [Punc], Full Analysis = {[.:Punc] .:Punc}"
         self.assertEqual(actual, expected)
 
+    def test_find_lang(self):
+        actual = normalization.find_lang("Hoşgeldin")
+        expected = "tr"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.find_lang("こんにちは")
+        expected = "ja"
+        self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
