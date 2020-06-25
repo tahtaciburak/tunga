@@ -77,11 +77,11 @@ class TestNormalization(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_remove_person_names(self):
-        actual = normalization.remove_person_names("beyza bilgisayar mühendisi")
+        actual = normalization.remove_person_names("Beyza bilgisayar mühendisi")
         expected = "bilgisayar mühendisi"
         self.assertEqual(actual, expected)
 
-        actual = normalization.remove_person_names("ali ayşe ahmet ve mehmet yakın arkadaş")
+        actual = normalization.remove_person_names("Ali Ayşe Ahmet ve Mehmet yakın arkadaş")
         expected = "ve yakın arkadaş"
         self.assertEqual(actual, expected)
 
@@ -170,7 +170,7 @@ class TestNormalization(unittest.TestCase):
     def test_custom_regex_removal(self):
         actual = normalization.custom_regex_removal('\S', "Merhaba bugün hava çok güzel")
         expected = "    "
-        self.assertEqual(actual,expected)
+        self.assertEqual(actual, expected)
 
         actual = normalization.custom_regex_removal('\D', "20 Temmuz 2020 Pazartesi")
         expected = "202020"
@@ -179,6 +179,7 @@ class TestNormalization(unittest.TestCase):
         actual = normalization.custom_regex_removal('\w', "Hey! Buraya baksana. Sana dedim. ")
         expected = "!  .  . "
         self.assertEqual(actual, expected)
+
 
 """   
     def test_syllable(self):

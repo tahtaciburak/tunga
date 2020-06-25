@@ -92,6 +92,7 @@ def remove_email(text):
 def remove_person_names(text):
     new_names = []
     for names in text.split(" "):
+        names = names.lower()
         if names.strip() not in name:
             new_names.append(names.strip())
     return " ".join(new_names).strip()
