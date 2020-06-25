@@ -183423,5 +183423,4 @@ mevil
 fedimeana
 yarennaz
 ayşe
-yağmur
-gül
+fgül

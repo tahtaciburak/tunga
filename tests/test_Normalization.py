@@ -180,12 +180,23 @@ class TestNormalization(unittest.TestCase):
         expected = "!  .  . "
         self.assertEqual(actual, expected)
 
-
-"""   
     def test_syllable(self):
         actual = normalization.syllable("merhaba")
-        expected= "mer ha ba"
+        expected = "mer ha ba"
         self.assertEqual(actual, expected)
-"""
+
+        actual = normalization.syllable("Her sabah kahvaltıda yumurta yerim")
+        expected = "Her sa bah kah val tı da yu mur ta ye rim"
+        self.assertEqual(actual, expected)
+
+    def test_tokenization(self):
+        actual = normalization.tokenization("Baharda kırlara gidip kır çiçeklerinden bir demet yaparız.")
+        expected = "Baharda:Word kırlara:Word gidip:Word kır:Word çiçeklerinden:Word bir:Word demet:Word yaparız:Word .:Punctuation "
+        self.assertEqual(actual, expected)
+
+        actual = normalization.tokenization("Düğünde, doğum günlerinde, ziyaretlerde, törenlerde hediye olarak bir buket çiçek ya da çelenk götürürler")
+        expected = "Düğünde:Word ,:Punctuation doğum:Word günlerinde:Word ,:Punctuation ziyaretlerde:Word ,:Punctuation törenlerde:Word hediye:Word olarak:Word bir:Word buket:Word çiçek:Word ya:Word da:Word çelenk:Word götürürler:Word "
+        self.assertEqual(actual, expected)
+
 if __name__ == '__main__':
     unittest.main()

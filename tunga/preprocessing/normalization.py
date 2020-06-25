@@ -1,14 +1,20 @@
 from bs4 import BeautifulSoup
 import re
-from Corpus.Sentence import Sentence
 from Dictionary.Word import Word
 from turkish.deasciifier import Deasciifier
 from Deasciifier.SimpleAsciifier import SimpleAsciifier
 from turkishnlp import detector
 from TurkishStemmer import TurkishStemmer
+import grpc
+import zemberek_grpc.preprocess_pb2_grpc as z_preprocess_g
+import zemberek_grpc.preprocess_pb2 as z_preprocess
+import sys
 
 obj = detector.TurkishNLP()
 obj.create_word_set()
+
+channel = grpc.insecure_channel('localhost:6789')
+preprocess_stub = z_preprocess_g.PreprocessingServiceStub(channel)
 
 __remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
 __remove_digits = str.maketrans('', '', '0123456789')
@@ -153,9 +159,7 @@ def deduplication(text):
 
 
 def remove_outlier(min, max, text):
-    counter = 0
-    for char in text:
-        counter += 1
+    counter = len(text)
     if counter > min and counter < max:
         return text
     else:
@@ -165,3 +169,23 @@ def remove_outlier(min, max, text):
 def custom_regex_removal(regex, text):
     text = re.sub(r'{}'.format(regex), '', text)
     return text
+
+
+def fix_decode(text):
+    if sys.version_info < (3, 0):
+        return text.decode('utf-8')
+    else:
+        return text
+
+
+def tokenize(text):
+    response = preprocess_stub.Tokenize(z_preprocess.TokenizationRequest(input=text))
+    return response.tokens
+
+
+def tokenization(text):
+    tokens = tokenize(text)
+    new_txt=""
+    for t in tokens:
+        new_txt+= t.token + ':' + t.type + " "
+    return new_txt
