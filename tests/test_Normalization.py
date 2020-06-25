@@ -167,6 +167,18 @@ class TestNormalization(unittest.TestCase):
         expected = "Merhaba bugün hava çok güzel"
         self.assertEqual(actual, expected)
 
+    def test_custom_regex_removal(self):
+        actual = normalization.custom_regex_removal('\S', "Merhaba bugün hava çok güzel")
+        expected = "    "
+        self.assertEqual(actual,expected)
+
+        actual = normalization.custom_regex_removal('\D', "20 Temmuz 2020 Pazartesi")
+        expected = "202020"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.custom_regex_removal('\w', "Hey! Buraya baksana. Sana dedim. ")
+        expected = "!  .  . "
+        self.assertEqual(actual, expected)
 
 """   
     def test_syllable(self):

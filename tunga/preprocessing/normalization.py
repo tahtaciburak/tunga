@@ -142,18 +142,25 @@ def deasciify(text):
     result = deasci.convert_to_turkish()
     return result
 
+
 def deduplication(text):
     result = []
     for word in text.split(" "):
         result.append(word)
-    new_text=list(dict.fromkeys(result))
+    new_text = list(dict.fromkeys(result))
     return " ".join(new_text)
 
-def remove_outlier(min,max,text):
-    counter=0
+
+def remove_outlier(min, max, text):
+    counter = 0
     for char in text:
-        counter +=1
-    if counter>min and counter<max:
+        counter += 1
+    if counter > min and counter < max:
         return text
     else:
         return "Metin istediğiniz karakter boyutunda değil"
+
+
+def custom_regex_removal(regex, text):
+    text = re.sub(r'{}'.format(regex), '', text)
+    return text
