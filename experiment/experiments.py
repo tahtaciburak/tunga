@@ -8,7 +8,7 @@ import os
 os.environ["PYSPARK_PYTHON"] = "/usr/local/bin/python3"
 sc = SparkContext('local[*]')
 spark = SparkSession(sc)
-df = spark.read.csv('hepsiburada_review.csv', header=True)
+df = spark.read.csv('../datasets/hepsiburada_review.csv', header=True)
 df.show()
 
 __remove_digits = str.maketrans('', '', '0123456789')
