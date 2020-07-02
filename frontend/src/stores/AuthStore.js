@@ -25,12 +25,12 @@ class _AuthStore{
 		);
 	}
 
-	@action setToken = (token) => {
+	@action setToken(token) {
 		window.localStorage.setItem('accessToken', token);
 		this.accessToken = token;
 	}
 
-	@action getToken = () => {
+	@action getToken(){
 		return this.accessToken;
 	}
 
