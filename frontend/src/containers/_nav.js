@@ -19,7 +19,12 @@ export default [
     to: '/projects',
     icon: 'cil-pencil',
   },
-
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Datasets',
+    to: '/datasets',
+    icon: 'cil-puzzle',
+  },
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']

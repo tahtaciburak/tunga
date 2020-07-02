@@ -34,6 +34,8 @@ const Badges = React.lazy(() => import('./views/notifications/badges/Badges'));
 const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'));
 const Projects = React.lazy(() => import('./views/projects/Projects'));
+const Datasets = React.lazy(() => import('./views/datasets/Datasets'));
+
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
@@ -43,6 +45,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/projects', name: 'Projects', component: Projects },
+  { path: '/datasets', name: 'Datasets', component: Datasets },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
