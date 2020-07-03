@@ -11,7 +11,9 @@ def read_tweets_from_user(username, max_tweet_count):
 
     user_tweet = []
     for tweet in user:
-        user_tweet.append(tweet.text)
+        user_tweet.append({
+            "tweet_text":tweet.text
+        })
     return user_tweet
 
 
@@ -29,5 +31,12 @@ def read_tweets_from_hashtag(hashtag, date, max_tweet_count):
     return date_tweet
 
 
-def read_tweets_from_mention(hashtag, date, max_tweet_count):
-    return True
+def read_tweets_from_mention(max_tweet_count):
+    user = api.mentions_timeline(count=max_tweet_count)
+
+    user_tweet = []
+    for tweet in user:
+        user_tweet.append(tweet.text)
+
+    return user_tweet
+print(read_tweets_from_mention(20))
