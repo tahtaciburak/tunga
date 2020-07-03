@@ -12,7 +12,7 @@ def read_tweets_from_user(username, max_tweet_count):
     user_tweet = []
     for tweet in user:
         user_tweet.append({
-            "tweet_text":tweet.text
+            "tweet_text": tweet.text
         })
     return user_tweet
 
@@ -28,7 +28,7 @@ def read_tweets_from_hashtag(hashtag, date, max_tweet_count):
     date_tweet = []
     for tweet in tweets:
         date_tweet.append({
-            "tweet_text":tweet.text
+            "tweet_text": tweet.text
         })
     return date_tweet
 
@@ -39,8 +39,7 @@ def read_tweets_from_mention(max_tweet_count):
     user_tweet = []
     for tweet in user:
         user_tweet.append({
-            "tweet_text":tweet.text
+            "tweet_text": tweet.text
         })
 
     return user_tweet
-
