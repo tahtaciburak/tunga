@@ -12,13 +12,15 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(255), unique=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     registered_on = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
 
-    def __init__(self, email, password, admin=False):
+    def __init__(self, username, email, password, admin=False):
         self.email = email
+        self.username = username
         self.password = bcrypt.generate_password_hash(
             password, app.config.get('BCRYPT_LOG_ROUNDS')
         ).decode()
@@ -32,9 +34,10 @@ class User(db.Model):
         """
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, minutes=60, seconds=5),
                 'iat': datetime.datetime.utcnow(),
-                'sub': user_id
+                'user_id': user_id,
+                'username': self.username
             }
             return jwt.encode(
                 payload,

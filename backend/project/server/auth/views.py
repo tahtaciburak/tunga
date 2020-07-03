@@ -1,6 +1,3 @@
-# project/server/auth/views.py
-
-
 from flask import Blueprint, request, make_response, jsonify
 from flask.views import MethodView
 
@@ -23,6 +20,7 @@ class RegisterAPI(MethodView):
         if not user:
             try:
                 user = User(
+                    username=post_data.get('username'),
                     email=post_data.get('email'),
                     password=post_data.get('password')
                 )
@@ -55,6 +53,7 @@ class LoginAPI(MethodView):
     """
     User Login Resource
     """
+
     def post(self):
         # get the post data
         post_data = request.get_json()
@@ -64,7 +63,7 @@ class LoginAPI(MethodView):
                 email=post_data.get('email')
             ).first()
             if user and bcrypt.check_password_hash(
-                user.password, post_data.get('password')
+                    user.password, post_data.get('password')
             ):
                 auth_token = user.encode_auth_token(user.id)
                 if auth_token:
@@ -93,6 +92,7 @@ class UserAPI(MethodView):
     """
     User Resource
     """
+
     def get(self):
         # get the auth token
         auth_header = request.headers.get('Authorization')
@@ -138,6 +138,7 @@ class LogoutAPI(MethodView):
     """
     Logout Resource
     """
+
     def post(self):
         # get auth token
         auth_header = request.headers.get('Authorization')
@@ -177,6 +178,7 @@ class LogoutAPI(MethodView):
                 'message': 'Provide a valid auth token.'
             }
             return make_response(jsonify(responseObject)), 403
+
 
 # define the API resources
 registration_view = RegisterAPI.as_view('register_api')
