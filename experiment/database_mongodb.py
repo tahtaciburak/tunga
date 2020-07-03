@@ -9,13 +9,13 @@ tungadb = tungaclient["tungadatabase"]
 mycol = tungadb["tweets"]
 print(tungadb.list_collection_names())
 
-hashtag_tweet=Twitter.read_tweets_from_hashtag("#karantina","2020-04-05",10)
+hashtag_tweet=Twitter.read_tweets_from_hashtag("#hasta","2020-04-05",10)
 hashtag_tweet2=Twitter.read_tweets_from_hashtag("#hastalık","2020",20)
 
-#database = mycol.insert_many(hashtag_tweet)
+database = mycol.insert_many(hashtag_tweet)
 
-#print(database.inserted_ids)
+print(database.inserted_ids)
 myresult = mycol.find().limit(15)
-#data = mycol.insert_many(hashtag_tweet)
+data = mycol.insert_many(hashtag_tweet)
 for data in myresult:
     print(data)

@@ -81,13 +81,13 @@ class TestNormalization(unittest.TestCase):
         expected = "bilgisayar mühendisi"
         self.assertEqual(actual, expected)
 
-        actual = normalization.remove_person_names("Ali Ayşe Ahmet ve Mehmet yakın arkadaş")
+        actual = normalization.remove_person_names("Ayşe Ahmet ve Mehmet yakın arkadaş")
         expected = "ve yakın arkadaş"
         self.assertEqual(actual, expected)
 
         actual = normalization.remove_person_names(
-            "fatma arkadaşları gül ve yağmur birlikte oyun oynarken düştü annesi semiha hanım hastaneye götürdü")
-        expected = "arkadaşları ve birlikte oyun oynarken düştü annesi hanım hastaneye götürdü"
+            "fatma arkadaşları gül birlikte oyun oynarken düştü annesi hastaneye götürdü")
+        expected = "arkadaşları birlikte oyun oynarken düştü annesi hastaneye götürdü"
         self.assertEqual(actual, expected)
 
     def test_remove_url(self):
@@ -187,7 +187,7 @@ class TestNormalization(unittest.TestCase):
 
     def test_syllable(self):
         actual = normalization.syllable("merhaba")
-        expected = "mer ha ba"
+        expected = ['mer', 'ha', 'ba']
         self.assertEqual(actual, expected)
 
         actual = normalization.syllable("Her sabah kahvaltıda yumurta yerim")
