@@ -20,7 +20,38 @@ import translate from '../../services/i18n/Translate';
 class ImportFromLocal extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      dataset_name: "",
+      dataset_description: "",
+      is_show_result_alert: false,
+      is_upload_successful: false,
+      file: null,
+      upload_file_name:translate.translate("retrieval.import_from_local.choose_file")
+    }
+    this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
+    this.handleDatasetDescriptionChange = this.handleDatasetDescriptionChange.bind(this);
+    this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
+    this.handleFileUploadChange = this.handleFileUploadChange.bind(this);
   }
+
+  handleDatasetNameChange(event) {
+    this.setState({ dataset_name: event.target.value });
+  }
+
+  handleDatasetDescriptionChange(event) {
+    this.setState({ dataset_description: event.target.value });
+  }
+
+  handleFileUploadChange(event) {
+    this.setState({file: event.target.files[0]});
+    this.setState({upload_file_name:event.target.files[0].name})
+  }
+
+  handleSubmitButtonClick(e) {
+    e.preventDefault();
+    alert(this.state.dataset_description);
+  }
+
   render() {
     return (
       <>
@@ -37,11 +68,11 @@ class ImportFromLocal extends React.Component {
                 <CCardBody>
                   <CFormGroup>
                     <CLabel htmlFor="datasetName">{translate.translate("retrieval.import_from_local.dataset_name")}</CLabel>
-                    <CInput id="datasetName" placeholder={translate.translate("retrieval.import_from_local.dataset_name_placeholder")} />
+                    <CInput onChange={this.handleDatasetNameChange} id="datasetName" placeholder={translate.translate("retrieval.import_from_local.dataset_name_placeholder")} />
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="datasetDescription">{translate.translate("retrieval.import_from_local.dataset_description")}</CLabel>
-                    <CInput id="datasetDescription" placeholder={translate.translate("retrieval.import_from_local.dataset_description_placeholder")} />
+                    <CInput onChange={this.handleDatasetDescriptionChange} id="datasetDescription" placeholder={translate.translate("retrieval.import_from_local.dataset_description_placeholder")} />
                   </CFormGroup>
 
                 </CCardBody>
@@ -55,27 +86,28 @@ class ImportFromLocal extends React.Component {
                   <CFormGroup row>
                     <CLabel col md={3}>{translate.translate("retrieval.import_from_local.choose_dataset_file")}</CLabel>
                     <CCol xs="12" md="9">
-                      <CInputFile custom id="custom-file-input" />
+                      <CInputFile onChange={this.handleFileUploadChange} custom id="custom-file-input" />
                       <CLabel htmlFor="custom-file-input" variant="custom-file">
-                        {translate.translate("retrieval.import_from_local.choose_file")}
+                        {this.state.upload_file_name}
                       </CLabel>
                     </CCol>
                     <CCol xs="12" md="12">
-                      <CButton color="success">{translate.translate("retrieval.import_from_local.upload")}</CButton>
+                      <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_local.upload")}</CButton>
                       <CButton style={{ marginLeft: 10 }} color="success">{translate.translate("retrieval.import_from_local.upload_and_analyze")}</CButton>
 
                     </CCol>
                   </CFormGroup>
                 </CCardBody>
               </CCard>
-              <CAlert color="success">
-                {translate.translate("retrieval.import_from_local.file_upload_success")}
-              </CAlert>
-              <CAlert color="danger">
-                {translate.translate("retrieval.import_from_local.file_upload_fail")}
-              </CAlert>
-
-              <CCard>
+              <CCol hidden={!this.state.is_show_result_alert}>
+                <CAlert hidden={!this.state.is_upload_successful} color="success">
+                  {translate.translate("retrieval.import_from_local.file_upload_success")}
+                </CAlert>
+                <CAlert hidden={this.state.is_upload_successful} color="danger">
+                  {translate.translate("retrieval.import_from_local.file_upload_fail")}
+                </CAlert>
+              </CCol>
+              <CCard hidden={!this.state.is_show_result_alert}>
                 <CCardHeader>
                   {translate.translate("retrieval.import_from_local.analysis")}
                 </CCardHeader>
