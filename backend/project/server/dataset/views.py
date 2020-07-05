@@ -30,13 +30,15 @@ class LocalUploadAPI(MethodView):
         file = request.files["file"]
         file_name = file.filename.split(".")[0] + "_" + str(random.randint(10000, 99999)) + "." + \
                     file.filename.split(".")[1]
-        upload_path = os.path.abspath(os.path.join(app.config['UPLOAD_PATH'], file_name))
+
+        if not os.path.isdir(os.path.join(app.config['UPLOAD_PATH'], str(user.id))):
+            os.makedirs(os.path.join(app.config['UPLOAD_PATH'], str(user.id)))
+
+        upload_path = os.path.abspath(os.path.join(app.config['UPLOAD_PATH'], str(user.id), file_name))
 
         file_owner_id = user.id
         dataset_name = request.form["dataset_name"]
         dataset_description = request.form["dataset_description"]
-
-        file.save(upload_path)
 
         try:
             dataset = Dataset(
@@ -44,7 +46,7 @@ class LocalUploadAPI(MethodView):
                 description=dataset_description,
                 filepath=upload_path,
                 size=0,  # TODO: fix here
-                row_count=0,  # TODO: fix here
+                row_count=len(file.readlines()),
                 user_id=file_owner_id
             )
             db.session.add(dataset)
@@ -53,6 +55,7 @@ class LocalUploadAPI(MethodView):
                 'status': 'success',
                 'message': 'Successfully uploaded.',
             }
+            file.save(upload_path)
             return make_response(jsonify(responseObject)), 201
 
         except Exception as e:

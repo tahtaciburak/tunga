@@ -7,8 +7,6 @@ const superagent = superagentPromise(_superagent, Promise);
 
 const API_ROOT = 'http://localhost:8080/';
 
-// const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
-
 const handleErrors = res => {
 	if (res !== null){
 		if (res.response && res.response.status === 401) {

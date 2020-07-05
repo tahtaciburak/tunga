@@ -17,6 +17,9 @@ import CIcon from '@coreui/icons-react'
 
 import translate from '../../services/i18n/Translate';
 
+import APIService from '../../services/APIService'
+import AlertService from '../../services/AlertService'
+
 class ImportFromLocal extends React.Component {
   constructor(props) {
     super(props);
@@ -26,12 +29,15 @@ class ImportFromLocal extends React.Component {
       is_show_result_alert: false,
       is_upload_successful: false,
       file: null,
-      upload_file_name:translate.translate("retrieval.import_from_local.choose_file")
+      upload_file_name: translate.translate("retrieval.import_from_local.choose_file")
     }
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleDatasetDescriptionChange = this.handleDatasetDescriptionChange.bind(this);
-    this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
     this.handleFileUploadChange = this.handleFileUploadChange.bind(this);
+
+    this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
+    this.handleRefreshClick = this.handleRefreshClick.bind(this);
+
   }
 
   handleDatasetNameChange(event) {
@@ -43,13 +49,46 @@ class ImportFromLocal extends React.Component {
   }
 
   handleFileUploadChange(event) {
-    this.setState({file: event.target.files[0]});
-    this.setState({upload_file_name:event.target.files[0].name})
+    this.setState({ file: event.target.files[0] });
+    this.setState({ upload_file_name: event.target.files[0].name })
+  }
+
+  handleRefreshClick(event) {
+    this.setState({
+      dataset_name: "",
+      dataset_description: "",
+      is_show_result_alert: false,
+      is_upload_successful: false,
+      file: null,
+      upload_file_name: translate.translate("retrieval.import_from_local.choose_file")
+    })
   }
 
   handleSubmitButtonClick(e) {
+    let formData = new FormData();
+    formData.append("file", this.state.file);
+    formData.append("dataset_name", this.state.dataset_name);
+    formData.append("dataset_description", this.state.dataset_description);
+
     e.preventDefault();
-    alert(this.state.dataset_description);
+    APIService.requests
+      .post('dataset/local', formData)
+      .then(data => {
+        console.log(data);
+        this.setState({ is_show_result_alert: true })
+        this.setState({ is_upload_successful: true })
+
+      })
+      .catch(data => {
+        alert("hata")
+        AlertService.Add({
+          type: 'alert',
+          //message: translate.getText('error.' + data.response.body.error.code),
+          level: 'error',
+          autoDismiss: 5
+        });
+      });
+
   }
 
   render() {
@@ -98,15 +137,17 @@ class ImportFromLocal extends React.Component {
                     </CCol>
                   </CFormGroup>
                 </CCardBody>
+                <CCol hidden={!this.state.is_show_result_alert}>
+                  <CAlert hidden={!this.state.is_upload_successful} color="success">
+                    {translate.translate("retrieval.import_from_local.file_upload_success")}
+                  </CAlert>
+                  <CAlert hidden={this.state.is_upload_successful} color="danger">
+                    {translate.translate("retrieval.import_from_local.file_upload_fail")}
+                  </CAlert>
+                  <CButton onClick={this.handleRefreshClick} color="primary">{translate.translate("retrieval.import_from_local.upload_new_file")}</CButton>
+                </CCol>
               </CCard>
-              <CCol hidden={!this.state.is_show_result_alert}>
-                <CAlert hidden={!this.state.is_upload_successful} color="success">
-                  {translate.translate("retrieval.import_from_local.file_upload_success")}
-                </CAlert>
-                <CAlert hidden={this.state.is_upload_successful} color="danger">
-                  {translate.translate("retrieval.import_from_local.file_upload_fail")}
-                </CAlert>
-              </CCol>
+
               <CCard hidden={!this.state.is_show_result_alert}>
                 <CCardHeader>
                   {translate.translate("retrieval.import_from_local.analysis")}
