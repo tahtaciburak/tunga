@@ -92,3 +92,32 @@ class BlacklistToken(db.Model):
             return True
         else:
             return False
+
+
+class Dataset(db.Model):
+    __tablename__ = "datasets"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    filename = db.Column(db.String(255), unique=False)
+    description = db.Column(db.String(255), unique=False, nullable=False)
+    filepath = db.Column(db.String(255), nullable=False)
+    size = db.Column(db.Integer, nullable=False)
+    row_count = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    last_updated = db.Column(db.DateTime, nullable=False)
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
+    user_id = db.Column(db.Integer, nullable=True)
+
+    def __init__(self, filename, description, filepath, size, row_count, user_id, is_active=False):
+        self.filename = filename
+        self.description = description
+        self.filepath = filepath
+
+        self.size = size
+        self.row_count = row_count
+
+        self.created_at = datetime.datetime.now()
+        self.last_updated = datetime.datetime.now()
+
+        self.is_active = is_active
+        self.user_id = user_id

@@ -1,3 +1,4 @@
+import translate from '../services/i18n/Translate';
 export default [
   {
     _tag: 'CSidebarNavItem',
@@ -15,16 +16,79 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Projects',
-    to: '/projects',
-    icon: 'cil-pencil',
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Datasets',
+    name: translate.translate("nav.my_datasets"),
     to: '/datasets',
     icon: 'cil-puzzle',
   },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: translate.translate("nav.data_ret.data_retrieval"),
+    route: '/buttons',
+    icon: 'cil-cloud-download',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: translate.translate("nav.data_ret.import_from_local"),
+        to: '/buttons/buttons',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: translate.translate("nav.data_ret.import_from_url"),
+        to: '/buttons/brand-buttons',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: translate.translate("nav.data_ret.import_from_twitter"),
+        to: '/buttons/button-groups',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: translate.translate("nav.data_ret.import_from_api"),
+        to: '/buttons/button-groups',
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: translate.translate("nav.preprocessing"),
+    route: '/buttons',
+    icon: 'cil-cursor',
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: translate.translate("nav.machine_learning"),
+    route: '/buttons',
+    icon: 'cil-functions',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Sentiment Analysis',
+        to: '/test',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Topic and Keyword Analysis',
+        to: '/test',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Summarization',
+        to: '/test',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Clustering',
+        to: '/test',
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Visualization',
+    route: '/test',
+    icon: 'cil-chart-pie',
+  },
+  /*
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']
@@ -34,12 +98,6 @@ export default [
     name: 'Colors',
     to: '/theme/colors',
     icon: 'cil-drop',
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Typography',
-    to: '/theme/typography',
-    icon: 'cil-pencil',
   },
   {
     _tag: 'CSidebarNavTitle',
@@ -236,49 +294,6 @@ export default [
     _tag: 'CSidebarNavDivider'
   },
   {
-    _tag: 'CSidebarNavTitle',
-    _children: ['Extras'],
-  },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Pages',
-    route: '/pages',
-    icon: 'cil-star',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Login',
-        to: '/login',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Register',
-        to: '/register',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Error 404',
-        to: '/404',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Error 500',
-        to: '/500',
-      },
-    ],
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Disabled',
-    icon: 'cil-ban',
-    badge: {
-      color: 'secondary',
-      text: 'NEW',
-    },
-    addLinkClass: 'c-disabled',
-    'disabled': true
-  },
-  {
     _tag: 'CSidebarNavDivider',
     className: 'm-2'
   },
@@ -319,6 +334,6 @@ export default [
   {
     _tag: 'CSidebarNavDivider',
     className: 'm-2'
-  }
+  }*/
 ]
 
