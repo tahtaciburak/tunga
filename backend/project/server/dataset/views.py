@@ -20,6 +20,7 @@ class GetUserDatasetsAPI(MethodView):
         dss = []
         for ds in user.datasets:
             dss.append(ds.as_dict())
+        dss = list(reversed(dss))
         return make_response(jsonify({"datasets": dss}))
 
 
