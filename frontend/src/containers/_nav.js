@@ -23,28 +23,28 @@ export default [
   {
     _tag: 'CSidebarNavDropdown',
     name: translate.translate("nav.data_ret.data_retrieval"),
-    route: '/buttons',
+    route: '/retrieval',
     icon: 'cil-cloud-download',
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: translate.translate("nav.data_ret.import_from_local"),
-        to: '/buttons/buttons',
+        to: '/retrieval/local',
       },
       {
         _tag: 'CSidebarNavItem',
         name: translate.translate("nav.data_ret.import_from_url"),
-        to: '/buttons/brand-buttons',
+        to: '/retrieval/url',
       },
       {
         _tag: 'CSidebarNavItem',
         name: translate.translate("nav.data_ret.import_from_twitter"),
-        to: '/buttons/button-groups',
+        to: '/retrieval/twitter',
       },
       {
         _tag: 'CSidebarNavItem',
         name: translate.translate("nav.data_ret.import_from_api"),
-        to: '/buttons/button-groups',
+        to: '/retrieval/api',
       },
     ],
   },
