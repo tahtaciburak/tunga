@@ -12,13 +12,15 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(255), unique=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     registered_on = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
 
-    def __init__(self, email, password, admin=False):
+    def __init__(self, username, email, password, admin=False):
         self.email = email
+        self.username = username
         self.password = bcrypt.generate_password_hash(
             password, app.config.get('BCRYPT_LOG_ROUNDS')
         ).decode()
@@ -32,9 +34,10 @@ class User(db.Model):
         """
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, minutes=60, seconds=5),
                 'iat': datetime.datetime.utcnow(),
-                'sub': user_id
+                'user_id': user_id,
+                'username': self.username
             }
             return jwt.encode(
                 payload,
@@ -89,3 +92,32 @@ class BlacklistToken(db.Model):
             return True
         else:
             return False
+
+
+class Dataset(db.Model):
+    __tablename__ = "datasets"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    filename = db.Column(db.String(255), unique=False)
+    description = db.Column(db.String(255), unique=False, nullable=False)
+    filepath = db.Column(db.String(255), nullable=False)
+    size = db.Column(db.Integer, nullable=False)
+    row_count = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    last_updated = db.Column(db.DateTime, nullable=False)
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
+    user_id = db.Column(db.Integer, nullable=True)
+
+    def __init__(self, filename, description, filepath, size, row_count, user_id, is_active=False):
+        self.filename = filename
+        self.description = description
+        self.filepath = filepath
+
+        self.size = size
+        self.row_count = row_count
+
+        self.created_at = datetime.datetime.now()
+        self.last_updated = datetime.datetime.now()
+
+        self.is_active = is_active
+        self.user_id = user_id
