@@ -17,6 +17,7 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     registered_on = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
+    datasets = db.relationship("Dataset")
 
     def __init__(self, username, email, password, admin=False):
         self.email = email
@@ -36,7 +37,7 @@ class User(db.Model):
             payload = {
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, minutes=60, seconds=5),
                 'iat': datetime.datetime.utcnow(),
-                'user_id': user_id,
+                'sub': user_id,
                 'username': self.username
             }
             return jwt.encode(
@@ -106,7 +107,7 @@ class Dataset(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     last_updated = db.Column(db.DateTime, nullable=False)
     is_active = db.Column(db.Boolean, nullable=False, default=True)
-    user_id = db.Column(db.Integer, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(self, filename, description, filepath, size, row_count, user_id, is_active=False):
         self.filename = filename
@@ -121,3 +122,5 @@ class Dataset(db.Model):
 
         self.is_active = is_active
         self.user_id = user_id
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
