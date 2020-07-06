@@ -2,8 +2,22 @@
     <img src="images/logo.png" width="480"\>
 </p>
 
-## tunga
-Agile Text Analytics Platform
+## tunga: Agile Text Analytics Platform
+Projeyi tanitan basit ve etikleyici bir veya birkac cumle tam da burada olmali 
+
+## Table of contents
+1. Icindekileri
+2. Buraya
+3. Yazmaliyiz
+4. Basliklar
+5. Halinde
+
+## Installation
+```bash
+docker pull <bizim docker containeri adi>:latest
+veyahut
+docker-compose up
+```
 
 For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
 
