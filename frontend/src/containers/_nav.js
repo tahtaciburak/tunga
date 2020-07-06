@@ -58,7 +58,7 @@ export default [
     _tag: 'CSidebarNavDropdown',
     name: translate.translate("nav.machine_learning"),
     route: '/buttons',
-    icon: 'cil-functions',
+    icon: 'cil-puzzle',
     _children: [
       {
         _tag: 'CSidebarNavItem',

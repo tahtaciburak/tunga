@@ -16,7 +16,6 @@ dataset_blueprint = Blueprint('dataset', __name__)
 class GetUserDatasetsAPI(MethodView):
     def get(self):
         user = utils.get_user_from_header(request.headers)
-        print(user.datasets)
         dss = []
         for ds in user.datasets:
             dss.append(ds.as_dict())
@@ -37,6 +36,7 @@ class LocalUploadAPI(MethodView):
 
         upload_path = os.path.abspath(os.path.join(app.config['UPLOAD_PATH'], str(user.id), file_name))
 
+        file_type = file_name.split(".")[1]
         file_owner_id = user.id
         dataset_name = request.form["dataset_name"]
         dataset_description = request.form["dataset_description"]
@@ -48,7 +48,8 @@ class LocalUploadAPI(MethodView):
                 filepath=upload_path,
                 size=0,  # TODO: fix here
                 row_count=len(file.readlines()),
-                user_id=file_owner_id
+                user_id=file_owner_id,
+                file_type=file_type
             )
             db.session.add(dataset)
             db.session.commit()

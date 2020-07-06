@@ -37,7 +37,8 @@ export default {
             total_field_count: "Sütun Sayısı",
             total_word_count: "Kelime Sayısı",
             total_distinct_word_count: "Farklı Kelime Sayısı",
-            total_missing_values: "Eksik Değer Sayısı"
+            total_missing_values: "Eksik Değer Sayısı",
+            upload_new_file: "Yeni Dosya Yükle"
         }
     }
 }

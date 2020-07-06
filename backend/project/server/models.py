@@ -100,6 +100,7 @@ class Dataset(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     filename = db.Column(db.String(255), unique=False)
+    filetype = db.Column(db.String(255), unique=False, nullable=True, default="raw")
     description = db.Column(db.String(255), unique=False, nullable=False)
     filepath = db.Column(db.String(255), nullable=False)
     size = db.Column(db.Integer, nullable=False)
@@ -109,7 +110,7 @@ class Dataset(db.Model):
     is_active = db.Column(db.Boolean, nullable=False, default=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    def __init__(self, filename, description, filepath, size, row_count, user_id, is_active=False):
+    def __init__(self, filename, description, filepath, size, row_count, user_id, file_type, is_active=False):
         self.filename = filename
         self.description = description
         self.filepath = filepath
@@ -122,5 +123,7 @@ class Dataset(db.Model):
 
         self.is_active = is_active
         self.user_id = user_id
+        self.filetype = file_type
+
     def as_dict(self):
-       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}

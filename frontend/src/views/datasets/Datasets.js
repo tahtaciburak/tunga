@@ -14,7 +14,7 @@ import APIService from '../../services/APIService'
 import AlertService from '../../services/AlertService'
 
 import translate from '../../services/i18n/Translate';
-const fields = ['filename', 'description', 'row_count', 'created_at']
+const fields = ['filename', 'description', 'row_count','filetype', 'created_at']
 
 class Datasets extends React.Component {
   constructor(props) {
