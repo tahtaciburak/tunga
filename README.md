@@ -1,4 +1,8 @@
-# tunga
+<p align="center">
+    <img src="images/logo.png" width="480"\>
+</p>
+
+## tunga
 Agile Text Analytics Platform
 
 For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
