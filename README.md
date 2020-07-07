@@ -21,6 +21,8 @@ docker-compose up
 
 For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
 
+For asciify methods: git clone https://github.com/starlangsoftware/TurkishDeasciifier-Py.git
+
 Turkish name list : https://gist.github.com/emrekgn/b4049851c88e328c065a
 
 Stop word: https://github.com/ahmetax/trstop/blob/master/dosyalar/turkce-stop-words
