@@ -35,6 +35,7 @@ const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'));
 const Projects = React.lazy(() => import('./views/projects/Projects'));
 const Datasets = React.lazy(() => import('./views/datasets/Datasets'));
+const Preprocessing = React.lazy(() => import('./views/preprocessing/Preprocessing'));
 const ImportFromLocal = React.lazy(() => import('./views/datasets/ImportFromLocal'));
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
@@ -47,6 +48,7 @@ const routes = [
   { path: '/projects', name: 'Projects', component: Projects },
   { path: '/datasets', name: 'Datasets', component: Datasets },
   { path: '/retrieval/local', name: 'ImportFromLocal', component: ImportFromLocal },
+  { path: '/preprocessing', name: 'Preprocessing', component: Preprocessing },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

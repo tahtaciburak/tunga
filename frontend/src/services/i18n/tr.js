@@ -40,5 +40,8 @@ export default {
             total_missing_values: "Eksik Değer Sayısı",
             upload_new_file: "Yeni Dosya Yükle"
         }
+    },
+    preprocessing:{
+        preprocessing_header:"Veri Önişleme"
     }
 }

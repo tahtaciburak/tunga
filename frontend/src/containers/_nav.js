@@ -51,13 +51,13 @@ export default [
   {
     _tag: 'CSidebarNavItem',
     name: translate.translate("nav.preprocessing"),
-    route: '/buttons',
+    to: '/preprocessing',
     icon: 'cil-cursor',
   },
   {
     _tag: 'CSidebarNavDropdown',
     name: translate.translate("nav.machine_learning"),
-    route: '/buttons',
+    route: '/preprocessing',
     icon: 'cil-puzzle',
     _children: [
       {
