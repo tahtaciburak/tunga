@@ -88,6 +88,12 @@ export default [
     route: '/test',
     icon: 'cil-chart-pie',
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Configuration',
+    route: '/test',
+    icon: 'cil-settings',
+  },
   /*
   {
     _tag: 'CSidebarNavTitle',
