@@ -14,7 +14,7 @@ import APIService from '../../services/APIService'
 import AlertService from '../../services/AlertService'
 
 import translate from '../../services/i18n/Translate';
-const fields = ['filename', 'description', 'row_count','filetype', 'created_at']
+const fields = ['filename', 'description', 'row_count', 'filetype', 'created_at']
 
 class Datasets extends React.Component {
   constructor(props) {
@@ -22,13 +22,16 @@ class Datasets extends React.Component {
     this.state = {
       datasets: []
     }
-
   }
 
   componentDidMount() {
     this.makeAPIcall();
   }
 
+	goTo(address){
+    alert('/#'+address);
+		this.props.history.push("/");
+	}
 
   async makeAPIcall() {
     await APIService.requests
@@ -85,54 +88,3 @@ class Datasets extends React.Component {
 }
 
 export default Datasets
-
-/**
- *
- *
- *             <CCard>
-            <CCardHeader>
-              Yukleme
-            </CCardHeader>
-            <CCardBody>
-              <CForm>
-                <CInputGroup className="mb-3">
-                  <CInputGroupPrepend>
-                    <CInputGroupText>
-                    </CInputGroupText>
-                  </CInputGroupPrepend>
-                  <CInput type="text" placeholder="Email" autoComplete="email" />
-                  <CFormGroup row>
-                  <CLabel col md={3}>Custom file input</CLabel>
-                  <CCol xs="12" md="9">
-                    <CInputFile custom id="custom-file-input"/>
-                    <CLabel htmlFor="custom-file-input" variant="custom-file">
-                      Choose file...
-                    </CLabel>
-                  </CCol>
-                </CFormGroup>
-                </CInputGroup>
-
-              </CForm>
-            </CCardBody>
-          </CCard>
-
-                      <CDataTable
-              items={usersData}
-              fields={fields}
-              striped
-              itemsPerPage={5}
-              pagination
-              scopedSlots = {{
-                'status':
-                  (item)=>(
-                    <td>
-                      <CBadge color={getBadge(item.status)}>
-                        {item.status}
-                      </CBadge>
-                    </td>
-                  )
-
-              }}
-            />
-
- */
