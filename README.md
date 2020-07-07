@@ -18,8 +18,10 @@ docker pull <bizim docker containeri adi>:latest
 veyahut
 docker-compose up
 ```
-
+## Kullandığımız Kaynaklar
 For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
+
+For asciify methods: git clone https://github.com/starlangsoftware/TurkishDeasciifier-Py.git
 
 Turkish name list : https://gist.github.com/emrekgn/b4049851c88e328c065a
 
