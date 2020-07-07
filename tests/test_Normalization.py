@@ -113,6 +113,11 @@ class TestNormalization(unittest.TestCase):
         expected = "dışarıda  ve  var"
         self.assertEqual(actual, expected)
 
+    def test_remove_price(self):
+        actual = normalization.remove_price("250 liraya parfüm aldım")
+        expected = " liraya parfüm aldım"
+        self.assertEqual(actual, expected)
+
     def test_asciify(self):
         actual = normalization.asciify("çok çalışmak")
         expected = "cok calismak"

@@ -124,6 +124,11 @@ def remove_hashtag(text):
     return text
 
 
+def remove_price(text):
+    text = re.sub(r'\d+', '', text)
+    return text
+
+
 def asciify(text):
     asciifier = SimpleAsciifier()
     result = []
