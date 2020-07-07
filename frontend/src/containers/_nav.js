@@ -91,7 +91,7 @@ export default [
   {
     _tag: 'CSidebarNavItem',
     name: 'Configuration',
-    route: '/test',
+    to: '/configuration',
     icon: 'cil-settings',
   },
   /*

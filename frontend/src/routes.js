@@ -39,6 +39,7 @@ const Preprocessing = React.lazy(() => import('./views/preprocessing/Preprocessi
 const ImportFromLocal = React.lazy(() => import('./views/datasets/ImportFromLocal'));
 const ImportFromURL = React.lazy(() => import('./views/datasets/ImportFromURL'));
 const ImportFromTwitter = React.lazy(() => import('./views/datasets/ImportFromTwitter'));
+const Configuration = React.lazy(() => import('./views/configuration/Configuration'));
 
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
@@ -55,6 +56,7 @@ const routes = [
   { path: '/retrieval/twitter', name: 'ImportFromTwitter', component: ImportFromTwitter },
 
   { path: '/preprocessing', name: 'Preprocessing', component: Preprocessing },
+  { path: '/configuration', name: 'Configuration', component: Configuration },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
