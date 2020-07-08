@@ -36,11 +36,13 @@ class TwitterCrawlerAPI(MethodView):
 class RemoteFileFetchAPI(MethodView):
     def post(self):
         user = utils.get_user_from_header(request.headers)
-        file_name = "" # TODO : Simdilik random string sonradan duzenlenebilir
-        utils.create_user_upload_path_if_not_exists(app.config['UPLOAD_PATH'], str(user.id))
-        upload_path = os.path.abspath(os.path.join(app.config['UPLOAD_PATH'], str(user.id), file_name))
+        post_data = request.get_json()
 
-        pass
+        dataset_name = post_data["dataset_name"]
+        dataset_description = post_data["dataset_description"]
+        dataset_url = post_data["dataset_url"]
+        # TODO: Start download from dataset_url to uploads directory
+        print(dataset_name, dataset_description, dataset_url)
 
 
 class LocalUploadAPI(MethodView):
@@ -149,11 +151,18 @@ class LocalUploadAPI(MethodView):
 
 
 local_dataset_upload_view = LocalUploadAPI.as_view('local_dataset_upload_api')
+remote_dataset_upload_view = RemoteFileFetchAPI.as_view('remote_dataset_upload_api')
 get_user_datasets = GetUserDatasetsAPI.as_view('get_user_datasets_api')
 
 dataset_blueprint.add_url_rule(
     '/dataset/local',
     view_func=local_dataset_upload_view,
+    methods=['POST']
+)
+
+dataset_blueprint.add_url_rule(
+    '/dataset/remote',
+    view_func=remote_dataset_upload_view,
     methods=['POST']
 )
 

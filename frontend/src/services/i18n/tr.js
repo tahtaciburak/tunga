@@ -42,9 +42,11 @@ export default {
         },
         import_from_url: {
             enter_fıle_remote_path: "Uzak Dosyanın Adresi",
-            remote_path: "URL Giriniz:",
+            remote_path: "Verisetinin bulunduğu URL:",
             remote_path_placeholder: "http(s)://",
-            fetch_data:"Veriyi Getir"
+            fetch_data:"Veriyi Getir",
+            dataset_name: "Veriseti Adı:",
+            dataset_description: "Veriseti Açıklaması:"
 
         }
     },

@@ -26,14 +26,14 @@ class ImportFromURL extends React.Component {
     this.state = {
       dataset_name: "",
       dataset_description: "",
+      dataset_url: "",
       is_show_result_alert: false,
       is_upload_successful: false,
-      file: null,
-      upload_file_name: translate.translate("retrieval.import_from_local.choose_file")
     }
+
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleDatasetDescriptionChange = this.handleDatasetDescriptionChange.bind(this);
-    this.handleFileUploadChange = this.handleFileUploadChange.bind(this);
+    this.handleDatasetURLChange = this.handleDatasetURLChange.bind(this);
 
     this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
     this.handleRefreshClick = this.handleRefreshClick.bind(this);
@@ -48,9 +48,8 @@ class ImportFromURL extends React.Component {
     this.setState({ dataset_description: event.target.value });
   }
 
-  handleFileUploadChange(event) {
-    this.setState({ file: event.target.files[0] });
-    this.setState({ upload_file_name: event.target.files[0].name })
+  handleDatasetURLChange(event) {
+    this.setState({ dataset_url: event.target.value });
   }
 
   handleRefreshClick(event) {
@@ -65,14 +64,14 @@ class ImportFromURL extends React.Component {
   }
 
   handleSubmitButtonClick(e) {
-    let formData = new FormData();
-    formData.append("file", this.state.file);
-    formData.append("dataset_name", this.state.dataset_name);
-    formData.append("dataset_description", this.state.dataset_description);
-
+    console.log(this.state);
     e.preventDefault();
     APIService.requests
-      .post('dataset/local', formData)
+      .post('dataset/remote', {
+        dataset_name: this.state.dataset_name,
+        dataset_description: this.state.dataset_description,
+        dataset_url: this.state.dataset_url
+      })
       .then(data => {
         console.log(data);
         this.setState({ is_show_result_alert: true })
@@ -110,10 +109,14 @@ class ImportFromURL extends React.Component {
                     <CInput onChange={this.handleDatasetNameChange} id="datasetName" placeholder={translate.translate("retrieval.import_from_url.dataset_name")} />
                   </CFormGroup>
                   <CFormGroup>
-                    <CLabel htmlFor="fetchAddress">{translate.translate("retrieval.import_from_url.remote_path")}</CLabel>
-                    <CInput onChange={this.handleFetchAddressChange} id="fetchAddress" placeholder={translate.translate("retrieval.import_from_url.remote_path_placeholder")} />
+                    <CLabel htmlFor="datasetDescription">{translate.translate("retrieval.import_from_local.dataset_description")}</CLabel>
+                    <CInput onChange={this.handleDatasetDescriptionChange} id="datasetDescription" placeholder={translate.translate("retrieval.import_from_local.dataset_description_placeholder")} />
                   </CFormGroup>
-                  <CButton color="success">{translate.translate("retrieval.import_from_url.fetch_data")}</CButton>
+                  <CFormGroup>
+                    <CLabel htmlFor="fetchAddress">{translate.translate("retrieval.import_from_url.remote_path")}</CLabel>
+                    <CInput onChange={this.handleDatasetURLChange} id="fetchAddress" placeholder={translate.translate("retrieval.import_from_url.remote_path_placeholder")} />
+                  </CFormGroup>
+                  <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_url.fetch_data")}</CButton>
                 </CCardBody>
               </CCard>
               <CCol>
