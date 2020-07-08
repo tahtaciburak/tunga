@@ -57,7 +57,6 @@ export default [
   {
     _tag: 'CSidebarNavDropdown',
     name: translate.translate("nav.machine_learning"),
-    route: '/preprocessing',
     icon: 'cil-puzzle',
     _children: [
       {
