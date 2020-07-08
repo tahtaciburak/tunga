@@ -129,10 +129,6 @@ def remove_price(text):
     return text
 
 
-def mail_cleaner(text):
-    #text = re.sub(r'^From:(.*?)$(.*?)To:(.*?)$(.*?)Subject:(.*?)$(.*?)(?=^From:|\Z)','', text)
-    return text
-
 def asciify(text):
     asciifier = SimpleAsciifier()
     result = []

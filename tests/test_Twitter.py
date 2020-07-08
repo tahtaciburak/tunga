@@ -83,3 +83,7 @@ class TestTwitter(unittest.TestCase):
                                    'forwarded your feedback to our Marketing team for awareness. '
                                    '^MN'}]
         self.assertEqual(actual, expected)
+
+
+if __name__ == '__main__':
+    unittest.main()
