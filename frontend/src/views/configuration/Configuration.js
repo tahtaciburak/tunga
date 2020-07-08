@@ -56,7 +56,7 @@ class Configuration extends React.Component {
       <>
         <div className="card">
           <div className="card-header">
-            {translate.translate("preprocessing.preprocessing_header")}
+            {translate.translate("configuration.configuration_header")}
           </div>
           <div className="card-body">
             <CCol xs="12" lg="12">
@@ -65,7 +65,7 @@ class Configuration extends React.Component {
 
                 </CCardHeader>
                 <CCardBody>
-
+                
                 </CCardBody>
               </CCard>
             </CCol>

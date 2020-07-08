@@ -50,5 +50,9 @@ export default {
     },
     preprocessing:{
         preprocessing_header:"Veri Önişleme"
+    },
+    configuration: {
+        configuration_header: "Ayarlar",
+        twitter_api_configuration: "Twitter API Ayarları",
     }
 }

@@ -1,5 +1,6 @@
 import os
 import random
+import json
 
 from flask import Blueprint, request, make_response, jsonify
 from flask.views import MethodView
@@ -11,6 +12,7 @@ from project.server import app
 
 from project.server import utils
 import pandas as pd
+import pymongo
 
 dataset_blueprint = Blueprint('dataset', __name__)
 
@@ -58,9 +60,9 @@ class LocalUploadAPI(MethodView):
         if file_type == "csv":
             try:
                 df = pd.read_csv(upload_path)
-                n_rows = int(df.shape[0])
+                n_rows = df.shape[0]
                 n_cols = df.shape[1]
-                n_missing_values = 0#df.isnull().sum()
+                n_missing_values = 0  # df.isnull().sum()
             except:
                 return make_response(jsonify({
                     "status": 'error',
@@ -98,13 +100,24 @@ class LocalUploadAPI(MethodView):
                     "status": 'error',
                     "reason": "improper json file"
                 })), 401
+        else:
+            return make_response(jsonify({
+                "status": 'error',
+                "reason": "unknown file type"
+            })), 401
+
+        records = json.loads(df.T.to_json()).values()
+        tungaclient = pymongo.MongoClient("mongodb://localhost:27017/")
+        user_mongodb = tungaclient["db_" + str(user.id)]
+        mycol = user_mongodb[dataset_name]
+        mycol.insert(records)
         try:
             dataset = Dataset(
                 filename=dataset_name,
                 description=dataset_description,
                 filepath=upload_path,
                 size=0,  # TODO: fix here
-                row_count=len(file.readlines()),
+                row_count=n_rows,
                 user_id=file_owner_id,
                 file_type=file_type
             )
