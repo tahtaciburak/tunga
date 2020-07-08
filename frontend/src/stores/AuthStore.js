@@ -6,12 +6,6 @@ class _AuthStore{
 	@observable userData = JSON.parse(window.localStorage.getItem('userData'));
 	@observable isLogged = this.isLoggedIn();
 
-
-    @observable user = {
-        firstName: "Erdem",
-        lastName: "Uslu"
-    }
-
     constructor() {
 		reaction(
 			() => this.accessToken,
