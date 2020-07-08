@@ -39,6 +39,13 @@ export default {
             total_distinct_word_count: "Farklı Kelime Sayısı",
             total_missing_values: "Eksik Değer Sayısı",
             upload_new_file: "Yeni Dosya Yükle"
+        },
+        import_from_url: {
+            enter_fıle_remote_path: "Uzak Dosyanın Adresi",
+            remote_path: "URL Giriniz:",
+            remote_path_placeholder: "http(s)://",
+            fetch_data:"Veriyi Getir"
+
         }
     },
     preprocessing:{
