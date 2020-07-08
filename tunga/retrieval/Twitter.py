@@ -1,8 +1,7 @@
 import tweepy as tw
-
-auth = tw.OAuthHandler('imW937M6khWYK3utt6rgUNwC9', 'NHrbDvcnvoqOIJjWKhUXZPAfsToM3k9X8mQoslGF0w24xiJknR')
-auth.set_access_token('246202949-DZ5kRviZM7cBJFyp1gMZw3GytoIsbGMBhNt3pGOW',
-                      'n7G3SblCHd9URjIAugRRBZKqYLUVyDYtf39vuYvgaqE9q')
+import config
+auth = tw.OAuthHandler(config.api_key, config.api_secret,)
+auth.set_access_token(config.access_token,config.token_secret)
 api = tw.API(auth)
 
 

@@ -76,6 +76,11 @@ class TestNormalization(unittest.TestCase):
         expected = "  "
         self.assertEqual(actual, expected)
 
+    def test_mail_cleaner(self):
+        actual = normalization.mail_cleaner("From: 'Beyza Canbay' <beyza@gmail.com>To: 'Burak Tahtacı' <burak@gmail.com> Subject: RE:Hello! Merhaba demek için mail atıyorum From: 'Edgar Allen Poe' <eap@gmail.com>To: 'Mark Twain' <mark.twain@gmail.com>Subject: RE: Hello!")
+        expected="Merhaba demek için mail atıyorum"
+
+        self.assertEqual(actual,expected)
     def test_remove_person_names(self):
         actual = normalization.remove_person_names("Beyza bilgisayar mühendisi")
         expected = "bilgisayar mühendisi"
