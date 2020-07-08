@@ -36,6 +36,10 @@ class TwitterCrawlerAPI(MethodView):
 class RemoteFileFetchAPI(MethodView):
     def post(self):
         user = utils.get_user_from_header(request.headers)
+        file_name = "" # TODO : Simdilik random string sonradan duzenlenebilir
+        utils.create_user_upload_path_if_not_exists(app.config['UPLOAD_PATH'], str(user.id))
+        upload_path = os.path.abspath(os.path.join(app.config['UPLOAD_PATH'], str(user.id), file_name))
+
         pass
 
 

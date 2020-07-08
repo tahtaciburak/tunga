@@ -106,21 +106,25 @@ class ImportFromURL extends React.Component {
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup>
-                    <CLabel htmlFor="datasetName">{translate.translate("retrieval.import_from_url.remote_path")}</CLabel>
-                    <CInput onChange={this.handleDatasetNameChange} id="datasetName" placeholder={translate.translate("retrieval.import_from_url.remote_path_placeholder")} />
+                    <CLabel htmlFor="datasetName">{translate.translate("retrieval.import_from_url.dataset_name")}</CLabel>
+                    <CInput onChange={this.handleDatasetNameChange} id="datasetName" placeholder={translate.translate("retrieval.import_from_url.dataset_name")} />
                   </CFormGroup>
-                <CButton color="success">{translate.translate("retrieval.import_from_url.fetch_data")}</CButton>
+                  <CFormGroup>
+                    <CLabel htmlFor="fetchAddress">{translate.translate("retrieval.import_from_url.remote_path")}</CLabel>
+                    <CInput onChange={this.handleFetchAddressChange} id="fetchAddress" placeholder={translate.translate("retrieval.import_from_url.remote_path_placeholder")} />
+                  </CFormGroup>
+                  <CButton color="success">{translate.translate("retrieval.import_from_url.fetch_data")}</CButton>
                 </CCardBody>
               </CCard>
               <CCol>
-                  <CAlert hidden={!this.state.is_upload_successful} color="success">
-                    {translate.translate("retrieval.import_from_local.file_upload_success")}
-                  </CAlert>
-                  <CAlert hidden={this.state.is_upload_successful} color="danger">
-                    {translate.translate("retrieval.import_from_local.file_upload_fail")}
-                  </CAlert>
-                  <CButton onClick={this.handleRefreshClick} color="primary">{translate.translate("retrieval.import_from_local.upload_new_file")}</CButton>
-                </CCol>
+                <CAlert hidden={!this.state.is_upload_successful} color="success">
+                  {translate.translate("retrieval.import_from_local.file_upload_success")}
+                </CAlert>
+                <CAlert hidden={this.state.is_upload_successful} color="danger">
+                  {translate.translate("retrieval.import_from_local.file_upload_fail")}
+                </CAlert>
+                <CButton onClick={this.handleRefreshClick} color="primary">{translate.translate("retrieval.import_from_local.upload_new_file")}</CButton>
+              </CCol>
 
             </CCol>
           </div>
