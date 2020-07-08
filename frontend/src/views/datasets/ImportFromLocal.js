@@ -29,7 +29,12 @@ class ImportFromLocal extends React.Component {
       is_show_result_alert: false,
       is_upload_successful: false,
       file: null,
-      upload_file_name: translate.translate("retrieval.import_from_local.choose_file")
+      upload_file_name: translate.translate("retrieval.import_from_local.choose_file"),
+      analytics: {
+        nrows:"0",
+        ncols:"0",
+        nmissing:"0"
+      }
     }
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleDatasetDescriptionChange = this.handleDatasetDescriptionChange.bind(this);
@@ -77,7 +82,11 @@ class ImportFromLocal extends React.Component {
         console.log(data);
         this.setState({ is_show_result_alert: true })
         this.setState({ is_upload_successful: true })
-
+        this.setState({analytics:
+          {
+            nrows:data.analytics.nrows,
+            ncols:data.analytics.ncols
+          }})
       })
       .catch(data => {
         alert("hata")
@@ -156,7 +165,7 @@ class ImportFromLocal extends React.Component {
                   <CRow>
                     <CCol sm="6" md="2">
                       <CWidgetProgressIcon
-                        header="87.500"
+                        header={String(this.state.analytics.nrows)}
                         text={translate.translate("retrieval.import_from_local.total_row_count")}
                         color="gradient-info"
                         inverse
@@ -166,7 +175,7 @@ class ImportFromLocal extends React.Component {
                     </CCol>
                     <CCol sm="6" md="2">
                       <CWidgetProgressIcon
-                        header="385"
+                        header={String(this.state.analytics.ncols)}
                         text={translate.translate("retrieval.import_from_local.total_field_count")}
                         color="gradient-success"
                         inverse
