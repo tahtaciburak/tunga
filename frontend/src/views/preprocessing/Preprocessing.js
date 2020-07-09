@@ -28,10 +28,10 @@ class Preprocessing extends React.Component {
     this.makeAPIcall();
   }
 
-	goTo(address){
-    alert('/#'+address);
-		this.props.history.push("/");
-	}
+  goTo(address) {
+    alert('/#' + address);
+    this.props.history.push("/");
+  }
 
   async makeAPIcall() {
     await APIService.requests
@@ -62,12 +62,37 @@ class Preprocessing extends React.Component {
             <CCol xs="12" lg="12">
               <CCard>
                 <CCardHeader>
-
+                  {translate.translate("preprocessing.choose_dataset")}
                 </CCardHeader>
                 <CCardBody>
 
                 </CCardBody>
               </CCard>
+              <CCard>
+                <CCardHeader>
+                  {translate.translate("preprocessing.choose_column")}
+                </CCardHeader>
+                <CCardBody>
+
+                </CCardBody>
+              </CCard>
+              <CCard>
+                <CCardHeader>
+                  {translate.translate("preprocessing.choose_operations")}
+                </CCardHeader>
+                <CCardBody>
+
+                </CCardBody>
+              </CCard>
+              <CCard>
+                <CCardHeader>
+                  {translate.translate("preprocessing.result")}
+                </CCardHeader>
+                <CCardBody>
+
+                </CCardBody>
+              </CCard>
+
             </CCol>
           </div>
         </div>

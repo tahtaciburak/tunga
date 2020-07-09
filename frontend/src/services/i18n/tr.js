@@ -51,7 +51,10 @@ export default {
         }
     },
     preprocessing:{
-        preprocessing_header:"Veri Önişleme"
+        preprocessing_header:"Veri Önişleme",
+        choose_dataset: "Verisetini Seçin",
+        choose_column: "Kolon Seçin",
+        choose_operations: "Uygulanacak İşlemler"
     },
     configuration: {
         configuration_header: "Ayarlar",

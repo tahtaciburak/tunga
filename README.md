@@ -18,6 +18,12 @@ docker pull <bizim docker containeri adi>:latest
 veyahut
 docker-compose up
 ```
+
+## Sistem Diyagramı
+<p align="center">
+    <img src="images/tunga_system_diagram.png" width="480"\>
+</p>
+
 ## Kullandığımız Kaynaklar
 For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
 
