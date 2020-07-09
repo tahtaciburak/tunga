@@ -3,7 +3,7 @@
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-postgres_local_base = 'postgresql://postgres:password@172.17.0.2/'
+postgres_local_base = 'postgresql://postgres:password@localhost/'
 database_name = 'tunga'
 
 

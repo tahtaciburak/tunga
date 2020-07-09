@@ -119,7 +119,7 @@ class ImportFromURL extends React.Component {
                   <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_url.fetch_data")}</CButton>
                 </CCardBody>
               </CCard>
-              <CCol>
+              <CCol hidden={!this.state.is_show_result_alert}>
                 <CAlert hidden={!this.state.is_upload_successful} color="success">
                   {translate.translate("retrieval.import_from_local.file_upload_success")}
                 </CAlert>
