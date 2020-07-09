@@ -30,5 +30,6 @@ def extract_language(text):
 
 
 def extract_price(text):
-    text = Price.fromstring(text)
+    price = Price.fromstring(text)
+    text = str(price.amount) + " " + str(price.currency)
     return str(text)

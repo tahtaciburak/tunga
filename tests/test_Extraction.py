@@ -43,11 +43,11 @@ class TestNormalization(unittest.TestCase):
 
     def test_extract_prices(self):
         actual = extraction.extract_price("Geçen gün aldığım kahve 13.5 liraydı")
-        expected = "Price(amount=Decimal('13.5'), currency=None)"
+        expected = "13.5 None"
         self.assertEqual(actual, expected)
 
         actual = extraction.extract_price("Geçen gün aldığım tişört 5$")
-        expected = "Price(amount=Decimal('5'), currency='$')"
+        expected = "5 $"
         self.assertEqual(actual,expected)
 
 
