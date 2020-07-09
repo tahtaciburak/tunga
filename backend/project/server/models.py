@@ -95,6 +95,24 @@ class BlacklistToken(db.Model):
             return False
 
 
+class Configuration(db.Model):
+    __tablename__ = "configurations"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    config_key = db.Column(db.String(255), unique=False)
+    config_value = db.Column(db.String(255), unique=False)
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
+    created_at = db.Column(db.DateTime, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __init__(self, config_key, config_value, user_id, is_active=True):
+        self.config_key = config_key
+        self.config_value = config_value
+        self.user_id = user_id
+        self.created_at = datetime.datetime.now()
+        self.is_active = is_active
+
+
 class Dataset(db.Model):
     __tablename__ = "datasets"
 

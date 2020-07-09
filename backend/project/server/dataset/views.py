@@ -18,14 +18,55 @@ import subprocess
 dataset_blueprint = Blueprint('dataset', __name__)
 
 
+class DatasetManager:
+    def __init__(self, dataset_path):
+        self.dataset_path = dataset_path
+        self.dataset_file_type = self.dataset_path.split(".")[-1]
+        self.dataset = None
+        self.delimiter = None
+        self.analytics_result = {
+            "n_rows": 0,
+            "n_cols": 0,
+            "n_missing_values": 0
+        }
+        self.columns = []
+        self.df = None
+
+    def create_dataframe(self):
+        if self.dataset_file_type == "csv":
+            return pd.read_csv(self.dataset_path)
+        elif self.dataset_file_type == "xlsx" or self.dataset_file_type == "xls":
+            return pd.read_excel(self.dataset_path)
+        elif self.dataset_file_type == "json":
+            return pd.read_json(self.dataset_file_type)
+        elif self.dataset_file_type == "txt":
+            with open(self.dataset_path, "r") as f:
+                lines = pd.Series([item.strip() for item in f.readlines()])
+            df_model = {
+                "texts": lines
+            }
+            return pd.DataFrame(df_model)
+
+    def analyze(self):
+        df = self.create_dataframe()
+        self.analytics_result["n_rows"] = df.shape[0]
+        self.analytics_result["n_cols"] = df.shape[1]
+        self.columns = df.columns
+        self.df = df
+
+
 class GetUserDatasetsAPI(MethodView):
+    """
+    Bu method kullanıcın sahip olduğu bütün datasetleri getirir.
+    """
+
     def get(self):
         user = utils.get_user_from_header(request.headers)
-        dss = []
+        user_datasets = []
         for ds in user.datasets:
-            dss.append(ds.as_dict())
-        dss = list(reversed(dss))
-        return make_response(jsonify({"datasets": dss}))
+            user_datasets.append(ds.as_dict())
+        user_datasets = list(reversed(user_datasets))
+        return make_response(jsonify({"datasets": user_datasets}))
 
 
 class TwitterCrawlerAPI(MethodView):
@@ -43,78 +84,35 @@ class RemoteFileFetchAPI(MethodView):
         dataset_description = post_data["dataset_description"]
         dataset_url = post_data["dataset_url"]
         file_name = dataset_url.split("/")[-1]
-        file_type = file_name.split(".")[-1]
         upload_path = os.path.join(os.path.join(app.config['UPLOAD_PATH'], str(user.id)), file_name)
-        print(upload_path)
-        a = subprocess.check_output(f"wget {dataset_url} -P {os.path.join(app.config['UPLOAD_PATH'], str(user.id))}", shell=True)
-        n_rows = 0
-        n_cols = 0
-        n_missing_values = 0
-        if file_type == "csv":
-            try:
-                df = pd.read_csv(upload_path)
-                print(df)
-                n_rows = df.shape[0]
-                n_cols = df.shape[1]
-                n_missing_values = 0  # df.isnull().sum()
-            except:
-                return make_response(jsonify({
-                    "status": 'error',
-                    "reason": "improper csv file"
-                })), 401
-        elif file_type == "txt":
-            with open(upload_path, "r") as f:
-                lines = pd.Series([item.strip() for item in f.readlines()])
-            df_model = {
-                "texts": lines
-            }
-            df = pd.DataFrame(df_model)
-            n_rows = df.shape[0]
-            n_cols = df.shape[1]
-            n_missing_values = df.isnull().sum()
-        elif file_type == "xlsx":
-            try:
-                df = pd.read_excel(upload_path)
-                n_rows = df.shape[0]
-                n_cols = df.shape[1]
-                n_missing_values = df.isnull().sum()
-            except:
-                return make_response(jsonify({
-                    "status": 'error',
-                    "reason": "improper excel file"
-                })), 401
-        elif file_type == "json":
-            try:
-                df = pd.read_json(upload_path)
-                n_rows = df.shape[0]
-                n_cols = df.shape[1]
-                n_missing_values = df.isnull().sum()
-            except:
-                return make_response(jsonify({
-                    "status": 'error',
-                    "reason": "improper json file"
-                })), 401
-        else:
-            return make_response(jsonify({
-                "status": 'error',
-                "reason": "unknown file type"
-            })), 401
+        a = subprocess.check_output(f"wget {dataset_url} -P {os.path.join(app.config['UPLOAD_PATH'], str(user.id))}",
+                                    shell=True)
+
+        dm = DatasetManager(upload_path)
+        dm.analyze()
+
+        records = json.loads(dm.df.T.to_json()).values()
+        tungaclient = pymongo.MongoClient("mongodb://localhost:27017/")
+        user_mongodb = tungaclient["db_" + str(user.id)]
+        mycol = user_mongodb[dataset_name]
+        mycol.insert(records)
 
         try:
             dataset = Dataset(
                 filename=dataset_name,
                 description=dataset_description,
                 filepath=os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + file_name,
+                file_type=dm.dataset_file_type,
                 size=0,  # TODO: fix here
-                row_count=n_rows,
+                row_count=dm.analytics_result["n_rows"],
                 user_id=user.id,
-                file_type=file_name.split(".")[-1]
             )
             db.session.add(dataset)
             db.session.commit()
             responseObject = {
                 'status': 'success',
-                'message': 'Successfully uploaded.'
+                'message': 'Successfully uploaded.',
+                'analytics': dm.analytics_result
             }
 
             return make_response(jsonify(responseObject)), 201
@@ -125,7 +123,7 @@ class RemoteFileFetchAPI(MethodView):
                 'status': 'fail',
                 'message': 'Some error occurred. Please try again.'
             }
-            return make_response(jsonify(responseObject)), 401
+            return make_response(jsonify(responseObject)), 400
 
 
 class LocalUploadAPI(MethodView):
