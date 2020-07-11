@@ -8,6 +8,7 @@ import {
   CButton,
   CRow,
   CSelect,
+  CInputCheckbox,
   CLabel,
   CFormGroup
 } from '@coreui/react'
@@ -25,9 +26,12 @@ class Preprocessing extends React.Component {
     this.state = {
       datasets: [],
       columns: [],
-      selectedDatasetId: -1
+      selectedDatasetId: -1,
+      selectedColumnId: -1,
+      isShowResult: false
     }
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
+    this.handleColumnChange = this.handleColumnChange.bind(this);
   }
 
   componentDidMount() {
@@ -35,11 +39,15 @@ class Preprocessing extends React.Component {
   }
 
   handleDatasetNameChange(event) {
-    let datasetId = event.target.value
-    this.setState({selectedDatasetId: datasetId});
+    let datasetId = event.target.value;
+    this.setState({ selectedDatasetId: datasetId });
     this.fetchColumns(datasetId);
   }
 
+  handleColumnChange(event) {
+    let columndId = event.target.value;
+    this.setState({ selectedColumnId: columndId });
+  }
 
   async fetchDatasets() {
     await APIService.requests
@@ -61,14 +69,14 @@ class Preprocessing extends React.Component {
 
   async fetchColumns(datasetId) {
     await APIService.requests
-      .get('dataset/'+datasetId+'/columns')
+      .get('dataset/' + datasetId + '/columns')
       .then(data => {
         console.log(data.columns)
-        this.setState({columns: data.columns})
+        this.setState({ columns: data.columns })
 
       })
       .catch(data => {
-        this.setState({columns: []})
+        this.setState({ columns: [] })
         console.log(data)
         AlertService.Add({
           type: 'alert',
@@ -122,7 +130,7 @@ class Preprocessing extends React.Component {
                       <CLabel htmlFor="select">{translate.translate("preprocessing.column")}</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
-                      <CSelect onChange={this.handleDatasetNameChange} custom name="select" id="select">
+                      <CSelect onChange={this.handleColumnChange} custom name="select" id="select">
                         <option value="0">{translate.translate("preprocessing.choose_column")}</option>
 
                         {this.state.columns.map((col, i) =>
@@ -140,10 +148,83 @@ class Preprocessing extends React.Component {
                   {translate.translate("preprocessing.choose_operations")}
                 </CCardHeader>
                 <CCardBody>
+                  <CCol md="12">
+                    <CRow>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox1" name="inline-checkbox1" value="option2" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox1">{translate.translate("preprocessing.lowercase")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox1" name="inline-checkbox1" value="option2" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox1">{translate.translate("preprocessing.uppercase")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox1" name="inline-checkbox1" value="option2" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox1">{translate.translate("preprocessing.remove_stopwords")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox2" name="inline-checkbox2" value="option2" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox2">{translate.translate("preprocessing.remove_punctuations")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox3" name="inline-checkbox3" value="option3" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox3">{translate.translate("preprocessing.remove_digits")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox4" name="inline-checkbox4" value="option4" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox4">{translate.translate("preprocessing.remove_emojis")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox5" name="inline-checkbox5" value="option5" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox5">{translate.translate("preprocessing.remove_hashtags")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox5" name="inline-checkbox5" value="option5" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox5">{translate.translate("preprocessing.remove_mentions")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.remove_urls")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.remove_emails")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.remove_non_turkish_words")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.correct_typos")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.lemmatize")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.stem")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.deasciify")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.asciify")}</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-checkbox" inline>
+                        <CInputCheckbox custom id="inline-checkbox6" name="inline-checkbox6" value="option6" />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-checkbox6">{translate.translate("preprocessing.remove_person_names")}</CLabel>
+                      </CFormGroup>
+                    </CRow>
+                  </CCol>
 
+                <CButton color="success">{translate.translate("preprocessing.start_preprocessing")}</CButton>
                 </CCardBody>
               </CCard>
-              <CCard>
+              <CCard hidden = {!this.state.isShowResult}>
                 <CCardHeader>
                   {translate.translate("preprocessing.result")}
                 </CCardHeader>
