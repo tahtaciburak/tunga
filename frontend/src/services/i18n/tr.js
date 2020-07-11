@@ -6,7 +6,7 @@ export default {
             import_from_local: "Bilgisayardan yükle",
             import_from_url: "URL'den yükle",
             import_from_twitter: "Twitter'dan yükle",
-            import_from_api: "API oluştur"    
+            import_from_api: "API oluştur"
         },
         preprocessing: "Veri Önişleme",
         machine_learning: "Makine Öğrenmesi"
@@ -19,7 +19,7 @@ export default {
         import_from_api: "API oluştur"
     },
     retrieval: {
-        import_from_local:{
+        import_from_local: {
             file_metadata: "Dosya Üstbilgileri",
             file_upload: "Dosya Yükleme",
             dataset_name: "Veriseti İsmi",
@@ -44,15 +44,18 @@ export default {
             enter_fıle_remote_path: "Uzak Dosyanın Adresi",
             remote_path: "Verisetinin bulunduğu URL:",
             remote_path_placeholder: "http(s)://",
-            fetch_data:"Veriyi Getir",
+            fetch_data: "Veriyi Getir",
             dataset_name: "Veriseti Adı:",
             dataset_description: "Veriseti Açıklaması:"
 
         }
     },
-    preprocessing:{
-        preprocessing_header:"Veri Önişleme",
+    preprocessing: {
+        preprocessing_header: "Veri Önişleme",
         choose_dataset: "Verisetini Seçin",
+        dataset: "Veriseti",
+        column: "Kolon",
+        please_choose: "Lütfen Seçin",
         choose_column: "Kolon Seçin",
         choose_operations: "Uygulanacak İşlemler"
     },

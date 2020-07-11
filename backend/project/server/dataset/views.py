@@ -55,6 +55,18 @@ class DatasetManager:
         self.df = df
 
 
+class GetDatasetColumnNamesAPI(MethodView):
+    def get(self, dataset_id):
+        user = utils.get_user_from_header(request.headers)
+        dataset = Dataset.query.filter_by(id=dataset_id).first()
+        df = pd.read_csv(dataset.filepath)
+        return jsonify({
+            "dataset_id": dataset_id,
+            "dataset_name": dataset.filename,
+            "columns": list(df.columns)
+        })
+
+
 class GetUserDatasetsAPI(MethodView):
     """
     Bu method kullanıcın sahip olduğu bütün datasetleri getirir.
@@ -234,6 +246,13 @@ class LocalUploadAPI(MethodView):
 local_dataset_upload_view = LocalUploadAPI.as_view('local_dataset_upload_api')
 remote_dataset_upload_view = RemoteFileFetchAPI.as_view('remote_dataset_upload_api')
 get_user_datasets = GetUserDatasetsAPI.as_view('get_user_datasets_api')
+get_dataset_column_names = GetDatasetColumnNamesAPI.as_view('get_dataset_column_names_api')
+
+dataset_blueprint.add_url_rule(
+    '/dataset/<dataset_id>/columns',
+    view_func=get_dataset_column_names,
+    methods=['GET']
+)
 
 dataset_blueprint.add_url_rule(
     '/dataset/local',
