@@ -79,6 +79,10 @@ class Datasets extends React.Component {
                     items={this.state.datasets}
                     fields={fields}
                     striped
+                    sorter
+                    hover
+                    columnFilter
+                    tableFilter              
                     itemsPerPage={10}
                     pagination
                     onRowClick={this.handleRowClick}
