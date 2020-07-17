@@ -35,11 +35,23 @@ const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'));
 const Projects = React.lazy(() => import('./views/projects/Projects'));
 const Datasets = React.lazy(() => import('./views/datasets/Datasets'));
+const InspectDataset = React.lazy(() => import('./views/datasets/InspectDataset'));
+
 const Preprocessing = React.lazy(() => import('./views/preprocessing/Preprocessing'));
 const ImportFromLocal = React.lazy(() => import('./views/datasets/ImportFromLocal'));
 const ImportFromURL = React.lazy(() => import('./views/datasets/ImportFromURL'));
 const ImportFromTwitter = React.lazy(() => import('./views/datasets/ImportFromTwitter'));
 const Configuration = React.lazy(() => import('./views/configuration/Configuration'));
+
+const SentimentAnalysis = React.lazy(() => import('./views/machine_learning/SentimentAnalysis'));
+const TopicModelling = React.lazy(() => import('./views/machine_learning/TopicModelling'));
+const KeywordExtraction = React.lazy(() => import('./views/machine_learning/KeywordExtraction'));
+const Summarization = React.lazy(() => import('./views/machine_learning/Summarization'));
+const LanguageIdentification = React.lazy(() => import('./views/machine_learning/LanguageIdentification'));
+const MachineTranslation = React.lazy(() => import('./views/machine_learning/MachineTranslation'));
+const NamedEntityRecognition = React.lazy(() => import('./views/machine_learning/NamedEntityRecognition'));
+
+
 
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
@@ -51,9 +63,21 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/projects', name: 'Projects', component: Projects },
   { path: '/datasets', name: 'Datasets', component: Datasets },
+
+  { path: '/inspect-dataset/:id', name: 'InspectDataset', component: InspectDataset },
+
   { path: '/retrieval/local', name: 'ImportFromLocal', component: ImportFromLocal },
   { path: '/retrieval/url', name: 'ImportFromURL', component: ImportFromURL },
   { path: '/retrieval/twitter', name: 'ImportFromTwitter', component: ImportFromTwitter },
+
+  { path: '/ml/sentiment', name: 'SentimentAnalysis', component: SentimentAnalysis },
+  { path: '/ml/topic-modelling', name: 'TopicModelling', component: TopicModelling },
+  { path: '/ml/sentiment', name: 'SentimentAnalysis', component: SentimentAnalysis },
+  { path: '/ml/keyword-extraction', name: 'KeywordExtraction', component: KeywordExtraction },
+  { path: '/ml/summarization', name: 'Summarization', component: Summarization },
+  { path: '/ml/language-identification', name: 'LanguageIdentification', component: LanguageIdentification },
+  { path: '/ml/translation', name: 'MachineTranslation', component: MachineTranslation },
+  { path: '/ml/ner', name: 'NamedEntityRecognition', component: NamedEntityRecognition },
 
   { path: '/preprocessing', name: 'Preprocessing', component: Preprocessing },
   { path: '/configuration', name: 'Configuration', component: Configuration },

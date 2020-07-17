@@ -24,6 +24,7 @@ class ImportFromTwitter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      is_configured: true,
       dataset_name: "",
       dataset_description: "",
       is_show_result_alert: false,
@@ -92,138 +93,102 @@ class ImportFromTwitter extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <div className="card">
-          <div className="card-header">
-            {translate.translate("datasets.import_from_local")}
+    if (!this.state.is_configured) {
+      return (
+        <>
+          <CAlert color="danger">{translate.translate("retrieval.import_from_twitter.apikey_not_found")}</CAlert>
+        </>
+      )
+
+    }
+    else {
+      return (
+        <>
+          <div className="card">
+            <div className="card-header">
+              {translate.translate("datasets.import_from_twitter")}
+            </div>
+            <div className="card-body">
+              <CCol xs="12" lg="12">
+                <CCard>
+                  <CCardHeader>
+                    {translate.translate("retrieval.import_from_local.file_metadata")}
+                  </CCardHeader>
+                  <CCardBody>
+                    <CFormGroup>
+                      <CLabel htmlFor="datasetName">{translate.translate("retrieval.import_from_local.dataset_name")}</CLabel>
+                      <CInput onChange={this.handleDatasetNameChange} id="datasetName" placeholder={translate.translate("retrieval.import_from_local.dataset_name_placeholder")} />
+                    </CFormGroup>
+                    <CFormGroup>
+                      <CLabel htmlFor="datasetDescription">{translate.translate("retrieval.import_from_local.dataset_description")}</CLabel>
+                      <CInput onChange={this.handleDatasetDescriptionChange} id="datasetDescription" placeholder={translate.translate("retrieval.import_from_local.dataset_description_placeholder")} />
+                    </CFormGroup>
+
+                  </CCardBody>
+                </CCard>
+
+                <CCard>
+                  <CCardHeader>
+                    {translate.translate("retrieval.import_from_twitter.fetch_data_from_user")}
+                  </CCardHeader>
+                  <CCardBody>
+                    <CFormGroup>
+                      <CLabel htmlFor="twitterUsername">{translate.translate("retrieval.import_from_twitter.twitter_username")}</CLabel>
+                      <CInput onChange={this.handleDatasetDescriptionChange} id="twitterUsername" placeholder={translate.translate("retrieval.import_from_twitter.twitter_username_placeholder")} />
+                    </CFormGroup>
+
+                    <CFormGroup row>
+
+                      <CCol xs="12" md="12">
+                        <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_from_user")}</CButton>
+                      </CCol>
+                    </CFormGroup>
+                  </CCardBody>
+                  <CCol hidden={!this.state.is_show_result_alert}>
+                    <CAlert hidden={!this.state.is_upload_successful} color="success">
+                      {translate.translate("retrieval.import_from_local.file_upload_success")}
+                    </CAlert>
+                    <CAlert hidden={this.state.is_upload_successful} color="danger">
+                      {translate.translate("retrieval.import_from_local.file_upload_fail")}
+                    </CAlert>
+                    <CButton onClick={this.handleRefreshClick} color="primary">{translate.translate("retrieval.import_from_twitter.fetch_data_from_user")}</CButton>
+                  </CCol>
+                </CCard>
+
+                <CCard>
+                  <CCardHeader>
+                    {translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag")}
+                  </CCardHeader>
+                  <CCardBody>
+                    <CFormGroup>
+                      <CLabel htmlFor="hashtag">{translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag")}</CLabel>
+                      <CInput onChange={this.handleDatasetDescriptionChange} id="hashtag" placeholder={translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag_placeholder")} />
+                    </CFormGroup>
+
+                    <CFormGroup row>
+
+                      <CCol xs="12" md="12">
+                        <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag")}</CButton>
+                      </CCol>
+                    </CFormGroup>
+                  </CCardBody>
+                  <CCol hidden={!this.state.is_show_result_alert}>
+                    <CAlert hidden={!this.state.is_upload_successful} color="success">
+                      {translate.translate("retrieval.import_from_local.file_upload_success")}
+                    </CAlert>
+                    <CAlert hidden={this.state.is_upload_successful} color="danger">
+                      {translate.translate("retrieval.import_from_local.file_upload_fail")}
+                    </CAlert>
+                    <CButton onClick={this.handleRefreshClick} color="primary">{translate.translate("retrieval.import_from_local.upload_new_file")}</CButton>
+                  </CCol>
+                </CCard>
+              </CCol>
+            </div>
           </div>
-          <div className="card-body">
-            <CCol xs="12" lg="12">
-              <CCard>
-                <CCardHeader>
-                  {translate.translate("retrieval.import_from_local.file_metadata")}
-                </CCardHeader>
-                <CCardBody>
-                  <CFormGroup>
-                    <CLabel htmlFor="datasetName">{translate.translate("retrieval.import_from_local.dataset_name")}</CLabel>
-                    <CInput onChange={this.handleDatasetNameChange} id="datasetName" placeholder={translate.translate("retrieval.import_from_local.dataset_name_placeholder")} />
-                  </CFormGroup>
-                  <CFormGroup>
-                    <CLabel htmlFor="datasetDescription">{translate.translate("retrieval.import_from_local.dataset_description")}</CLabel>
-                    <CInput onChange={this.handleDatasetDescriptionChange} id="datasetDescription" placeholder={translate.translate("retrieval.import_from_local.dataset_description_placeholder")} />
-                  </CFormGroup>
+        </>
+      )
 
-                </CCardBody>
-              </CCard>
-
-              <CCard>
-                <CCardHeader>
-                  {translate.translate("retrieval.import_from_local.file_upload")}
-                </CCardHeader>
-                <CCardBody>
-                  <CFormGroup row>
-                    <CLabel col md={3}>{translate.translate("retrieval.import_from_local.choose_dataset_file")}</CLabel>
-                    <CCol xs="12" md="9">
-                      <CInputFile onChange={this.handleFileUploadChange} custom id="custom-file-input" />
-                      <CLabel htmlFor="custom-file-input" variant="custom-file">
-                        {this.state.upload_file_name}
-                      </CLabel>
-                    </CCol>
-                    <CCol xs="12" md="12">
-                      <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_local.upload")}</CButton>
-                      <CButton style={{ marginLeft: 10 }} color="success">{translate.translate("retrieval.import_from_local.upload_and_analyze")}</CButton>
-
-                    </CCol>
-                  </CFormGroup>
-                </CCardBody>
-                <CCol hidden={!this.state.is_show_result_alert}>
-                  <CAlert hidden={!this.state.is_upload_successful} color="success">
-                    {translate.translate("retrieval.import_from_local.file_upload_success")}
-                  </CAlert>
-                  <CAlert hidden={this.state.is_upload_successful} color="danger">
-                    {translate.translate("retrieval.import_from_local.file_upload_fail")}
-                  </CAlert>
-                  <CButton onClick={this.handleRefreshClick} color="primary">{translate.translate("retrieval.import_from_local.upload_new_file")}</CButton>
-                </CCol>
-              </CCard>
-
-              <CCard hidden={!this.state.is_show_result_alert}>
-                <CCardHeader>
-                  {translate.translate("retrieval.import_from_local.analysis")}
-                </CCardHeader>
-                <CCardBody>
-                  <CRow>
-                    <CCol sm="6" md="2">
-                      <CWidgetProgressIcon
-                        header="87.500"
-                        text={translate.translate("retrieval.import_from_local.total_row_count")}
-                        color="gradient-info"
-                        inverse
-                      >
-                        <CIcon name="cil-people" height="36" />
-                      </CWidgetProgressIcon>
-                    </CCol>
-                    <CCol sm="6" md="2">
-                      <CWidgetProgressIcon
-                        header="385"
-                        text={translate.translate("retrieval.import_from_local.total_field_count")}
-                        color="gradient-success"
-                        inverse
-                      >
-                        <CIcon name="cil-userFollow" height="36" />
-                      </CWidgetProgressIcon>
-                    </CCol>
-                    <CCol sm="6" md="2">
-                      <CWidgetProgressIcon
-                        header="1238"
-                        text={translate.translate("retrieval.import_from_local.total_word_count")}
-                        color="gradient-warning"
-                        inverse
-                      >
-                        <CIcon name="cil-basket" height="36" />
-                      </CWidgetProgressIcon>
-                    </CCol>
-                    <CCol sm="6" md="2">
-                      <CWidgetProgressIcon
-                        header="28%"
-                        text={translate.translate("retrieval.import_from_local.total_distinct_word_count")}
-                        color="gradient-primary"
-                        inverse
-                      >
-                        <CIcon name="cil-chartPie" height="36" />
-                      </CWidgetProgressIcon>
-                    </CCol>
-                    <CCol sm="6" md="2">
-                      <CWidgetProgressIcon
-                        header="0"
-                        text={translate.translate("retrieval.import_from_local.total_missing_values")}
-                        color="gradient-danger"
-                        inverse
-                      >
-                        <CIcon name="cil-speedometer" height="36" />
-                      </CWidgetProgressIcon>
-                    </CCol>
-                    <CCol sm="6" md="2">
-                      <CWidgetProgressIcon
-                        header="0"
-                        text="comments"
-                        color="gradient-info"
-                        inverse
-                      >
-                        <CIcon name="cil-speech" height="36" />
-                      </CWidgetProgressIcon>
-                    </CCol>
-                  </CRow>
-
-                </CCardBody>
-              </CCard>
-
-            </CCol>
-          </div>
-        </div>
-      </>
-    )
+    }
   }
 }
 

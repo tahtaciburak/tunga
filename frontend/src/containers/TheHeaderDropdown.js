@@ -10,6 +10,8 @@ import {
 import CIcon from '@coreui/icons-react'
 import { inject, observer } from 'mobx-react';
 
+import translate from '../services/i18n/Translate';
+
 @inject("AuthStore")
 
 @observer
@@ -29,12 +31,8 @@ class TheHeaderDropdown extends React.Component {
         direction="down"
       >
         <CDropdownToggle className="c-header-nav-link" caret={false}>
-          <div className="c-avatar">
-            <CImg
-              src={'avatars/6.jpg'}
-              className="c-avatar-img"
-              alt="admin@bootstrapmaster.com"
-            />
+          <div className="c-avatar" style={{backgroundColor:"gray",color:"white",fontSize:23}}>
+            I
           </div>
         </CDropdownToggle>
         <CDropdownMenu className="pt-0" placement="bottom-end">
@@ -44,15 +42,12 @@ class TheHeaderDropdown extends React.Component {
             color="light"
             className="text-center"
           >
-            <strong>Account</strong>
-          </CDropdownItem>
-          <CDropdownItem>
-            <CIcon name="cil-user" className="mfe-2" />Profile
+            <strong>{translate.translate("header_dropdown.account")}</strong>
           </CDropdownItem>
           <CDropdownItem divider />
           <CDropdownItem onClick={this.handleLogout}>
             <CIcon name="cil-lock-locked" className="mfe-2" />
-            Logout
+            {translate.translate("header_dropdown.logout")}
           </CDropdownItem>
         </CDropdownMenu>
       </CDropdown>
@@ -62,3 +57,12 @@ class TheHeaderDropdown extends React.Component {
 }
 
 export default TheHeaderDropdown
+
+/**
+ * 
+ * 
+ *           <CDropdownItem>
+            <CIcon name="cil-user" className="mfe-2" />Profile
+          </CDropdownItem>
+
+ */

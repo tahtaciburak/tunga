@@ -62,22 +62,41 @@ export default [
       {
         _tag: 'CSidebarNavItem',
         name: 'Sentiment Analysis',
-        to: '/test',
+        to: '/ml/sentiment',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Topic and Keyword Analysis',
-        to: '/test',
+        name: 'Topic Modelling',
+        to: '/ml/topic-modelling',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Keyword Extraction',
+        to: '/ml/keyword-extraction',
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Summarization',
-        to: '/test',
+        to: '/ml/summarization',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Clustering',
-        to: '/test',
+        name: 'Language Identification',
+        to: '/ml/language-identification',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Translation',
+        to: '/ml/translation',
+        badge: {
+          color:"secondary",
+          text: 'BETA'
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Named Entity Recognition',
+        to: '/ml/ner',
       },
     ],
   },

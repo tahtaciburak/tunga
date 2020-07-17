@@ -33,9 +33,6 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/>
         <TheHeaderDropdown/>
       </CHeaderNav>
 
@@ -62,3 +59,14 @@ const TheHeader = () => {
 }
 
 export default TheHeader
+
+/**
+ * 
+ * 
+ * 
+ *         
+ *      <TheHeaderDropdownNotif/>
+        <TheHeaderDropdownTasks/>
+        <TheHeaderDropdownMssg/>
+
+ */

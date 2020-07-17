@@ -1,4 +1,8 @@
 export default {
+    header_dropdown:{
+        account:"Hesap",
+        logout: "Çıkış Yap"
+    },
     nav: {
         my_datasets: "Verisetlerim",
         data_ret: {
@@ -47,7 +51,9 @@ export default {
             fetch_data: "Veriyi Getir",
             dataset_name: "Veriseti Adı:",
             dataset_description: "Veriseti Açıklaması:"
-
+        },
+        import_from_twitter:{
+            apikey_not_found:"API KEY bulunamadı Konfigürasyon sayfasından TWITTER_API_KEY değişkenini ekleyin."
         }
     },
     preprocessing: {
@@ -74,10 +80,41 @@ export default {
         stem: "Kelimelerin kök hallerini kullan",
         deasciify: "ASCII karakterleri Türkçe karakterlerle değiştir",
         asciify: "Türkçe karakterleri ASCII karakterlerle değiştir",
-        remove_person_names: "Kişi isimlerini sil"
+        remove_person_names: "Kişi isimlerini sil",
+        start_preprocessing: "Önişlemeye Başla!"
+    },
+    machine_learning:{
+        sentiment: {
+            header: "Duygu Durumu Analizi"
+        },
+        topic_modelling: {
+            header: "Konu Modelleme"
+        },
+        keyword_extraction: {
+            header: "Anahtar Kelime Çıkarımı"
+        },
+        summarization: {
+            header: "Metin Özetleme"
+        },
+        language_identification:{
+            header: "Dil Tanıma"
+        },
+        machine_translation:{
+            header: "Makine Çevirisi"
+        },
+        ner:{
+            header: "Varlık İsmi Çıkarımı"
+        }
     },
     configuration: {
         configuration_header: "Ayarlar",
         twitter_api_configuration: "Twitter API Ayarları",
+        add_new_configuration: "Yeni Ayar Ekle",
+        my_configurations: "Ayarlarım",
+        add_config: "Ayarı Kaydet",
+        key: "Ayar Adı (Anahtar):",
+        key_placeholder: "Ayar Adınızı Giriniz",
+        value: "Değer:",
+        value_placeholder: "Ayar Değerini Giriniz"
     }
 }

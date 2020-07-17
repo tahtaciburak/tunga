@@ -18,9 +18,8 @@ import APIService from '../../services/APIService'
 import AlertService from '../../services/AlertService'
 
 import translate from '../../services/i18n/Translate';
-const fields = ['filename', 'description', 'row_count', 'filetype', 'created_at']
 
-class Preprocessing extends React.Component {
+class SentimentAnalysis extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -140,22 +139,22 @@ class Preprocessing extends React.Component {
       <>
         <div className="card">
           <div className="card-header">
-            {translate.translate("preprocessing.preprocessing_header")}
+            {translate.translate("machine_learning.sentiment.header")}
           </div>
           <div className="card-body">
             <CCol xs="12" lg="12">
               <CCard>
                 <CCardHeader>
-                  {translate.translate("preprocessing.choose_dataset")}
+                  {translate.translate("machine_learning.sentiment.choose_dataset")}
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="select">{translate.translate("preprocessing.dataset")}</CLabel>
+                      <CLabel htmlFor="select">{translate.translate("machine_learning.sentiment.dataset")}</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
                       <CSelect onChange={this.handleDatasetNameChange} custom name="select" id="select">
-                        <option value="0">{translate.translate("preprocessing.please_choose")}</option>
+                        <option value="0">{translate.translate("machine_learning.sentiment.please_choose")}</option>
 
                         {this.state.datasets.map((ds, i) =>
                           <option key={i} value={i}>{ds.filename}</option>
@@ -169,16 +168,16 @@ class Preprocessing extends React.Component {
               </CCard>
               <CCard>
                 <CCardHeader>
-                  {translate.translate("preprocessing.choose_column")}
+                  {translate.translate("machine_learning.sentiment.choose_column")}
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="select">{translate.translate("preprocessing.column")}</CLabel>
+                      <CLabel htmlFor="select">{translate.translate("machine_learning.sentiment.column")}</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
                       <CSelect onChange={this.handleColumnChange} custom name="select" id="select">
-                        <option value="0">{translate.translate("preprocessing.choose_column")}</option>
+                        <option value="0">{translate.translate("machine_learning.sentiment.choose_column")}</option>
 
                         {this.state.columns.map((col, i) =>
                           <option key={i} value={i}>{col}</option>
@@ -192,26 +191,18 @@ class Preprocessing extends React.Component {
               </CCard>
               <CCard>
                 <CCardHeader>
-                  {translate.translate("preprocessing.choose_operations")}
+                  {translate.translate("machine_learning.sentiment.choose_model")}
                 </CCardHeader>
                 <CCardBody>
                   <CCol md="12">
-                    {this.state.steps.map((k, v) =>
-                      <CRow>
-                        <CFormGroup style={{ paddingRight: 150 }} variant="custom-checkbox" inline>
-                          <CInputCheckbox onChange={this.handleCheckboxClick} custom id={v} name={k} value={v} />
-                          <CLabel variant="custom-checkbox" htmlFor={v}>{translate.translate("preprocessing." + k)}</CLabel>
-                        </CFormGroup>
-                      </CRow>
-                    )}
                   </CCol>
 
-                  <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("preprocessing.start_preprocessing")}</CButton>
+                  <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("machine_learning.sentiment.get_result")}</CButton>
                 </CCardBody>
               </CCard>
               <CCard hidden={!this.state.isShowResult}>
                 <CCardHeader>
-                  {translate.translate("preprocessing.result")}
+                  {translate.translate("machine_learning.sentiment.result")}
                 </CCardHeader>
                 <CCardBody>
 
@@ -227,7 +218,7 @@ class Preprocessing extends React.Component {
   }
 }
 
-export default Preprocessing
+export default SentimentAnalysis
 
 /**
  *

@@ -16,7 +16,7 @@ import AlertService from '../../services/AlertService'
 import translate from '../../services/i18n/Translate';
 const fields = ['filename', 'description', 'row_count', 'filetype', 'created_at']
 
-class Datasets extends React.Component {
+class InspectDataset extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +25,7 @@ class Datasets extends React.Component {
   }
 
   componentDidMount() {
+    alert(this.props.match.params.id)
     this.makeAPIcall();
   }
 
@@ -50,9 +51,6 @@ class Datasets extends React.Component {
       });
   }
 
-  handleRowClick(event) {
-    alert(event.target.id)
-  }
 
   render() {
     return (
@@ -78,7 +76,6 @@ class Datasets extends React.Component {
                     striped
                     itemsPerPage={10}
                     pagination
-                    onRowClick={this.handleRowClick}
                   />
                 </CCardBody>
               </CCard>
@@ -90,4 +87,4 @@ class Datasets extends React.Component {
   }
 }
 
-export default Datasets
+export default InspectDataset

@@ -18,6 +18,7 @@ class User(db.Model):
     registered_on = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
     datasets = db.relationship("Dataset")
+    configurations = db.relationship("Configuration")
 
     def __init__(self, username, email, password, admin=False):
         self.email = email
@@ -111,6 +112,9 @@ class Configuration(db.Model):
         self.user_id = user_id
         self.created_at = datetime.datetime.now()
         self.is_active = is_active
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 class Dataset(db.Model):
