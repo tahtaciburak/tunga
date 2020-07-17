@@ -141,8 +141,6 @@ class ImportFromLocal extends React.Component {
                     </CCol>
                     <CCol xs="12" md="12">
                       <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_local.upload")}</CButton>
-                      <CButton style={{ marginLeft: 10 }} color="success">{translate.translate("retrieval.import_from_local.upload_and_analyze")}</CButton>
-
                     </CCol>
                   </CFormGroup>
                 </CCardBody>

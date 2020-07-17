@@ -22,7 +22,7 @@ class Datasets extends React.Component {
     this.state = {
       datasets: []
     }
-    this.goTo= this.goTo.bind(this);
+    this.goTo = this.goTo.bind(this);
     this.handleRowClick = this.handleRowClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
@@ -31,10 +31,10 @@ class Datasets extends React.Component {
     this.makeAPIcall();
   }
 
-	goTo(address){
-    alert('/#'+address);
-		this.props.history.push("/");
-	}
+  goTo(address) {
+    alert('/#' + address);
+    this.props.history.push("/");
+  }
 
   async makeAPIcall() {
     await APIService.requests
@@ -55,12 +55,13 @@ class Datasets extends React.Component {
 
   handleRowClick(event) {
     //console.log(event.id)
-    this.props.history.push("/inspect-dataset/"+event.id);
+    this.props.history.push("/inspect-dataset/" + event.id);
   }
 
   handleButtonClick(event) {
-    this.props.history.push("/retrieval/"+event.target.name)
+    this.props.history.push("/retrieval/" + event.target.name)
   }
+  
   render() {
     return (
       <>
@@ -86,7 +87,7 @@ class Datasets extends React.Component {
                     sorter
                     hover
                     columnFilter
-                    tableFilter              
+                    tableFilter
                     itemsPerPage={10}
                     pagination
                     onRowClick={this.handleRowClick}

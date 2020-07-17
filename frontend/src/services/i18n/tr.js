@@ -20,7 +20,14 @@ export default {
         import_from_local: "Bilgisayardan yükle",
         import_from_url: "URL'den yükle",
         import_from_twitter: "Twitter'dan yükle",
-        import_from_api: "API oluştur"
+        import_from_api: "API oluştur",
+        inspect_dataset:{
+            header:"Dataseti Incele",
+            dataset_name: "Veriseti Adı",
+            dataset_description: "Veriseti Açıklaması",
+            metadata: "Veriseti Üstbilgileri",
+            data: "Veri"
+        }
     },
     retrieval: {
         import_from_local: {

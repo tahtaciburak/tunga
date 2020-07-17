@@ -20,13 +20,15 @@ const fields = ['filename', 'description', 'row_count', 'filetype', 'created_at'
 class InspectDataset extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      datasets: []
+      tableData: [],
+      fields: [],
+      selectedDatasetId: -1
     }
   }
 
   componentDidMount() {
-    alert(this.props.match.params.id)
     this.makeAPIcall();
   }
 
@@ -36,11 +38,15 @@ class InspectDataset extends React.Component {
 	}
 
   async makeAPIcall() {
-    /*  
     await APIService.requests
-      .get('dataset/all')
-      .then(data => {
-        this.setState({ datasets: data.datasets })
+      .get('dataset/'+ this.props.match.params.id + "/inspect")
+      .then(fetchedData => {
+        console.log(fetchedData)
+        this.setState({ tableData: fetchedData.data })
+        this.setState({ fields: fetchedData.columns })
+        this.setState({ datasetName: fetchedData.dataset_name})
+        this.setState({ datasetDescription: fetchedData.dataset_description})
+      
       })
       .catch(data => {
         console.log(data)
@@ -50,7 +56,7 @@ class InspectDataset extends React.Component {
           level: 'error',
           autoDismiss: 5
         });
-      });*/
+      });
   }
 
 
@@ -59,28 +65,35 @@ class InspectDataset extends React.Component {
       <>
         <div className="card">
           <div className="card-header">
-            {translate.translate("datasets.inspect_dataset")}
+            {translate.translate("datasets.inspect_dataset.header")}
           </div>
           <div className="card-body">
             <CCol xs="12" lg="12">
             <CCard>
                 <CCardHeader>
-                    {translate.translate("datasets.inspect_dataset")}
+                    {translate.translate("datasets.inspect_dataset.metadata")}
                 </CCardHeader>
                 <CCardBody>
-                    <CLabel>Test</CLabel>
+                  <CLabel>{translate.translate("datasets.inspect_dataset.dataset_name")}: <b>{this.state.datasetName}</b>  </CLabel>
+                  <br/>
+                  <CLabel>{translate.translate("datasets.inspect_dataset.dataset_description")}: <b>{this.state.datasetDescription}</b></CLabel>
+
                 </CCardBody>
               </CCard>
 
               <CCard>
                 <CCardHeader>
-                    {translate.translate("datasets.inspect_dataset")}
+                    {translate.translate("datasets.inspect_dataset.data")}
                 </CCardHeader>
                 <CCardBody>
                   <CDataTable
-                    items={this.state.datasets}
-                    fields={fields}
+                    items={this.state.tableData}
+                    fields={this.state.fields}
                     striped
+                    sorter
+                    hover
+                    columnFilter
+                    tableFilter
                     itemsPerPage={10}
                     pagination
                   />
