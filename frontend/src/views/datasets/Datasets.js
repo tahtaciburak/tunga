@@ -22,6 +22,8 @@ class Datasets extends React.Component {
     this.state = {
       datasets: []
     }
+    this.goTo= this.goTo.bind(this);
+    this.handleRowClick = this.handleRowClick.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +53,8 @@ class Datasets extends React.Component {
   }
 
   handleRowClick(event) {
-    alert(event.target.id)
+    //console.log(event.id)
+    this.props.history.push("/inspect-dataset/"+event.id);
   }
 
   render() {

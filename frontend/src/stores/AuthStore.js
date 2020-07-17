@@ -1,12 +1,12 @@
 import { observable, action, reaction } from "mobx";
 import jwt_decode from 'jwt-decode';
 
-class _AuthStore{
-    @observable accessToken = window.localStorage.getItem('accessToken');
+class _AuthStore {
+	@observable accessToken = window.localStorage.getItem('accessToken');
 	@observable userData = JSON.parse(window.localStorage.getItem('userData'));
 	@observable isLogged = this.isLoggedIn();
 
-    constructor() {
+	constructor() {
 		reaction(
 			() => this.accessToken,
 			accessToken => {
@@ -24,7 +24,7 @@ class _AuthStore{
 		this.accessToken = token;
 	}
 
-	@action getToken(){
+	@action getToken() {
 		return this.accessToken;
 	}
 
@@ -42,15 +42,15 @@ class _AuthStore{
 		return decodedToken.data.role;
 	}
 
-	@action isLoggedIn = () =>{
-		if (this.accessToken !== '' && this.accessToken !== null && !this.isExpiredToken(this.accessToken)){
+	@action isLoggedIn = () => {
+		if (this.accessToken !== '' && this.accessToken !== null && !this.isExpiredToken(this.accessToken)) {
 			return true;
 		}
 		window.localStorage.removeItem('accessToken');
 		return false;
 	}
 
-    @action setLoginProps = (token, user) =>{
+	@action setLoginProps = (token, user) => {
 		const decodedToken = jwt_decode(token);
 		this.setToken(token);
 		this.setUser(decodedToken.username);
@@ -61,7 +61,7 @@ class _AuthStore{
 		const decodedToken = jwt_decode(token);
 		const now = new Date().getTime();
 		decodedToken.exp *= 1000;
-		if (decodedToken.exp < now){
+		if (decodedToken.exp < now) {
 			return true;
 		}
 		return false;

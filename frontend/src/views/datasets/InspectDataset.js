@@ -6,6 +6,7 @@ import {
   CCardHeader,
   CDataTable,
   CButton,
+  CLabel,
   CRow
 } from '@coreui/react'
 
@@ -35,6 +36,7 @@ class InspectDataset extends React.Component {
 	}
 
   async makeAPIcall() {
+    /*  
     await APIService.requests
       .get('dataset/all')
       .then(data => {
@@ -48,7 +50,7 @@ class InspectDataset extends React.Component {
           level: 'error',
           autoDismiss: 5
         });
-      });
+      });*/
   }
 
 
@@ -57,17 +59,22 @@ class InspectDataset extends React.Component {
       <>
         <div className="card">
           <div className="card-header">
-            {translate.translate("datasets.my_datasets")}
+            {translate.translate("datasets.inspect_dataset")}
           </div>
           <div className="card-body">
             <CCol xs="12" lg="12">
+            <CCard>
+                <CCardHeader>
+                    {translate.translate("datasets.inspect_dataset")}
+                </CCardHeader>
+                <CCardBody>
+                    <CLabel>Test</CLabel>
+                </CCardBody>
+              </CCard>
+
               <CCard>
                 <CCardHeader>
-                  <CButton color="success">{translate.translate("datasets.import_from_local")}</CButton>
-                  <CButton style={{ marginLeft: 10 }} color="warning">{translate.translate("datasets.import_from_url")}</CButton>
-                  <CButton style={{ marginLeft: 10 }} color="primary">{translate.translate("datasets.import_from_twitter")}</CButton>
-                  <CButton style={{ marginLeft: 10 }} color="danger">{translate.translate("datasets.import_from_api")}</CButton>
-
+                    {translate.translate("datasets.inspect_dataset")}
                 </CCardHeader>
                 <CCardBody>
                   <CDataTable
