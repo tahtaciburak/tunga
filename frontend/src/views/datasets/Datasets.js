@@ -24,6 +24,7 @@ class Datasets extends React.Component {
     }
     this.goTo= this.goTo.bind(this);
     this.handleRowClick = this.handleRowClick.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +58,9 @@ class Datasets extends React.Component {
     this.props.history.push("/inspect-dataset/"+event.id);
   }
 
+  handleButtonClick(event) {
+    this.props.history.push("/retrieval/"+event.target.name)
+  }
   render() {
     return (
       <>
@@ -68,10 +72,10 @@ class Datasets extends React.Component {
             <CCol xs="12" lg="12">
               <CCard>
                 <CCardHeader>
-                  <CButton color="success">{translate.translate("datasets.import_from_local")}</CButton>
-                  <CButton style={{ marginLeft: 10 }} color="warning">{translate.translate("datasets.import_from_url")}</CButton>
-                  <CButton style={{ marginLeft: 10 }} color="primary">{translate.translate("datasets.import_from_twitter")}</CButton>
-                  <CButton style={{ marginLeft: 10 }} color="danger">{translate.translate("datasets.import_from_api")}</CButton>
+                  <CButton onClick={this.handleButtonClick} name="local" color="success">{translate.translate("datasets.import_from_local")}</CButton>
+                  <CButton onClick={this.handleButtonClick} name="url" style={{ marginLeft: 10 }} color="warning">{translate.translate("datasets.import_from_url")}</CButton>
+                  <CButton onClick={this.handleButtonClick} name="twitter" style={{ marginLeft: 10 }} color="primary">{translate.translate("datasets.import_from_twitter")}</CButton>
+                  <CButton onClick={this.handleButtonClick} name="api" style={{ marginLeft: 10 }} color="danger">{translate.translate("datasets.import_from_api")}</CButton>
 
                 </CCardHeader>
                 <CCardBody>
@@ -98,3 +102,13 @@ class Datasets extends React.Component {
 }
 
 export default Datasets
+
+/*
+
+                  <CButton color="success">{translate.translate("datasets.import_from_local")}</CButton>
+                  <CButton style={{ marginLeft: 10 }} color="warning">{translate.translate("datasets.import_from_url")}</CButton>
+                  <CButton style={{ marginLeft: 10 }} color="primary">{translate.translate("datasets.import_from_twitter")}</CButton>
+                  <CButton style={{ marginLeft: 10 }} color="danger">{translate.translate("datasets.import_from_api")}</CButton>
+
+
+*/
