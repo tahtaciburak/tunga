@@ -51,8 +51,9 @@ class _AuthStore{
 	}
 
     @action setLoginProps = (token, user) =>{
+		const decodedToken = jwt_decode(token);
 		this.setToken(token);
-		this.setUser(user);
+		this.setUser(decodedToken.username);
 		this.isLogged = true;
 	}
 

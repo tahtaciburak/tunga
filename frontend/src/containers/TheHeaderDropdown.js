@@ -32,7 +32,7 @@ class TheHeaderDropdown extends React.Component {
       >
         <CDropdownToggle className="c-header-nav-link" caret={false}>
           <div className="c-avatar" style={{backgroundColor:"gray",color:"white",fontSize:23}}>
-            I
+            {this.props.AuthStore.userData[0].toUpperCase()}
           </div>
         </CDropdownToggle>
         <CDropdownMenu className="pt-0" placement="bottom-end">
