@@ -6,7 +6,11 @@ from tunga.extraction import extraction
 class TestExtraction(unittest.TestCase):
     def test_extract_emoji(self):
         actual = extraction.extract_emoji("Bugün çok rahatsızlandım 🦠😵🤒🤮👩🥼💊")
-        expected = "🦠 😵 🤒 🤮 👩 🥼 💊"
+        expected = "🦠😵🤒🤮👩🥼💊"
+        self.assertEqual(actual, expected)
+
+        actual = extraction.extract_emoji("Bugün hava 🌈☀️🌤️ güzel 😘🥰")
+        expected = "🌈☀️🌤️ 😘🥰"
         self.assertEqual(actual, expected)
 
     def test_extract_email(self):
@@ -24,7 +28,7 @@ class TestExtraction(unittest.TestCase):
         expected = "http://beyzacanbay.com.tr"
         self.assertEqual(actual, expected)
 
-        actual = extraction.extract_url("Web için https://buraktahtaci.com adresine ya da https://kaj.com ")
+        actual = extraction.extract_url("Web için https://buraktahtaci.com adresine ya da https://kaj.com")
         expected = "https://buraktahtaci.com https://kaj.com"
         self.assertEqual(actual, expected)
 
@@ -35,7 +39,7 @@ class TestExtraction(unittest.TestCase):
 
     def test_extract_hastag(self):
         actual = extraction.extract_hashtags("#herkese #günaydın #hemen #hemen #herkese demek ne güzel")
-        expected = "hemen herkese günaydın"
+        expected = "herkese günaydın hemen"
         self.assertEqual(actual, expected)
 
     def test_extract_language(self):
