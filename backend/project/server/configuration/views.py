@@ -1,8 +1,8 @@
 from flask import Blueprint, request, make_response, jsonify
 from flask.views import MethodView
 
-from project.server import db
-from project.server.models import Configuration
+from project.server import bcrypt, db
+from project.server.models import User, BlacklistToken, Configuration
 from project.server import utils
 
 configuration_blueprint = Blueprint('configuration', __name__)
@@ -30,7 +30,7 @@ class ConfigurationControllerAPI(MethodView):
             db.session.commit()
             responseObject = {
                 'status': 'success',
-                'message': 'New configuration added successfully.'
+                'message': 'Add new configuration successful.'
             }
 
             return make_response(jsonify(responseObject)), 201

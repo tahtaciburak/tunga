@@ -28,6 +28,7 @@ class Preprocessing extends React.Component {
       columns: [],
       selectedDatasetId: -1,
       selectedColumnId: -1,
+      selectedColumn: "",
       isShowResult: false,
       steps: [
         "lowercase",
@@ -67,6 +68,7 @@ class Preprocessing extends React.Component {
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleColumnChange = this.handleColumnChange.bind(this);
     this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
+    this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -82,6 +84,7 @@ class Preprocessing extends React.Component {
   handleColumnChange(event) {
     let columndId = event.target.value;
     this.setState({ selectedColumnId: columndId });
+    this.setState({ selectedColumn: event.target.name })
   }
 
   handleCheckboxClick(event) {
@@ -92,8 +95,35 @@ class Preprocessing extends React.Component {
     this.setState({ selectedSteps: actualSelected });
   }
 
-  handleSubmitButtonClick(event){
-    alert("datayi sunucuya gonder")
+  handleSubmitButtonClick(event) {
+    APIService.requests
+      .post('preprocessing', { 
+        selectedSteps: this.state.selectedSteps,
+        datasetId: this.state.selectedDatasetId,
+        column: this.state.selectedColumn
+
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({ is_show_result_alert: true })
+        this.setState({ is_upload_successful: true })
+        this.setState({
+          analytics:
+          {
+            nrows: data.analytics.nrows,
+            ncols: data.analytics.ncols
+          }
+        })
+      })
+      .catch(data => {
+        alert("hata")
+        AlertService.Add({
+          type: 'alert',
+          //message: translate.getText('error.' + data.response.body.error.code),
+          level: 'error',
+          autoDismiss: 5
+        });
+      });
   }
 
   async fetchDatasets() {
@@ -181,7 +211,7 @@ class Preprocessing extends React.Component {
                         <option value="0">{translate.translate("preprocessing.choose_column")}</option>
 
                         {this.state.columns.map((col, i) =>
-                          <option key={i} value={i}>{col}</option>
+                          <option key={i} name={col} value={i}>{col}</option>
 
                         )}
                       </CSelect>
