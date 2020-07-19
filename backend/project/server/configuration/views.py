@@ -10,6 +10,10 @@ configuration_blueprint = Blueprint('configuration', __name__)
 
 class ConfigurationControllerAPI(MethodView):
     def get(self):
+        """
+        Fetch all configs according to the user_id
+        :return: user's configutarions.
+        """
         user = utils.get_user_from_header(request.headers)
         user_configs = []
         for ds in user.configurations:
@@ -18,6 +22,10 @@ class ConfigurationControllerAPI(MethodView):
         return make_response(jsonify({"configs": user_configs}))
 
     def post(self):
+        """
+        Add new config to the user configurations
+        :return: status
+        """
         user = utils.get_user_from_header(request.headers)
         post_data = request.get_json()
         try:
@@ -36,10 +44,10 @@ class ConfigurationControllerAPI(MethodView):
             return make_response(jsonify(responseObject)), 201
 
         except Exception as e:
-            print(e)
             responseObject = {
                 'status': 'fail',
-                'message': 'Some error occurred. Please try again.'
+                'message': 'Some error occurred. Please try again.',
+                'raw_error': e
             }
             return make_response(jsonify(responseObject)), 400
 

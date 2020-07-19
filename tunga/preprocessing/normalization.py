@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 import re
 import sys
-from Dictionary.Word import Word
-from turkish.deasciifier import Deasciifier
-from Deasciifier.SimpleAsciifier import SimpleAsciifier
+#from Dictionary.Word import Word
+#from turkish.deasciifier import Deasciifier
+#from Deasciifier.SimpleAsciifier import SimpleAsciifier
 from TurkishStemmer import TurkishStemmer
 import grpc
 import zemberek_grpc.preprocess_pb2_grpc as z_preprocess_g
@@ -45,6 +45,11 @@ except:
 
 
 def remove_stopwords(text):
+    """
+    Removes stopwords from text.
+    :param text:
+    :return: stop_words_removed
+    """
     new_tokens = []
     for token in text.split(" "):
         if token.strip().lower() not in stopwords:
@@ -53,6 +58,7 @@ def remove_stopwords(text):
 
 
 def remove_digits(text):
+    # TODO: Add docstring...
     text = str(text)
     return text.translate(__remove_digits).strip()
 
@@ -137,15 +143,19 @@ def asciify(text):
     return " ".join(result)
 
 
-def syllable(word):
-    boundaries = __get_syllable_boundaries(word)
-    result = []
-    for i in range(0, len(boundaries) - 1):
-        result.append(word[boundaries[i]:boundaries[i + 1]])
-    if len(boundaries) > 0:
-        result.append(word[boundaries[len(boundaries) - 1]:])
+def syllable(sentence):
+    syllables = []
+    for word in sentence.split(" "):
+        boundaries = __get_syllable_boundaries(word)
+        result = []
+        for i in range(0, len(boundaries) - 1):
+            result.append(word[boundaries[i]:boundaries[i + 1]])
+        if len(boundaries) > 0:
+            result.append(word[boundaries[len(boundaries) - 1]:])
 
-    return result
+        for item in result:
+            syllables.append(item)
+    return " ".join(syllables).strip()
 
 
 def __get_syllable_boundaries(word):
