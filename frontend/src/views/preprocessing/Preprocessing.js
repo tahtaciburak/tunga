@@ -107,16 +107,9 @@ class Preprocessing extends React.Component {
         console.log(data);
         this.setState({ is_show_result_alert: true })
         this.setState({ is_upload_successful: true })
-        this.setState({
-          analytics:
-          {
-            nrows: data.analytics.nrows,
-            ncols: data.analytics.ncols
-          }
-        })
       })
       .catch(data => {
-        alert("hata")
+        console.log(data)
         AlertService.Add({
           type: 'alert',
           //message: translate.getText('error.' + data.response.body.error.code),
@@ -188,7 +181,7 @@ class Preprocessing extends React.Component {
                         <option value="0">{translate.translate("preprocessing.please_choose")}</option>
 
                         {this.state.datasets.map((ds, i) =>
-                          <option key={i} value={i}>{ds.filename}</option>
+                          <option key={i} value={ds.id}>{ds.filename}</option>
 
                         )}
                       </CSelect>
