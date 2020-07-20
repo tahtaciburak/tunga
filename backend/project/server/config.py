@@ -21,7 +21,7 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     BCRYPT_LOG_ROUNDS = 4
     SQLALCHEMY_DATABASE_URI = postgres_local_base + database_name
-    UPLOAD_PATH = "/Users/beyzacanbay/Desktop/tunga/backend/uploads"
+    UPLOAD_PATH = "/home/burak/Desktop/Projects/tunga/backend/uploads"
 
 
 class TestingConfig(BaseConfig):
@@ -31,7 +31,7 @@ class TestingConfig(BaseConfig):
     BCRYPT_LOG_ROUNDS = 4
     SQLALCHEMY_DATABASE_URI = postgres_local_base + database_name + '_test'
     PRESERVE_CONTEXT_ON_EXCEPTION = False
-    UPLOAD_PATH = "/Users/beyzacanbay/Desktop/tunga/backend/uploads"
+    UPLOAD_PATH = "/home/burak/Desktop/Projects/tunga/backend/uploads"
 
 
 class ProductionConfig(BaseConfig):
@@ -39,4 +39,4 @@ class ProductionConfig(BaseConfig):
     SECRET_KEY = 'my_precious'
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = 'postgresql:///example'
-    UPLOAD_PATH = "/Users/beyzacanbay/Desktop/tunga/backend/uploads"
+    UPLOAD_PATH = "/home/burak/Desktop/Projects/tunga/backend/uploads"

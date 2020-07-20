@@ -1,7 +1,8 @@
 import tweepy as tw
 from tunga.retrieval import config
-auth = tw.OAuthHandler(config.api_key, config.api_secret,)
-auth.set_access_token(config.access_token,config.token_secret)
+
+auth = tw.OAuthHandler(config.api_key, config.api_secret, )
+auth.set_access_token(config.access_token, config.token_secret)
 api = tw.API(auth)
 
 
