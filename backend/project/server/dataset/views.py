@@ -127,11 +127,11 @@ class RemoteFileFetchAPI(MethodView):
         dm = DatasetManager(upload_path)
         dm.analyze()
 
-        records = json.loads(dm.df.T.to_json()).values()
-        tungaclient = pymongo.MongoClient("mongodb://localhost:27017/")
-        user_mongodb = tungaclient["db_" + str(user.id)]
-        mycol = user_mongodb[dataset_name]
-        mycol.insert(records)
+        # records = json.loads(dm.df.T.to_json()).values()
+        # tungaclient = pymongo.MongoClient("mongodb://localhost:27017/")
+        # user_mongodb = tungaclient["db_" + str(user.id)]
+        # mycol = user_mongodb[dataset_name]
+        # mycol.insert(records)
 
         try:
             dataset = Dataset(
@@ -205,10 +205,10 @@ class LocalUploadAPI(MethodView):
             return make_response(jsonify(responseObject)), 201
 
         except Exception as e:
-            print(e)
             responseObject = {
                 'status': 'fail',
-                'message': 'Some error occurred. Please try again.'
+                'message': 'Some error occurred. Please try again.',
+                'raw_error': str(e)
             }
             return make_response(jsonify(responseObject)), 400
 
