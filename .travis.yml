@@ -1,10 +1,19 @@
 language: python
 python: 3.7
 
-install:
+before_install:
   - pip install codecov
 
 script: coverage run test_Normalization.py
 
 after_success:
-  - codecov # submit coverage
+  - codecov
+
+
+
+
+
+
+
+
+pip3 install pgadmin4-1.4-py2.py3-none-any.whl -U psycopg2

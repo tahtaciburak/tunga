@@ -95,6 +95,8 @@ export default {
             header: "Duygu Durumu Analizi"
         },
         topic_modelling: {
+            choose_dataset: "Verisetinizi seçin",
+            choose_column: "İşlem yapmak istediğiniz sütunu seçin",
             header: "Konu Modelleme"
         },
         keyword_extraction: {
