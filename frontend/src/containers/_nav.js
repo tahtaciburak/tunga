@@ -102,13 +102,13 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Visualization',
-    route: '/test',
+    name: 'Veri Görselleştirme',
+    to: '/visualization',
     icon: 'cil-chart-pie',
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Configuration',
+    name: 'Sistem Değişkenleri',
     to: '/configuration',
     icon: 'cil-settings',
   },

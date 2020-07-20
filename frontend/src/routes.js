@@ -51,6 +51,7 @@ const LanguageIdentification = React.lazy(() => import('./views/machine_learning
 const MachineTranslation = React.lazy(() => import('./views/machine_learning/MachineTranslation'));
 const NamedEntityRecognition = React.lazy(() => import('./views/machine_learning/NamedEntityRecognition'));
 
+const Visualization = React.lazy(() => import('./views/visualization/Visualization'));
 
 
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
@@ -80,6 +81,7 @@ const routes = [
   { path: '/ml/ner', name: 'NamedEntityRecognition', component: NamedEntityRecognition },
 
   { path: '/preprocessing', name: 'Preprocessing', component: Preprocessing },
+  { path: '/visualization', name: 'Visualization', component: Visualization },
   { path: '/configuration', name: 'Configuration', component: Configuration },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },

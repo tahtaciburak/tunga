@@ -115,6 +115,10 @@ export default {
             header: "Varlık İsmi Çıkarımı"
         }
     },
+    visualization:{
+        header: "Veri Görselleştirme",
+        choose_dataset: "Görselleştirmek istediğiniz verisetini seçin"
+    },
     configuration: {
         configuration_header: "Ayarlar",
         twitter_api_configuration: "Twitter API Ayarları",
