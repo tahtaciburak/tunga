@@ -16,8 +16,8 @@ class PreprocessingControllerAPI(MethodView):
         dataset = Dataset.query.filter_by(id=post_data["datasetId"], user_id=user.id).first()
         selected_column_name = post_data["column"]
         df = pd.read_csv(dataset.filepath)
-        df["PREPROCESSED"+selected_column_name]=pd.Series([str(item).upper() for item in df[selected_column_name]])
-        df.to_csv(dataset.filepath,index=None)
+        df["PREPROCESSED_" + selected_column_name] = pd.Series([str(item).upper() for item in df[selected_column_name]])
+        df.to_csv(dataset.filepath, index=None)
         return jsonify(post_data)
 
 
