@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="images/logo.png" width="480"\>
+    <img src="images/tunga.png" width="480"\>
 </p>
 
 ## tunga: Agile Text Analytics Platform
