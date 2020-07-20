@@ -1,2 +1,7 @@
+from multi_rake import Rake
+
+
 def extract_keywords(text):
-    return ["rastgele", "keyword", "uretirim", "ben"]
+    rake = Rake()
+    keywords = rake.apply(text)
+    return keywords[:10]

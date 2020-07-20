@@ -13,9 +13,13 @@ class PreprocessingControllerAPI(MethodView):
     def post(self):
         user = utils.get_user_from_header(request.headers)
         post_data = request.get_json()
+
+        selected_steps = post_data["selectedSteps"]
         dataset = Dataset.query.filter_by(id=post_data["datasetId"], user_id=user.id).first()
         selected_column_name = post_data["column"]
+
         df = pd.read_csv(dataset.filepath)
+
         df["PREPROCESSED_" + selected_column_name] = pd.Series([str(item).upper() for item in df[selected_column_name]])
         df.to_csv(dataset.filepath, index=None)
         return jsonify(post_data)
