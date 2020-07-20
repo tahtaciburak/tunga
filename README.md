@@ -13,18 +13,18 @@ Projeyi tanitan basit ve etikleyici bir veya birkac cumle tam da burada olmali
 5. Halinde
 
 ## Kurulum İşlemi
-1. '''docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 -v ~/data/docker/postgres:/var/lib/postgresql/data postgres'''
+1. ```docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 -v ~/data/docker/postgres:/var/lib/postgresql/data postgres```
 2. Veritabanı işlemleri için aşağıdaki sıra takip edilmelidir.
-    1. db create
-    2. db init
-    3. db migrate
-3. docker exec -it docker-postgres /bin/bash
-4. su postgres
-5. psql
-6. create database tunga;
-7. create database tunga_test;
-8. Backend python3 manage.py runserver -p 8080
-9. Frontend npm start
+    1. ```db create```
+    2. ```db init```
+    3. ```db migrate```
+3. ```docker exec -it docker-postgres /bin/bash```
+4. ```su postgres```
+5. ```psql```
+6. ```create database tunga;```
+7. ```create database tunga_test;```
+8. ```Backend python3 manage.py runserver -p 8080```
+9. ```Frontend npm start```
 
 ## Sistem Diyagramı
 <p align="center">
