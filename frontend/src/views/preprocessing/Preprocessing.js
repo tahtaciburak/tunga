@@ -84,7 +84,7 @@ class Preprocessing extends React.Component {
   handleColumnChange(event) {
     let columndId = event.target.value;
     this.setState({ selectedColumnId: columndId });
-    this.setState({ selectedColumn: event.target.name })
+    this.setState({ selectedColumn: event.target.value })
   }
 
   handleCheckboxClick(event) {
@@ -204,7 +204,7 @@ class Preprocessing extends React.Component {
                         <option value="0">{translate.translate("preprocessing.choose_column")}</option>
 
                         {this.state.columns.map((col, i) =>
-                          <option key={i} name={col} value={i}>{col}</option>
+                          <option key={i} name={col} value={col}>{col}</option>
 
                         )}
                       </CSelect>
