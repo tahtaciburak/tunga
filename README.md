@@ -23,8 +23,8 @@ Projeyi tanitan basit ve etikleyici bir veya birkac cumle tam da burada olmali
 5. ```psql```
 6. ```create database tunga;```
 7. ```create database tunga_test;```
-8. ```Backend python3 manage.py runserver -p 8080```
-9. ```Frontend npm start```
+8.Backend dizinine gidip ```python3 manage.py runserver -p 8080```
+9.Frontend dizinine gidip ``` npm start```
 
 ## Sistem Diyagramı
 <p align="center">
