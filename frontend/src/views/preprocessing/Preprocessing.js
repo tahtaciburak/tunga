@@ -1,6 +1,7 @@
 import React, { useEffect, useState, createRef } from 'react'
 import {
   CCol, CBadge,
+  CAlert,
   CCard,
   CCardBody,
   CCardHeader,
@@ -97,7 +98,7 @@ class Preprocessing extends React.Component {
 
   handleSubmitButtonClick(event) {
     APIService.requests
-      .post('preprocessing', { 
+      .post('preprocessing', {
         selectedSteps: this.state.selectedSteps,
         datasetId: this.state.selectedDatasetId,
         column: this.state.selectedColumn
@@ -105,7 +106,7 @@ class Preprocessing extends React.Component {
       })
       .then(data => {
         console.log(data);
-        this.setState({ is_show_result_alert: true })
+        this.setState({ isShowResult: true })
         this.setState({ is_upload_successful: true })
       })
       .catch(data => {
@@ -230,15 +231,9 @@ class Preprocessing extends React.Component {
                   </CCol>
 
                   <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("preprocessing.start_preprocessing")}</CButton>
-                </CCardBody>
-              </CCard>
-              <CCard hidden={!this.state.isShowResult}>
-                <CCardHeader>
-                  {translate.translate("preprocessing.result")}
-                </CCardHeader>
-                <CCardBody>
-
-
+                  <CAlert hidden={!this.state.isShowResult} color="success">
+                    {translate.translate("preprocessing.successful")}
+                  </CAlert>
                 </CCardBody>
               </CCard>
 

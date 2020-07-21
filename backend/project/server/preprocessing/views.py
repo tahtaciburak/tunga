@@ -6,6 +6,8 @@ from project.server import db
 from project.server.models import Configuration, Dataset
 from project.server import utils
 
+from tunga import preprocessing
+
 preprocessing_blueprint = Blueprint('preprocessing', __name__)
 
 
@@ -20,9 +22,37 @@ class PreprocessingControllerAPI(MethodView):
 
         df = pd.read_csv(dataset.filepath)
 
-        df["PREPROCESSED_" + selected_column_name] = pd.Series([str(item).upper() for item in df[selected_column_name]])
+        df["PREPROCESSED_" + selected_column_name] = self.apply_preprocessing_steps_to_column(selected_steps,
+                                                                                              df[selected_column_name])
+
         df.to_csv(dataset.filepath, index=None)
         return jsonify(post_data)
+
+    @staticmethod
+    def apply_preprocessing_steps_to_column(steps, column):
+        function_map = {'lowercase': preprocessing.lowercase,
+                        'uppercase': preprocessing.uppercase,
+                        'remove_stopwords': preprocessing.remove_stopwords,
+                        'remove_digits': preprocessing.remove_digits,
+                        'remove_emails': preprocessing.remove_email,
+                        'remove_urls': preprocessing.remove_url,
+                        'remove_emojis': preprocessing.remove_emojis,
+                        'remove_hashtags': preprocessing.remove_hashtag,
+                        'remove_mentions': preprocessing.remove_mentions,
+                        'remove_non_turkish_words': False,
+                        'correct_typos': preprocessing.correct_typo,
+                        'lemmatize': False,
+                        'stem': False,
+                        'asciify': False,
+                        'deasciify': False}
+
+        for key in steps.keys():
+            if steps[key]:
+                try:
+                    column = column.apply(function_map[key])
+                except:
+                    print("Not implemented preprocessing step", key)
+        return column
 
 
 preprocessing_controller = PreprocessingControllerAPI.as_view('preprocessing_controller_api')
