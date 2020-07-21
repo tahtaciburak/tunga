@@ -73,6 +73,10 @@ export default [
         _tag: 'CSidebarNavItem',
         name: 'Keyword Extraction',
         to: '/ml/keyword-extraction',
+        badge: {
+          color:"success",
+          text: "DONE"
+        }
       },
       {
         _tag: 'CSidebarNavItem',
