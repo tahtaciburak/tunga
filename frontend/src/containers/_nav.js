@@ -87,6 +87,10 @@ export default [
         _tag: 'CSidebarNavItem',
         name: 'Language Identification',
         to: '/ml/language-identification',
+        badge: {
+          color:"success",
+          text: "DONE"
+        }
       },
       {
         _tag: 'CSidebarNavItem',
