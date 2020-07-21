@@ -36,6 +36,7 @@ class Preprocessing extends React.Component {
       steps: [
         "lowercase",
         "uppercase",
+        "remove_punctuations",
         "remove_stopwords",
         "remove_digits",
         "remove_emails",
@@ -53,6 +54,7 @@ class Preprocessing extends React.Component {
       selectedSteps: {
         lowercase: false,
         uppercase: false,
+        remove_punctuations:false,
         remove_stopwords: false,
         remove_digits: false,
         remove_emails: false,
@@ -72,6 +74,7 @@ class Preprocessing extends React.Component {
     this.handleColumnChange = this.handleColumnChange.bind(this);
     this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
     this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
+    this.handleInspectDatasetButtonClick = this.handleInspectDatasetButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -98,9 +101,13 @@ class Preprocessing extends React.Component {
     this.setState({ selectedSteps: actualSelected });
   }
 
+  handleInspectDatasetButtonClick(event){
+    this.props.history.push("inspect-dataset/"+this.state.selectedDatasetId)
+  }
+
   handleSubmitButtonClick(event) {
     this.setState({ isWaiting: true })
-    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId == -1){
+    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId == -1) {
       alert("İşleme başlamadan önce lütfen verisetini ve ilgili kolonu seçin !")
       this.setState({ isWaiting: false })
       return
@@ -254,10 +261,17 @@ class Preprocessing extends React.Component {
                       {translate.translate("preprocessing.waiting")}
                     </CButton>
                   </CRow>
+                  <CRow>
+                    <CCol>
+                      <CAlert hidden={!this.state.isShowResult} color="success">
+                        {translate.translate("preprocessing.successful")}
+                        <CButton onClick={this.handleInspectDatasetButtonClick} style={{marginLeft:20}} color="primary">
+                          {translate.translate("preprocessing.inspect_dataset")}
+                        </CButton>
+                      </CAlert>
 
-                  <CAlert hidden={!this.state.isShowResult} color="success">
-                    {translate.translate("preprocessing.successful")}
-                  </CAlert>
+                    </CCol>
+                  </CRow>
                 </CCardBody>
               </CCard>
 

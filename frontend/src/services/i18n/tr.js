@@ -90,7 +90,8 @@ export default {
         remove_person_names: "Kişi isimlerini sil",
         start_preprocessing: "Önişlemeye Başla!",
         waiting: "Ön işleme sürüyor...",
-        successful: "Ön işleme başarılı"
+        successful: "Ön işleme başarılı",
+        inspect_dataset: "Verisetine Gözat"
     },
     machine_learning:{
         sentiment: {

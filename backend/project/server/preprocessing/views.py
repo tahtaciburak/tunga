@@ -13,8 +13,6 @@ preprocessing_blueprint = Blueprint('preprocessing', __name__)
 
 class PreprocessingControllerAPI(MethodView):
     def post(self):
-        from time import sleep
-        sleep(2)
         user = utils.get_user_from_header(request.headers)
         post_data = request.get_json()
 
@@ -34,6 +32,7 @@ class PreprocessingControllerAPI(MethodView):
     def apply_preprocessing_steps_to_column(steps, column):
         function_map = {'lowercase': preprocessing.lowercase,
                         'uppercase': preprocessing.uppercase,
+                        'remove_punctuations': preprocessing.remove_punctuations,
                         'remove_stopwords': preprocessing.remove_stopwords,
                         'remove_digits': preprocessing.remove_digits,
                         'remove_emails': preprocessing.remove_email,
