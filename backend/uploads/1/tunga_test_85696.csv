@@ -1,5 +1,5 @@
-id,text,PREPROCESSED_text
-1,hangimiz sevmedik cilginlar gibi,HANGIMIZ SEVMEDIK CILGINLAR
-2,Bu ne boyle dayi neyi yanlis yapiyoz,BOYLE DAYI NEYI YANLIS YAPIYOZ
-3,Benim mail adresim buraktahtaci@burak.com bana mail atabilirsiniz,MAIL ADRESIM BURAKTAHTACI@BURAK.COM MAIL ATABILIRSINIZ
-4,Peki sen ne dusunuyorsun hocam @buraktahtaci ???,PEKI DUSUNUYORSUN HOCAM @BURAKTAHTACI ???
+id,text,PREPROCESSED_text,KEYWORDS_text
+1,hangimiz sevmedik cilginlar gibi,HANGIMIZ SEVMEDIK CILGINLAR,"[('hangimiz sevmedik cilginlar', 9.0)]"
+2,Bu ne boyle dayi neyi yanlis yapiyoz,BOYLE DAYI NEYI YANLIS YAPIYOZ,[]
+3,Benim mail adresim buraktahtaci@burak.com bana mail atabilirsiniz,MAIL ADRESIM BURAKTAHTACI@BURAK.COM MAIL ATABILIRSINIZ,"[('mail adresim buraktahtaci@burak', 8.5), ('mail atabilirsiniz', 4.5), ('com', 1.0)]"
+4,Peki sen ne dusunuyorsun hocam @buraktahtaci ???,PEKI DUSUNUYORSUN HOCAM @BURAKTAHTACI ???,"[('dusunuyorsun hocam @buraktahtaci', 9.0), ('peki', 1.0)]"

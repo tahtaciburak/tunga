@@ -1,6 +1,6 @@
 export default {
-    header_dropdown:{
-        account:"Hesap",
+    header_dropdown: {
+        account: "Hesap",
         logout: "Çıkış Yap"
     },
     nav: {
@@ -21,8 +21,8 @@ export default {
         import_from_url: "URL'den yükle",
         import_from_twitter: "Twitter'dan yükle",
         import_from_api: "API oluştur",
-        inspect_dataset:{
-            header:"Dataseti Incele",
+        inspect_dataset: {
+            header: "Dataseti Incele",
             dataset_name: "Veriseti Adı",
             dataset_description: "Veriseti Açıklaması",
             metadata: "Veriseti Üstbilgileri",
@@ -59,8 +59,8 @@ export default {
             dataset_name: "Veriseti Adı:",
             dataset_description: "Veriseti Açıklaması:"
         },
-        import_from_twitter:{
-            apikey_not_found:"API KEY bulunamadı Konfigürasyon sayfasından TWITTER_API_KEY değişkenini ekleyin."
+        import_from_twitter: {
+            apikey_not_found: "API KEY bulunamadı Konfigürasyon sayfasından TWITTER_API_KEY değişkenini ekleyin."
         }
     },
     preprocessing: {
@@ -93,7 +93,7 @@ export default {
         successful: "Ön işleme başarılı",
         inspect_dataset: "Verisetine Gözat"
     },
-    machine_learning:{
+    machine_learning: {
         sentiment: {
             header: "Duygu Durumu Analizi"
         },
@@ -107,23 +107,24 @@ export default {
             dataset: "Veriseti",
             choose_dataset: "Verisetinizi seçin",
             choose_column: "İşlem yapmak istediğiniz sütunu seçin",
+            please_choose: "Lütfen Seçin",
             column: "Kolon"
 
         },
         summarization: {
             header: "Metin Özetleme"
         },
-        language_identification:{
+        language_identification: {
             header: "Dil Tanıma"
         },
-        machine_translation:{
+        machine_translation: {
             header: "Makine Çevirisi"
         },
-        ner:{
+        ner: {
             header: "Varlık İsmi Çıkarımı"
         }
     },
-    visualization:{
+    visualization: {
         header: "Veri Görselleştirme",
         choose_dataset: "Görselleştirmek istediğiniz verisetini seçin"
     },

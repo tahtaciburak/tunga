@@ -13,6 +13,7 @@ class KeywordExtractionAPI(MethodView):
     def post(self):
         user = utils.get_user_from_header(request.headers)
         post_data = request.get_json()
+        print(post_data)
         dataset = Dataset.query.filter_by(id=post_data["datasetId"], user_id=user.id).first()
         selected_column_name = post_data["column"]
         df = pd.read_csv(dataset.filepath)
