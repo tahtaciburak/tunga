@@ -145,12 +145,12 @@ class KeywordExtraction extends React.Component {
             <CCol xs="12" lg="12">
               <CCard>
                 <CCardHeader>
-                  {translate.translate("machine_learning.topic_modelling.choose_dataset")}
+                  {translate.translate("machine_learning.keyword_extraction.choose_dataset")}
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="select">{translate.translate("machine_learning.topic_modelling.dataset")}</CLabel>
+                      <CLabel htmlFor="select">{translate.translate("machine_learning.keyword_extraction.dataset")}</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
                       <CSelect onChange={this.handleDatasetNameChange} custom name="select" id="select">
@@ -168,16 +168,16 @@ class KeywordExtraction extends React.Component {
               </CCard>
               <CCard>
                 <CCardHeader>
-                  {translate.translate("machine_learning.topic_modelling.choose_column")}
+                  {translate.translate("machine_learning.keyword_extraction.choose_column")}
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="select">{translate.translate("machine_learning.topic_modelling.column")}</CLabel>
+                      <CLabel htmlFor="select">{translate.translate("machine_learning.keyword_extraction.column")}</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
                       <CSelect onChange={this.handleColumnChange} custom name="select" id="select">
-                        <option value="0">{translate.translate("machine_learning.topic_modelling.choose_column")}</option>
+                        <option value="0">{translate.translate("machine_learning.keyword_extraction.choose_column")}</option>
 
                         {this.state.columns.map((col, i) =>
                           <option key={i} value={i}>{col}</option>

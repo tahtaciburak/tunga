@@ -103,7 +103,12 @@ export default {
             header: "Konu Modelleme"
         },
         keyword_extraction: {
-            header: "Anahtar Kelime Çıkarımı"
+            header: "Anahtar Kelime Çıkarımı",
+            dataset: "Veriseti",
+            choose_dataset: "Verisetinizi seçin",
+            choose_column: "İşlem yapmak istediğiniz sütunu seçin",
+            column: "Kolon"
+
         },
         summarization: {
             header: "Metin Özetleme"

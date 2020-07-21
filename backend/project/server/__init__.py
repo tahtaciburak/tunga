@@ -24,7 +24,10 @@ from project.server.dataset.views import dataset_blueprint
 from project.server.configuration.views import configuration_blueprint
 from project.server.preprocessing.views import preprocessing_blueprint
 
+from project.server.machine_learning.keyword_extraction.views import keyword_extraction_blueprint
+
 app.register_blueprint(auth_blueprint)
 app.register_blueprint(dataset_blueprint)
 app.register_blueprint(configuration_blueprint)
 app.register_blueprint(preprocessing_blueprint)
+app.register_blueprint(keyword_extraction_blueprint)
