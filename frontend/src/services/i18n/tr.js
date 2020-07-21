@@ -88,7 +88,9 @@ export default {
         deasciify: "ASCII karakterleri Türkçe karakterlerle değiştir",
         asciify: "Türkçe karakterleri ASCII karakterlerle değiştir",
         remove_person_names: "Kişi isimlerini sil",
-        start_preprocessing: "Önişlemeye Başla!"
+        start_preprocessing: "Önişlemeye Başla!",
+        waiting: "Ön işleme sürüyor...",
+        successful: "Ön işleme başarılı"
     },
     machine_learning:{
         sentiment: {

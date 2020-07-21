@@ -13,6 +13,8 @@ preprocessing_blueprint = Blueprint('preprocessing', __name__)
 
 class PreprocessingControllerAPI(MethodView):
     def post(self):
+        from time import sleep
+        sleep(2)
         user = utils.get_user_from_header(request.headers)
         post_data = request.get_json()
 

@@ -13,6 +13,7 @@ import {
   CLabel,
   CFormGroup
 } from '@coreui/react'
+import Loader from 'react-loader-spinner'
 
 //import usersData from '../users/UsersData'
 import APIService from '../../services/APIService'
@@ -31,6 +32,7 @@ class Preprocessing extends React.Component {
       selectedColumnId: -1,
       selectedColumn: "",
       isShowResult: false,
+      isWaiting: false,
       steps: [
         "lowercase",
         "uppercase",
@@ -97,6 +99,12 @@ class Preprocessing extends React.Component {
   }
 
   handleSubmitButtonClick(event) {
+    this.setState({ isWaiting: true })
+    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId == -1){
+      alert("İşleme başlamadan önce lütfen verisetini ve ilgili kolonu seçin !")
+      this.setState({ isWaiting: false })
+      return
+    }
     APIService.requests
       .post('preprocessing', {
         selectedSteps: this.state.selectedSteps,
@@ -107,9 +115,11 @@ class Preprocessing extends React.Component {
       .then(data => {
         console.log(data);
         this.setState({ isShowResult: true })
+        this.setState({ isWaiting: false })
         this.setState({ is_upload_successful: true })
       })
       .catch(data => {
+        this.setState({ is_upload_successful: true })
         console.log(data)
         AlertService.Add({
           type: 'alert',
@@ -229,8 +239,22 @@ class Preprocessing extends React.Component {
                       </CRow>
                     )}
                   </CCol>
+                  <CRow>
+                    <CButton hidden={this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">
+                      {translate.translate("preprocessing.start_preprocessing")}
+                    </CButton>
+                    <CButton disabled="true" hidden={!this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="secondary">
+                      <Loader
+                        type="Bars"
+                        color="#00BFFF"
+                        height={20}
+                        width={20}
+                        timeout={300000}
+                      />
+                      {translate.translate("preprocessing.waiting")}
+                    </CButton>
+                  </CRow>
 
-                  <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("preprocessing.start_preprocessing")}</CButton>
                   <CAlert hidden={!this.state.isShowResult} color="success">
                     {translate.translate("preprocessing.successful")}
                   </CAlert>
