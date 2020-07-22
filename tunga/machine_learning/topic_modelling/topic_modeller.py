@@ -18,7 +18,7 @@ def __get_topic_info(model, count_vectorizer, n_top_words):
 
 def topic_modeller(column, num_topics=10, num_words=10):
     count_vectorizer = CountVectorizer()
-    count_data = count_vectorizer.fit_transform(column)
+    count_data = count_vectorizer.fit_transform([str(item) for item in column])
     lda = LDA(n_components=num_topics, n_jobs=-1)
     m = lda.fit_transform(count_data)
     topic_info = __get_topic_info(lda, count_vectorizer, num_words)

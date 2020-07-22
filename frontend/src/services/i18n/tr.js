@@ -95,7 +95,14 @@ export default {
     },
     machine_learning: {
         sentiment: {
-            header: "Duygu Durumu Analizi"
+            header: "Duygu Durumu Analizi",
+            dataset: "Veriseti",
+            choose_dataset:"Verisetini Seçin",
+            choose_column:"Kolonu Seçin",
+            please_choose:"Lütfen Seçin",
+            column:"Kolon",
+            choose_model:"Modeli Seçin",
+            get_result:"Çalıştır"
         },
         topic_modelling: {
             choose_dataset: "Verisetinizi seçin",

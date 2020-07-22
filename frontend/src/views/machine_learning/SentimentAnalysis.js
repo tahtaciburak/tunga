@@ -28,40 +28,6 @@ class SentimentAnalysis extends React.Component {
       selectedDatasetId: -1,
       selectedColumnId: -1,
       isShowResult: false,
-      steps: [
-        "lowercase",
-        "uppercase",
-        "remove_stopwords",
-        "remove_digits",
-        "remove_emails",
-        "remove_urls",
-        "remove_emojis",
-        "remove_hashtags",
-        "remove_mentions",
-        "remove_non_turkish_words",
-        "correct_typos",
-        "lemmatize",
-        "stem",
-        "asciify",
-        "deasciify"
-      ],
-      selectedSteps: {
-        lowercase: false,
-        uppercase: false,
-        remove_stopwords: false,
-        remove_digits: false,
-        remove_emails: false,
-        remove_urls: false,
-        remove_emojis: false,
-        remove_hashtags: false,
-        remove_mentions: false,
-        remove_non_turkish_words: false,
-        correct_typos: false,
-        lemmatize: false,
-        stem: false,
-        asciify: false,
-        deasciify: false
-      }
     }
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleColumnChange = this.handleColumnChange.bind(this);
@@ -157,7 +123,7 @@ class SentimentAnalysis extends React.Component {
                         <option value="0">{translate.translate("machine_learning.sentiment.please_choose")}</option>
 
                         {this.state.datasets.map((ds, i) =>
-                          <option key={i} value={i}>{ds.filename}</option>
+                          <option key={i} value={ds.id}>{ds.filename}</option>
 
                         )}
                       </CSelect>
@@ -180,7 +146,7 @@ class SentimentAnalysis extends React.Component {
                         <option value="0">{translate.translate("machine_learning.sentiment.choose_column")}</option>
 
                         {this.state.columns.map((col, i) =>
-                          <option key={i} value={i}>{col}</option>
+                          <option key={i} value={col}>{col}</option>
 
                         )}
                       </CSelect>
