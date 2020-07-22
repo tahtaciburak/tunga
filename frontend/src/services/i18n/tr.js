@@ -100,7 +100,21 @@ export default {
         topic_modelling: {
             choose_dataset: "Verisetinizi seçin",
             choose_column: "İşlem yapmak istediğiniz sütunu seçin",
-            header: "Konu Modelleme"
+            header: "Konu Modelleme",
+            dataset: "Veriseti",
+            please_choose: "Lütfen Seçin",
+            column: "Kolon",
+            result: "Sonuç",
+            get_result: "Konu Modellemesini Başlat",
+            waiting:"Konu Modellemesi Yapılıyor...",
+            hyperparameters: "Hiperparametreler",
+            num_topics_label: "Konu Sayısı",
+            num_topics_placeholder: "Bölmek istediğiniz konu sayısını giriniz.",
+            num_keywords_label: "Konu Başına Anahtar Kelime",
+            num_keywords_placeholder: "Konu başına üretilecek anahtar kelime sayısını giriniz."
+
+
+
         },
         keyword_extraction: {
             header: "Anahtar Kelime Çıkarımı",
@@ -108,7 +122,7 @@ export default {
             choose_dataset: "Verisetinizi seçin",
             choose_column: "İşlem yapmak istediğiniz sütunu seçin",
             please_choose: "Lütfen Seçin",
-            column: "Kolon"
+            column: "Kolon",
 
         },
         summarization: {

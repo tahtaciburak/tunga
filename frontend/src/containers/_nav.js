@@ -68,6 +68,11 @@ export default [
         _tag: 'CSidebarNavItem',
         name: 'Topic Modelling',
         to: '/ml/topic-modelling',
+        badge: {
+          color:"success",
+          text: "DONE"
+        }
+
       },
       {
         _tag: 'CSidebarNavItem',
