@@ -14,6 +14,7 @@ class BaseConfig:
     BCRYPT_LOG_ROUNDS = 13
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_PATH = "/Users/beyzacanbay/Desktop/tunga/backend/uploads"
+    THREADED = True
 
 
 class DevelopmentConfig(BaseConfig):

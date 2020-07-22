@@ -50,8 +50,10 @@ class PreprocessingControllerAPI(MethodView):
         for key in steps.keys():
             if steps[key]:
                 try:
-                    column = column.apply(function_map[key])
-                except:
+                    # column = column.fillna("").apply(function_map[key])
+                    column = pd.Series([function_map[key](str(item)) for item in column])
+                except Exception as e:
+                    print(e)
                     print("Not implemented preprocessing step", key)
         return column
 

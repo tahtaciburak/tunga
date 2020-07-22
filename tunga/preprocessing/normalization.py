@@ -311,6 +311,7 @@ def correct_typo(text):
     if n_response.normalized_input:
         return n_response.normalized_input
     else:
+        print("err")
         return text
 
 
