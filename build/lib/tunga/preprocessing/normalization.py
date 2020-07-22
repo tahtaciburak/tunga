@@ -275,47 +275,43 @@ def tokenization(text):
     return new_txt
 
 
-def analyze(text):
+def __analyze(text):
     response = morphology_stub.AnalyzeSentence(z_morphology.SentenceAnalysisRequest(input=text))
     return response
 
 
 def lemmatization(text):
     fix_text = fix_decode(text)
-    analysis_result = analyze(fix_text)
-    new_txt = ""
+    analysis_result = __analyze(fix_text)
+    new_txt = []
     for a in analysis_result.results:
         best = a.best
-        lemmas = ""
-        for l in best.lemmas:
-            lemmas = lemmas + " " + l
-        new_txt += "Word = " + a.token + ", Lemmas = " + lemmas + ", POS = [" + best.pos + "], Full Analysis = {" + best.analysis + "}"
-
-    return new_txt
+        new_txt.append(best.lemmas[0].strip())
+    return " ".join(new_txt)
 
 
-def find_lang_id(text):
+def __find_lang_id(text):
     response = langid_stub.Detect(z_langid.LanguageIdRequest(input=text))
     return response.langId
 
 
 def find_lang(text):
-    lang_id = find_lang_id(text)
+    lang_id = __find_lang_id(text)
     return lang_id
 
 
-def normalize(text):
+def __normalize(text):
     response = normalization_stub.Normalize(z_normalization.NormalizationRequest(input=text))
     return response
 
 
 def correct_typo(text):
     normalization_input = fix_decode(text)
-    n_response = normalize(normalization_input)
+    n_response = __normalize(normalization_input)
     if n_response.normalized_input:
         return n_response.normalized_input
     else:
-        return 'Problem normalizing input : ' + n_response.error
+        return text
 
 
 def lowercase(text):

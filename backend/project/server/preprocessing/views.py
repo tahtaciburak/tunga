@@ -42,7 +42,7 @@ class PreprocessingControllerAPI(MethodView):
                         'remove_mentions': preprocessing.remove_mentions,
                         'remove_non_turkish_words': False,
                         'correct_typos': preprocessing.correct_typo,
-                        'lemmatize': False,
+                        'lemmatize': preprocessing.lemmatization,
                         'stem': False,
                         'asciify': False,
                         'deasciify': False}

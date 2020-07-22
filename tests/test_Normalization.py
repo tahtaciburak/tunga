@@ -77,10 +77,12 @@ class TestNormalization(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_mail_cleaner(self):
-        actual = normalization.mail_cleaner("From: 'Beyza Canbay' <beyza@gmail.com>To: 'Burak Tahtacı' <burak@gmail.com> Subject: RE:Hello! Merhaba demek için mail atıyorum From: 'Edgar Allen Poe' <eap@gmail.com>To: 'Mark Twain' <mark.twain@gmail.com>Subject: RE: Hello!")
-        expected="Merhaba demek için mail atıyorum"
+        actual = normalization.mail_cleaner(
+            "From: 'Beyza Canbay' <beyza@gmail.com>To: 'Burak Tahtacı' <burak@gmail.com> Subject: RE:Hello! Merhaba demek için mail atıyorum From: 'Edgar Allen Poe' <eap@gmail.com>To: 'Mark Twain' <mark.twain@gmail.com>Subject: RE: Hello!")
+        expected = "Merhaba demek için mail atıyorum"
 
-        self.assertEqual(actual,expected)
+        self.assertEqual(actual, expected)
+
     def test_remove_person_names(self):
         actual = normalization.remove_person_names("Beyza bilgisayar mühendisi")
         expected = "bilgisayar mühendisi"
@@ -197,7 +199,7 @@ class TestNormalization(unittest.TestCase):
 
     def test_syllable(self):
         actual = normalization.syllable("merhaba")
-        expected = ['mer', 'ha', 'ba']
+        expected = 'mer ha ba'
         self.assertEqual(actual, expected)
 
         actual = normalization.syllable("Her sabah kahvaltıda yumurta yerim")
@@ -216,7 +218,7 @@ class TestNormalization(unittest.TestCase):
 
     def test_lemmatization(self):
         actual = normalization.lemmatization("O kavanozun kapağını açamayan dengesiz bir insandı.")
-        expected = "Word = O, Lemmas =  o, POS = [Det], Full Analysis = {[o:Det] o:Det}Word = kavanozun, Lemmas =  kavanoz, POS = [Noun], Full Analysis = {[kavanoz:Noun] kavanoz:Noun+A3sg+un:Gen}Word = kapağını, Lemmas =  kapak, POS = [Noun], Full Analysis = {[kapak:Noun] kapağ:Noun+A3sg+ı:P3sg+nı:Acc}Word = açamayan, Lemmas =  aç açamayan, POS = [Adj], Full Analysis = {[açmak:Verb] aç:Verb+ama:Unable|yan:PresPart→Adj}Word = dengesiz, Lemmas =  denge dengesiz, POS = [Adj], Full Analysis = {[denge:Noun] denge:Noun+A3sg|siz:Without→Adj}Word = bir, Lemmas =  bir, POS = [Det], Full Analysis = {[bir:Det] bir:Det}Word = insandı, Lemmas =  insan, POS = [Verb], Full Analysis = {[insan:Noun] insan:Noun+A3sg|Zero→Verb+dı:Past+A3sg}Word = ., Lemmas =  ., POS = [Punc], Full Analysis = {[.:Punc] .:Punc}"
+        expected = "o kavanoz kapak aç denge bir insan ."
         self.assertEqual(actual, expected)
 
     def test_find_lang(self):
@@ -228,6 +230,13 @@ class TestNormalization(unittest.TestCase):
         expected = "ja"
         self.assertEqual(actual, expected)
 
+        actual = normalization.find_lang("das ist eine tomaten")
+        expected = "de"
+        self.assertEqual(actual, expected)
+
+        actual = normalization.find_lang("are you cola")
+        expected = "en"
+        self.assertEqual(actual, expected)
 
 if __name__ == '__main__':
     unittest.main()

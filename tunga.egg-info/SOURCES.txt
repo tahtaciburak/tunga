@@ -19,7 +19,6 @@ tunga/machine_learning/sentiment_analysis/__init__.py
 tunga/machine_learning/sentiment_analysis/hotel_sentiment.py
 tunga/machine_learning/sentiment_analysis/product_sentiment.py
 tunga/machine_learning/summarization/__init__.py
-tunga/machine_learning/summarization/extract_summarrization.py
 tunga/machine_learning/summarization/summarizer.py
 tunga/machine_learning/topic_modelling/__init__.py
 tunga/machine_learning/topic_modelling/topic_extraction.py

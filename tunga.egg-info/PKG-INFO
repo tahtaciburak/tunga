@@ -7,7 +7,7 @@ Author: Burak TAHTACI
 Author-email: tahtaiburak@gmail.com
 License: UNKNOWN
 Description: <p align="center">
-            <img src="images/logo.png" width="480"\>
+            <img src="images/tunga.png" width="480"\>
         </p>
         
         ## tunga: Agile Text Analytics Platform
@@ -20,12 +20,19 @@ Description: <p align="center">
         4. Basliklar
         5. Halinde
         
-        ## Installation
-        ```bash
-        docker pull <bizim docker containeri adi>:latest
-        veyahut
-        docker-compose up
-        ```
+        ## Kurulum İşlemi
+        1. ```docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 -v ~/data/docker/postgres:/var/lib/postgresql/data postgres```
+        2. Veritabanı işlemleri için aşağıdaki sıra takip edilmelidir.
+            1. ```db create```
+            2. ```db init```
+            3. ```db migrate```
+        3. ```docker exec -it docker-postgres /bin/bash```
+        4. ```su postgres```
+        5. ```psql```
+        6. ```create database tunga;```
+        7. ```create database tunga_test;```
+        8.Backend dizinine gidip ```python3 manage.py runserver -p 8080```
+        9.Frontend dizinine gidip ``` npm start```
         
         ## Sistem Diyagramı
         <p align="center">
