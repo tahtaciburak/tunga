@@ -15,7 +15,10 @@ tunga/extraction/ner_extraction.py
 tunga/machine_learning/__init__.py
 tunga/machine_learning/keyword_extraction/__init__.py
 tunga/machine_learning/keyword_extraction/rake.py
+tunga/machine_learning/ner/__init__.py
+tunga/machine_learning/ner/bert.py
 tunga/machine_learning/sentiment_analysis/__init__.py
+tunga/machine_learning/sentiment_analysis/bert_sentiment.py
 tunga/machine_learning/sentiment_analysis/hotel_sentiment.py
 tunga/machine_learning/sentiment_analysis/product_sentiment.py
 tunga/machine_learning/summarization/__init__.py
