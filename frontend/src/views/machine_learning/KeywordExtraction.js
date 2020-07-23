@@ -12,6 +12,7 @@ import {
   CLabel,
   CFormGroup
 } from '@coreui/react'
+import Loader from 'react-loader-spinner'
 
 //import usersData from '../users/UsersData'
 import APIService from '../../services/APIService'
@@ -181,7 +182,20 @@ class KeywordExtraction extends React.Component {
                       </CSelect>
                     </CCol>
                   </CFormGroup>
-                  <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("machine_learning.topic_modelling.get_result")}</CButton>
+
+                  <CButton hidden={this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">
+                      {translate.translate("machine_learning.keyword_extraction.get_result")}
+                    </CButton>
+                    <CButton disabled="true" hidden={!this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="secondary">
+                      <Loader
+                        type="Bars"
+                        color="#00BFFF"
+                        height={20}
+                        width={20}
+                        timeout={300000}
+                      />
+                      {translate.translate("machine_learning.keyword_extraction.waiting")}
+                    </CButton>
 
                 </CCardBody>
               </CCard>
@@ -194,3 +208,11 @@ class KeywordExtraction extends React.Component {
 }
 
 export default KeywordExtraction
+
+/**
+ * 
+ * 
+ * 
+                  <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("machine_learning.topic_modelling.get_result")}</CButton>
+ * 
+ */
