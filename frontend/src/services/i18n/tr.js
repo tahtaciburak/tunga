@@ -102,7 +102,10 @@ export default {
             please_choose:"Lütfen Seçin",
             column:"Kolon",
             choose_model:"Modeli Seçin",
-            get_result:"Çalıştır"
+            get_result:"Çalıştır",
+            result: "Sonuç",
+            success: "Başarılı.",
+            waiting: "Çalışıyor..."
         },
         topic_modelling: {
             choose_dataset: "Verisetinizi seçin",
@@ -130,6 +133,8 @@ export default {
             choose_column: "İşlem yapmak istediğiniz sütunu seçin",
             please_choose: "Lütfen Seçin",
             column: "Kolon",
+            get_result: "Çalıştır",
+            waiting: "Çalışıyor..."
 
         },
         summarization: {

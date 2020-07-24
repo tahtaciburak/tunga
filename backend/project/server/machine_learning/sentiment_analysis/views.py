@@ -17,8 +17,7 @@ class SentimentAnalysisAPI(MethodView):
         dataset = Dataset.query.filter_by(id=post_data["datasetId"], user_id=user.id).first()
         selected_column_name = post_data["column"]
         df = pd.read_csv(dataset.filepath)
-        # df["KEYWORDS_" + selected_column_name] = df[selected_column_name].fillna("").apply(rake.extract_keywords)
-        df["SENTIMENT" + selected_column_name] = pd.Series(
+        df["SENTIMENT_" + selected_column_name] = pd.Series(
             [bert_sentiment.get_sentiment(str(item))[0] for item in df[selected_column_name]])
         df.to_csv(dataset.filepath, index=None)
         return jsonify(post_data)

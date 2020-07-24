@@ -68,20 +68,12 @@ export default [
         _tag: 'CSidebarNavItem',
         name: 'Topic Modelling',
         to: '/ml/topic-modelling',
-        badge: {
-          color:"success",
-          text: "DONE"
-        }
 
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Keyword Extraction',
         to: '/ml/keyword-extraction',
-        badge: {
-          color:"success",
-          text: "DONE"
-        }
       },
       {
         _tag: 'CSidebarNavItem',
@@ -92,19 +84,11 @@ export default [
         _tag: 'CSidebarNavItem',
         name: 'Language Identification',
         to: '/ml/language-identification',
-        badge: {
-          color:"success",
-          text: "DONE"
-        }
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Translation',
         to: '/ml/translation',
-        badge: {
-          color:"secondary",
-          text: 'BETA'
-        }
       },
       {
         _tag: 'CSidebarNavItem',

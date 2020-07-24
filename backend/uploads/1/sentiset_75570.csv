@@ -1,0 +1,7 @@
+id, text,PREPROCESSED_ text,SENTIMENTPREPROCESSED_ text,KEYWORDS_PREPROCESSED_ text,TOPIC_PREPROCESSED_ text,SENTIMENT_PREPROCESSED_ text
+1, cok etkilendim muthis bir oyundu,çok etkilendim müthiş oyundu,positive,"[('etkilendim müthiş oyundu', 9.0)]",0,positive
+2, ne iyi ne kotu bence daha da gelistirilebilir,iyi kötü bence geliştirilebilir,negative,[],1,negative
+3, tek kelimeyle harika,tek kelimeyle harika,positive,"[('tek kelimeyle harika', 9.0)]",0,positive
+4, cok lezzetliydi sefin eline saglik,çok lezzetliydi şefin eline sağlık,positive,[],0,positive
+5, gelistirilmeli,geliştirilmeli,positive,"[('geliştirilmeli', 1.0)]",0,positive
+6, hic beyenmedim derhal yeni bir menu geirtirilmeli,hiç beğenmedim derhal yeni menü geirtirilmeli,negative,[],1,negative

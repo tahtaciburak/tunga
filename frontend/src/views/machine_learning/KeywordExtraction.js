@@ -63,6 +63,7 @@ class KeywordExtraction extends React.Component {
   }
 
   handleSubmitButtonClick(event) {
+    console.log(this.state.selectedColumn)
     this.setState({ isWaiting: true })
     if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId == -1) {
       alert("İşleme başlamadan önce lütfen verisetini ve ilgili kolonu seçin !")

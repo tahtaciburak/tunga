@@ -28,40 +28,6 @@ class LanguageIdentification extends React.Component {
       selectedDatasetId: -1,
       selectedColumnId: -1,
       isShowResult: false,
-      steps: [
-        "lowercase",
-        "uppercase",
-        "remove_stopwords",
-        "remove_digits",
-        "remove_emails",
-        "remove_urls",
-        "remove_emojis",
-        "remove_hashtags",
-        "remove_mentions",
-        "remove_non_turkish_words",
-        "correct_typos",
-        "lemmatize",
-        "stem",
-        "asciify",
-        "deasciify"
-      ],
-      selectedSteps: {
-        lowercase: false,
-        uppercase: false,
-        remove_stopwords: false,
-        remove_digits: false,
-        remove_emails: false,
-        remove_urls: false,
-        remove_emojis: false,
-        remove_hashtags: false,
-        remove_mentions: false,
-        remove_non_turkish_words: false,
-        correct_typos: false,
-        lemmatize: false,
-        stem: false,
-        asciify: false,
-        deasciify: false
-      }
     }
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleColumnChange = this.handleColumnChange.bind(this);
