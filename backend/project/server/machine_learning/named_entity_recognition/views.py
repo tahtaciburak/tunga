@@ -17,9 +17,6 @@ class NamedEntityRecognitionAPI(MethodView):
         dataset = Dataset.query.filter_by(id=post_data["datasetId"], user_id=user.id).first()
         selected_column_name = post_data["column"]
         df = pd.read_csv(dataset.filepath)
-        """
-        TODO: Write your logic here.
-        """
         per_list = []
         org_list = []
         loc_list = []

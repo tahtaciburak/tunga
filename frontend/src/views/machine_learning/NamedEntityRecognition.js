@@ -16,6 +16,7 @@ import {
 //import usersData from '../users/UsersData'
 import APIService from '../../services/APIService'
 import AlertService from '../../services/AlertService'
+import Loader from 'react-loader-spinner'
 
 import translate from '../../services/i18n/Translate';
 
@@ -28,48 +29,20 @@ class NamedEntityRecognition extends React.Component {
       selectedDatasetId: -1,
       selectedColumnId: -1,
       isShowResult: false,
-      steps: [
-        "lowercase",
-        "uppercase",
-        "remove_stopwords",
-        "remove_digits",
-        "remove_emails",
-        "remove_urls",
-        "remove_emojis",
-        "remove_hashtags",
-        "remove_mentions",
-        "remove_non_turkish_words",
-        "correct_typos",
-        "lemmatize",
-        "stem",
-        "asciify",
-        "deasciify"
-      ],
-      selectedSteps: {
-        lowercase: false,
-        uppercase: false,
-        remove_stopwords: false,
-        remove_digits: false,
-        remove_emails: false,
-        remove_urls: false,
-        remove_emojis: false,
-        remove_hashtags: false,
-        remove_mentions: false,
-        remove_non_turkish_words: false,
-        correct_typos: false,
-        lemmatize: false,
-        stem: false,
-        asciify: false,
-        deasciify: false
-      }
     }
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleColumnChange = this.handleColumnChange.bind(this);
     this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
+    this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
+    this.handleInspectDatasetButtonClick = this.handleInspectDatasetButtonClick.bind(this);
   }
 
   componentDidMount() {
     this.fetchDatasets();
+  }
+
+  handleInspectDatasetButtonClick(event) {
+    this.props.history.push("/inspect-dataset/" + this.state.selectedDatasetId)
   }
 
   handleDatasetNameChange(event) {
@@ -81,6 +54,7 @@ class NamedEntityRecognition extends React.Component {
   handleColumnChange(event) {
     let columndId = event.target.value;
     this.setState({ selectedColumnId: columndId });
+    this.setState({ selectedColumn: event.target.value })
   }
 
   handleCheckboxClick(event) {
@@ -91,8 +65,34 @@ class NamedEntityRecognition extends React.Component {
     this.setState({ selectedSteps: actualSelected });
   }
 
-  handleSubmitButtonClick(event){
-    alert("datayi sunucuya gonder")
+  handleSubmitButtonClick(event) {
+
+    this.setState({ isWaiting: true })
+    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId == -1) {
+      alert("İşleme başlamadan önce lütfen verisetini ve ilgili kolonu seçin !")
+      this.setState({ isWaiting: false })
+      return
+    }
+    APIService.requests
+      .post('ml/named_entity_recognition', {
+        datasetId: this.state.selectedDatasetId,
+        column: this.state.selectedColumn
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({ isShowResult: true })
+        this.setState({ isWaiting: false })
+      })
+      .catch(data => {
+        this.setState({ isWaiting: false })
+        console.log(data)
+        AlertService.Add({
+          type: 'alert',
+          //message: translate.getText('error.' + data.response.body.error.code),
+          level: 'error',
+          autoDismiss: 5
+        });
+      });
   }
 
   async fetchDatasets() {
@@ -157,7 +157,7 @@ class NamedEntityRecognition extends React.Component {
                         <option value="0">{translate.translate("machine_learning.topic_modelling.please_choose")}</option>
 
                         {this.state.datasets.map((ds, i) =>
-                          <option key={i} value={i}>{ds.filename}</option>
+                          <option key={i} value={ds.id}>{ds.filename}</option>
 
                         )}
                       </CSelect>
@@ -180,7 +180,7 @@ class NamedEntityRecognition extends React.Component {
                         <option value="0">{translate.translate("machine_learning.topic_modelling.choose_column")}</option>
 
                         {this.state.columns.map((col, i) =>
-                          <option key={i} value={i}>{col}</option>
+                          <option key={i} value={col}>{col}</option>
 
                         )}
                       </CSelect>
@@ -197,7 +197,21 @@ class NamedEntityRecognition extends React.Component {
                   <CCol md="12">
                   </CCol>
 
-                  <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("machine_learning.topic_modelling.get_result")}</CButton>
+                  <CButton hidden={this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">
+                    {translate.translate("machine_learning.sentiment.get_result")}
+                  </CButton>
+                  <CButton disabled="true" hidden={!this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="secondary">
+                    <Loader
+                      type="Bars"
+                      color="#00BFFF"
+                      height={20}
+                      width={20}
+                      timeout={300000}
+                    />
+                    {translate.translate("machine_learning.sentiment.waiting")}
+                  </CButton>
+
+
                 </CCardBody>
               </CCard>
               <CCard hidden={!this.state.isShowResult}>

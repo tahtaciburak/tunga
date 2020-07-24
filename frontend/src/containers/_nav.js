@@ -61,38 +61,38 @@ export default [
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: 'Sentiment Analysis',
+        name: 'Duygu Durum Analizi',
         to: '/ml/sentiment',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Topic Modelling',
+        name: 'Konu Modelleme',
         to: '/ml/topic-modelling',
 
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Keyword Extraction',
+        name: 'Anahtar Kelime Çıkarımı',
         to: '/ml/keyword-extraction',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Summarization',
+        name: 'Metin Özetleme',
         to: '/ml/summarization',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Language Identification',
+        name: 'Dil Tespiti',
         to: '/ml/language-identification',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Translation',
+        name: 'Türkçe-İngilizce Çeviri',
         to: '/ml/translation',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Named Entity Recognition',
+        name: 'Varlık Adı Tanımlama',
         to: '/ml/ner',
       },
     ],

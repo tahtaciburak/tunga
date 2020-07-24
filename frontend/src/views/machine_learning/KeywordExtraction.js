@@ -5,6 +5,7 @@ import {
   CCardBody,
   CCardHeader,
   CDataTable,
+  CAlert,
   CButton,
   CRow,
   CSelect,
@@ -30,17 +31,24 @@ class KeywordExtraction extends React.Component {
       selectedColumnId: -1,
       selectedColumn: "",
       isShowResult: false,
-      isWaiting:false
+      isWaiting: false
     }
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleColumnChange = this.handleColumnChange.bind(this);
     this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
     this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
+    this.handleInspectDatasetButtonClick = this.handleInspectDatasetButtonClick.bind(this);
+
   }
 
   componentDidMount() {
     this.fetchDatasets();
   }
+
+  handleInspectDatasetButtonClick(event) {
+    this.props.history.push("/inspect-dataset/" + this.state.selectedDatasetId)
+  }
+
 
   handleDatasetNameChange(event) {
     let datasetId = event.target.value;
@@ -184,21 +192,35 @@ class KeywordExtraction extends React.Component {
                   </CFormGroup>
 
                   <CButton hidden={this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">
-                      {translate.translate("machine_learning.keyword_extraction.get_result")}
-                    </CButton>
-                    <CButton disabled="true" hidden={!this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="secondary">
-                      <Loader
-                        type="Bars"
-                        color="#00BFFF"
-                        height={20}
-                        width={20}
-                        timeout={300000}
-                      />
-                      {translate.translate("machine_learning.keyword_extraction.waiting")}
-                    </CButton>
+                    {translate.translate("machine_learning.keyword_extraction.get_result")}
+                  </CButton>
+                  <CButton disabled="true" hidden={!this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="secondary">
+                    <Loader
+                      type="Bars"
+                      color="#00BFFF"
+                      height={20}
+                      width={20}
+                      timeout={300000}
+                    />
+                    {translate.translate("machine_learning.keyword_extraction.waiting")}
+                  </CButton>
 
                 </CCardBody>
               </CCard>
+              <CCard hidden={!this.state.isShowResult}>
+                <CCardHeader>
+                  {translate.translate("machine_learning.sentiment.result")}
+                </CCardHeader>
+                <CCardBody>
+                  <CAlert color="success">{translate.translate("machine_learning.sentiment.success")}</CAlert>
+                  <CButton onClick={this.handleInspectDatasetButtonClick} style={{ marginLeft: 20 }} color="primary">
+                    {translate.translate("preprocessing.inspect_dataset")}
+                  </CButton>
+
+
+                </CCardBody>
+              </CCard>
+
             </CCol>
           </div>
         </div>
@@ -210,9 +232,9 @@ class KeywordExtraction extends React.Component {
 export default KeywordExtraction
 
 /**
- * 
- * 
- * 
+ *
+ *
+ *
                   <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("machine_learning.topic_modelling.get_result")}</CButton>
- * 
+ *
  */
