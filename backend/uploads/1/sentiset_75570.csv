@@ -1,7 +1,7 @@
-id, text,PREPROCESSED_ text,SENTIMENTPREPROCESSED_ text,KEYWORDS_PREPROCESSED_ text,TOPIC_PREPROCESSED_ text,SENTIMENT_PREPROCESSED_ text,LANG_PREPROCESSED_ text
-1, cok etkilendim muthis bir oyundu,çok etkilendim müthiş oyundu,positive,"[('etkilendim müthiş oyundu', 9.0)]",0,positive,tr
-2, ne iyi ne kotu bence daha da gelistirilebilir,iyi kötü bence geliştirilebilir,negative,[],1,negative,tr
-3, tek kelimeyle harika,tek kelimeyle harika,positive,"[('tek kelimeyle harika', 9.0)]",0,positive,tr
-4, cok lezzetliydi sefin eline saglik,çok lezzetliydi şefin eline sağlık,positive,[],0,positive,tr
-5, gelistirilmeli,geliştirilmeli,positive,"[('geliştirilmeli', 1.0)]",0,positive,tr
-6, hic beyenmedim derhal yeni bir menu geirtirilmeli,hiç beğenmedim derhal yeni menü geirtirilmeli,negative,[],1,negative,tr
+id, text,PREPROCESSED_ text,SENTIMENTPREPROCESSED_ text,KEYWORDS_PREPROCESSED_ text,TOPIC_PREPROCESSED_ text,SENTIMENT_PREPROCESSED_ text,LANG_PREPROCESSED_ text,NER_PERSON_PREPROCESSED_ text,NER_ORGANIZATION_PREPROCESSED_ text,NER_LOCATION_PREPROCESSED_ text
+1, cok etkilendim muthis bir oyundu,çok etkilendim müthiş oyundu,positive,"[('etkilendim müthiş oyundu', 9.0)]",0,positive,tr,,,
+2, ne iyi ne kotu bence daha da gelistirilebilir,iyi kötü bence geliştirilebilir,negative,[],1,negative,tr,,,
+3, tek kelimeyle harika,tek kelimeyle harika,positive,"[('tek kelimeyle harika', 9.0)]",0,positive,tr,,,
+4, cok lezzetliydi sefin eline saglik,çok lezzetliydi şefin eline sağlık,positive,[],0,positive,tr,,,
+5, gelistirilmeli,geliştirilmeli,positive,"[('geliştirilmeli', 1.0)]",0,positive,tr,,,
+6, hic beyenmedim derhal yeni bir menu geirtirilmeli,hiç beğenmedim derhal yeni menü geirtirilmeli,negative,[],1,negative,tr,,,

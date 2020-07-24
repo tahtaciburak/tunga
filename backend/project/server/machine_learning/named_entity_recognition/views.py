@@ -5,6 +5,8 @@ from project.server import bcrypt, db
 from project.server.models import User, BlacklistToken, Dataset
 from project.server import utils
 
+from tunga.machine_learning.ner import bert
+
 named_entity_recognition_blueprint = Blueprint('named_entity_recognition', __name__)
 
 
@@ -18,6 +20,18 @@ class NamedEntityRecognitionAPI(MethodView):
         """
         TODO: Write your logic here.
         """
+        per_list = []
+        org_list = []
+        loc_list = []
+        for line in df[selected_column_name]:
+            result = bert.get_result(line)
+            per_list.append(result["PER"])
+            org_list.append(result["ORG"])
+            loc_list.append(result["LOC"])
+        df["NER_PERSON_" + selected_column_name] = pd.Series(per_list).fillna("-")
+        df["NER_ORGANIZATION_" + selected_column_name] = pd.Series(org_list).fillna("-")
+        df["NER_LOCATION_" + selected_column_name] = pd.Series(loc_list).fillna("-")
+
         df.to_csv(dataset.filepath, index=None)
         return jsonify(post_data)
 
