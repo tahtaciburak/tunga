@@ -141,7 +141,16 @@ export default {
             header: "Metin Özetleme"
         },
         language_identification: {
-            header: "Dil Tanıma"
+            header: "Dil Tanıma",
+            dataset: "Veriseti",
+            choose_dataset: "Verisetinizi seçin",
+            choose_column: "İşlem yapmak istediğiniz sütunu seçin",
+            please_choose: "Lütfen Seçin",
+            column: "Kolon",
+            get_result: "Çalıştır",
+            waiting: "Çalışıyor...",
+            choose_model: "Modeli Seçin",
+            result: "Sonuç"
         },
         machine_translation: {
             header: "Makine Çevirisi"

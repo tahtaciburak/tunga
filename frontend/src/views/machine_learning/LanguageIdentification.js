@@ -5,6 +5,7 @@ import {
   CCardBody,
   CCardHeader,
   CDataTable,
+  CAlert,
   CButton,
   CRow,
   CSelect,
@@ -16,6 +17,7 @@ import {
 //import usersData from '../users/UsersData'
 import APIService from '../../services/APIService'
 import AlertService from '../../services/AlertService'
+import Loader from 'react-loader-spinner'
 
 import translate from '../../services/i18n/Translate';
 
@@ -32,10 +34,17 @@ class LanguageIdentification extends React.Component {
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleColumnChange = this.handleColumnChange.bind(this);
     this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
+    this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
+    this.handleInspectDatasetButtonClick = this.handleInspectDatasetButtonClick.bind(this);
+
   }
 
   componentDidMount() {
     this.fetchDatasets();
+  }
+
+  handleInspectDatasetButtonClick(event) {
+    this.props.history.push("/inspect-dataset/" + this.state.selectedDatasetId)
   }
 
   handleDatasetNameChange(event) {
@@ -47,6 +56,8 @@ class LanguageIdentification extends React.Component {
   handleColumnChange(event) {
     let columndId = event.target.value;
     this.setState({ selectedColumnId: columndId });
+    this.setState({ selectedColumn: columndId });
+
   }
 
   handleCheckboxClick(event) {
@@ -58,7 +69,32 @@ class LanguageIdentification extends React.Component {
   }
 
   handleSubmitButtonClick(event){
-    alert("datayi sunucuya gonder")
+    this.setState({ isWaiting: true })
+    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId == -1) {
+      alert("İşleme başlamadan önce lütfen verisetini ve ilgili kolonu seçin !")
+      this.setState({ isWaiting: false })
+      return
+    }
+    APIService.requests
+      .post('ml/language_identification', {
+        datasetId: this.state.selectedDatasetId,
+        column: this.state.selectedColumn
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({ isShowResult: true })
+        this.setState({ isWaiting: false })
+      })
+      .catch(data => {
+        this.setState({ isWaiting: false })
+        console.log(data)
+        AlertService.Add({
+          type: 'alert',
+          //message: translate.getText('error.' + data.response.body.error.code),
+          level: 'error',
+          autoDismiss: 5
+        });
+      });
   }
 
   async fetchDatasets() {
@@ -111,19 +147,19 @@ class LanguageIdentification extends React.Component {
             <CCol xs="12" lg="12">
               <CCard>
                 <CCardHeader>
-                  {translate.translate("machine_learning.topic_modelling.choose_dataset")}
+                  {translate.translate("machine_learning.language_identification.choose_dataset")}
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="select">{translate.translate("machine_learning.topic_modelling.dataset")}</CLabel>
+                      <CLabel htmlFor="select">{translate.translate("machine_learning.language_identification.dataset")}</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
                       <CSelect onChange={this.handleDatasetNameChange} custom name="select" id="select">
-                        <option value="0">{translate.translate("machine_learning.topic_modelling.please_choose")}</option>
+                        <option value="0">{translate.translate("machine_learning.language_identification.please_choose")}</option>
 
                         {this.state.datasets.map((ds, i) =>
-                          <option key={i} value={i}>{ds.filename}</option>
+                          <option key={i} value={ds.id}>{ds.filename}</option>
 
                         )}
                       </CSelect>
@@ -134,19 +170,19 @@ class LanguageIdentification extends React.Component {
               </CCard>
               <CCard>
                 <CCardHeader>
-                  {translate.translate("machine_learning.topic_modelling.choose_column")}
+                  {translate.translate("machine_learning.language_identification.choose_column")}
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="select">{translate.translate("machine_learning.topic_modelling.column")}</CLabel>
+                      <CLabel htmlFor="select">{translate.translate("machine_learning.language_identification.column")}</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
                       <CSelect onChange={this.handleColumnChange} custom name="select" id="select">
-                        <option value="0">{translate.translate("machine_learning.topic_modelling.choose_column")}</option>
+                        <option value="0">{translate.translate("machine_learning.language_identification.choose_column")}</option>
 
                         {this.state.columns.map((col, i) =>
-                          <option key={i} value={i}>{col}</option>
+                          <option key={i} value={col}>{col}</option>
 
                         )}
                       </CSelect>
@@ -157,20 +193,36 @@ class LanguageIdentification extends React.Component {
               </CCard>
               <CCard>
                 <CCardHeader>
-                  {translate.translate("machine_learning.topic_modelling.choose_model")}
+                  {translate.translate("machine_learning.language_identification.choose_model")}
                 </CCardHeader>
                 <CCardBody>
                   <CCol md="12">
                   </CCol>
 
-                  <CButton onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">{translate.translate("machine_learning.topic_modelling.get_result")}</CButton>
+                  <CButton hidden={this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="success">
+                    {translate.translate("machine_learning.language_identification.get_result")}
+                  </CButton>
+                  <CButton disabled="true" hidden={!this.state.isWaiting} onClick={this.handleSubmitButtonClick} style={{ marginTop: 23 }} color="secondary">
+                    <Loader
+                      type="Bars"
+                      color="#00BFFF"
+                      height={20}
+                      width={20}
+                      timeout={300000}
+                    />
+                    {translate.translate("machine_learning.sentiment.waiting")}
+                  </CButton>
                 </CCardBody>
               </CCard>
               <CCard hidden={!this.state.isShowResult}>
                 <CCardHeader>
-                  {translate.translate("machine_learning.topic_modelling.result")}
+                  {translate.translate("machine_learning.sentiment.result")}
                 </CCardHeader>
                 <CCardBody>
+                  <CAlert color="success">{translate.translate("machine_learning.sentiment.success")}</CAlert>
+                  <CButton onClick={this.handleInspectDatasetButtonClick} style={{ marginLeft: 20 }} color="primary">
+                    {translate.translate("preprocessing.inspect_dataset")}
+                  </CButton>
 
 
                 </CCardBody>

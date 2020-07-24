@@ -5,8 +5,8 @@ from project.server import bcrypt, db
 from project.server.models import User, BlacklistToken, Dataset
 from project.server import utils
 
-from tunga.machine_learning.keyword_extraction import rake
 from tunga.preprocessing.normalization import find_lang
+
 lang_id_blueprint = Blueprint('language_identification', __name__)
 
 
