@@ -9,12 +9,12 @@ geliştirilmiştir.
 
 
 ## İçindekiler
-- [Kurulum İşlemi](#Kurulum-İşlemi)
+- [Docker İle Kurulum İşlemi](#Docker-İle-Kurulum-İşlemi)
 - [Sistem Diyagramı](#Sistem-Diyagramı)
 - [Kullandığımız Kaynaklar](#Kullandığımız-Kaynaklar)
 - [Örnek Kullanım](#Örnek-Kullanım)
 
-## Kurulum İşlemi
+## Docker İle Kurulum İşlemi
 1. ```docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 -v ~/data/docker/postgres:/var/lib/postgresql/data postgres```
 2. Veritabanı işlemleri için aşağıdaki sıra takip edilmelidir.
     1. ```db create```
