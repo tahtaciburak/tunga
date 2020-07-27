@@ -7,6 +7,7 @@
 hızlandıran web tabanlı ve açık kaynak bir SaaS uygulamasıdır. Bu proje Açık Kaynak Doğal Dil İşleme Hackathon'u sürecinde
 geliştirilmiştir. www.acikhack.com
 
+[![Build Status](https://travis-ci.com/tahtaciburak/tunga.svg?token=nnqL1e1pEDHAHFsZzkNx&branch=master)](https://travis-ci.com/tahtaciburak/tunga)
 
 ## İçindekiler
 - [Docker İle Kurulum İşlemi](#Docker-İle-Kurulum-İşlemi)
