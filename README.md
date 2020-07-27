@@ -9,8 +9,8 @@ geliştirilmiştir.
 
 ## İçindekiler
 - [Kurulum İşlemi](#Kurulum-İşlemi)
-- [Sistem Diyagramı](#Sistem Diyagramı)
-- [Kullandığımız Kaynaklar](#Kullandığımız Kaynaklar)
+- [Sistem Diyagramı](#Sistem-Diyagramı)
+- [Kullandığımız Kaynaklar](#Kullandığımız-Kaynaklar)
 
 ## Kurulum İşlemi
 1. ```docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 -v ~/data/docker/postgres:/var/lib/postgresql/data postgres```
