@@ -1,6 +1,5 @@
-<p align="center">
-    <img src="images/tunga.png" width="480"\>
-</p>
+<img src="images/tunga.png" width="480"\>
+
 
 # TUNGA: Agile Text Analytics Platform
 > Tunga, düzensiz metin veri setlerinden değerli bilgiler üretebilmek için geliştirilmiş ve tüm metin işleme sürecini 
