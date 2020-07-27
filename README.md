@@ -12,6 +12,7 @@ geliştirilmiştir.
 - [Kurulum İşlemi](#Kurulum-İşlemi)
 - [Sistem Diyagramı](#Sistem-Diyagramı)
 - [Kullandığımız Kaynaklar](#Kullandığımız-Kaynaklar)
+- [Örnek Kullanım](#Örnek-Kullanım)
 
 ## Kurulum İşlemi
 1. ```docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 -v ~/data/docker/postgres:/var/lib/postgresql/data postgres```
@@ -38,6 +39,8 @@ geliştirilmiştir.
 <p align="center">
     <img src="images/tunga_system_diagram.png" width="480"\>
 </p>
+
+## Örnek Kullanım
 
 ## Kullandığımız Kaynaklar
 For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
