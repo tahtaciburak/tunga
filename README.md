@@ -41,6 +41,9 @@ geliştirilmiştir.
 </p>
 
 ## Örnek Kullanım
+``` shell 
+    $ pip install tunga
+```
 
 ## Kullandığımız Kaynaklar
 For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
