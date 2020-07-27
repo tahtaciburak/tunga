@@ -7,7 +7,7 @@
 hızlandıran web tabanlı ve açık kaynak bir SaaS uygulamasıdır. Bu proje Açık Kaynak Doğal Dil İşleme Hackathon'u sürecinde
 geliştirilmiştir.
 
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger)
+(http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)]
 
 ## İçindekiler
 - [Kurulum İşlemi](#Kurulum-İşlemi)
