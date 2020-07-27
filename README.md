@@ -24,10 +24,12 @@ geliştirilmiştir.
 5. ```psql```
 6. ```create database tunga;```
 7. ```create database tunga_test;```
+- Backend dizininde
 8. ``` shell 
     $ python3 manage.py runserver -p 8080
     ```
-9. ```shell 
+- Frontend dizininde
+9.```shell 
     $ npm start
     ```
 
