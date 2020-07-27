@@ -12,6 +12,7 @@ before_install:
 script:
   - python setup.py sdist bdist_wheel
   - pip install .
+  - pip install -r requirements.txt
   - pip install pytest
   - pip install codecov
   - pytest tests/*
