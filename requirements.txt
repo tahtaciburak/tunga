@@ -2,3 +2,5 @@ pandas
 bs4
 emoji
 tweepy
+TurkishStemmer
+textblob
