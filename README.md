@@ -27,12 +27,12 @@ geliştirilmiştir.
 - Backend dizininde
 ``` shell 
     $ python3 manage.py runserver -p 8080
-    ```
+```
 - Frontend dizininde
 
 ```shell 
     $ npm start
-    ```
+```
 
 ## Sistem Diyagramı
 <p align="center">
