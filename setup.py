@@ -8,10 +8,10 @@ try:
     build_version = str(os.environ["BUILD_VERSION"])
 except:
     build_version = "local"
-    
+
 setuptools.setup(
     name="tunga",
-    version="1.0.0-" + build_version,
+    version="1.0.0." + build_version,
     author="Burak TAHTACI",
     author_email="tahtaiburak@gmail.com",
     description="Tunga Core Library",
