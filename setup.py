@@ -1,11 +1,17 @@
+import os
 import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+try:
+    build_version = str(os.environ["BUILD_VERSION"])
+except:
+    build_version = "local"
+    
 setuptools.setup(
     name="tunga",
-    version="0.0.1",
+    version="1.0.0-" + build_version,
     author="Burak TAHTACI",
     author_email="tahtaiburak@gmail.com",
     description="Tunga Core Library",
