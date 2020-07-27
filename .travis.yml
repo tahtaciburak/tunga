@@ -13,10 +13,6 @@ script:
   - python setup.py sdist bdist_wheel
   - pip install .
   - pip install -r requirements.txt
-  - pip install pytest
-  - pip install codecov
-  - pytest tests/*
-  - codecov
 deploy:
   provider: pypi
   user: "__token__"
