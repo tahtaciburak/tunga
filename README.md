@@ -46,5 +46,5 @@ Kufur tespit list: https://github.com/ooguz/turkce-kufur-karaliste/blob/master/k
 For Summary : https://github.com/Eruimdas/turkish_text_summarization/blob/master/Extraction_Based_Text_Summarization.ipynb
 
 ## 📝 License
-
+MIT
 
