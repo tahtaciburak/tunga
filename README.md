@@ -1,4 +1,4 @@
-<img src="images/tunga.png" width="500" height="300" align="center" />
+<img src="images/tunga.png" width="700" height="300" align="center" />
 
 
 # TUNGA: Agile Text Analytics Platform
