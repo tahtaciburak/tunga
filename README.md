@@ -7,7 +7,6 @@
 hızlandıran web tabanlı ve açık kaynak bir SaaS uygulamasıdır. Bu proje Açık Kaynak Doğal Dil İşleme Hackathon'u sürecinde
 geliştirilmiştir.
 
-(http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)]
 
 ## İçindekiler
 - [Kurulum İşlemi](#Kurulum-İşlemi)
@@ -45,5 +44,7 @@ Stop word: https://github.com/ahmetax/trstop/blob/master/dosyalar/turkce-stop-wo
 Kufur tespit list: https://github.com/ooguz/turkce-kufur-karaliste/blob/master/karaliste.txt
 
 For Summary : https://github.com/Eruimdas/turkish_text_summarization/blob/master/Extraction_Based_Text_Summarization.ipynb
+
+## 📝 License
 
 
