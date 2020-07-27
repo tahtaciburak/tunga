@@ -25,10 +25,10 @@ geliştirilmiştir.
 6. ```create database tunga;```
 7. ```create database tunga_test;```
 8. ``` shell 
-    $python3 manage.py runserver -p 8080
+    $ python3 manage.py runserver -p 8080
     ```
 9. ```shell 
-    $npm start
+    $ npm start
     ```
 
 ## Sistem Diyagramı
