@@ -8,11 +8,9 @@ hızlandıran web tabanlı ve açık kaynak bir SaaS uygulamasıdır. Bu proje A
 geliştirilmiştir.
 
 ## İçindekiler
-1. Icindekileri
-2. Buraya
-3. Yazmaliyiz
-4. Basliklar
-5. Halinde
+1. Kurulum İşlemleri
+2. Sistem Diyagramı
+3. Kullandığımız Kaynaklar
 
 ## Kurulum İşlemi
 1. ```docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 -v ~/data/docker/postgres:/var/lib/postgresql/data postgres```
