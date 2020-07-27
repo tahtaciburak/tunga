@@ -19,7 +19,7 @@ geliştirilmiştir.
     1. ```db create```
     2. ```db init```
     3. ```db migrate```
-3. ``` sh docker exec -it docker-postgres /bin/bash```
+3. ```docker exec -it docker-postgres /bin/bash```
 4. ```su postgres```
 5. ```psql```
 6. ```create database tunga;```
