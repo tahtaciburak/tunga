@@ -23,7 +23,7 @@ from project.server.auth.views import auth_blueprint
 from project.server.dataset.views import dataset_blueprint
 from project.server.configuration.views import configuration_blueprint
 from project.server.preprocessing.views import preprocessing_blueprint
-
+from project.server.visualization.views import visualization_blueprint
 from project.server.machine_learning.keyword_extraction.views import keyword_extraction_blueprint
 from project.server.machine_learning.language_identification.views import lang_id_blueprint
 from project.server.machine_learning.topic_modelling.views import topic_modelling_blueprint
@@ -39,3 +39,5 @@ app.register_blueprint(lang_id_blueprint)
 app.register_blueprint(topic_modelling_blueprint)
 app.register_blueprint(sentiment_analysis_blueprint)
 app.register_blueprint(named_entity_recognition_blueprint)
+app.register_blueprint(visualization_blueprint)
+

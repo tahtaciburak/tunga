@@ -1,0 +1,8 @@
+id,text,PREPROCESSED_text,SENTIMENT_PREPROCESSED_text
+1,cok etkilendim muthis bir oyundu,çok etkilendim müthiş oyundu,positive
+2,ne iyi ne kotu bence daha da gelistirilebilir,iyi kötü bence geliştirilebilir,negative
+3,tek kelimeyle harika,tek kelimeyle harika,positive
+4,cok lezzetliydi sefin eline saglik,çok lezzetliydi şefin eline sağlık,positive
+5,gelistirilmeli,geliştirilmeli,positive
+6,hic beyenmedim derhal yeni bir menu geirtirilmeli,hiç beğenmedim derhal yeni menü geirtirilmeli,negative
+7,urunu İstanbul bayisinden satin aldim ama Ankara'dan gönderildi,ürünü istanbul bayisinden satın aldım ankaradan gönderildi,negative

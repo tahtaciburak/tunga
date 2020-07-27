@@ -1,0 +1,8 @@
+id,text,NER_PERSON_text,NER_ORGANIZATION_text,NER_LOCATION_text,LANG_text
+1,cok etkilendim muthis bir oyundu,[],[],[''],tr
+2,ne iyi ne kotu bence daha da gelistirilebilir,[],[],[' ne iyi ne kot'],tr
+3,tek kelimeyle harika,[],[],[''],tr
+4,cok lezzetliydi sefin eline saglik,[],[],[''],tr
+5,gelistirilmeli,[],[],[''],tr
+6,hic beyenmedim derhal yeni bir menu geirtirilmeli,[],[],[''],tr
+7,urunu İstanbul bayisinden satin aldim ama Ankara'dan gönderildi,[],[' İstanbul'],[' Ankara'],tr

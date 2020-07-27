@@ -3,9 +3,11 @@
 </p>
 
 ## tunga: Agile Text Analytics Platform
-Projeyi tanitan basit ve etikleyici bir veya birkac cumle tam da burada olmali 
+Tunga, düzensiz metin veri setlerinden değerli bilgiler üretebilmek için geliştirilmiş ve tüm metin işleme sürecini 
+hızlandıran web tabanlı ve açık kaynak bir SaaS uygulamasıdır. Bu proje Açık Kaynak Doğal Dil İşleme Hackathon'u sürecinde
+geliştirilmiştir.
 
-## Table of contents
+## İçindekiler
 1. Icindekileri
 2. Buraya
 3. Yazmaliyiz

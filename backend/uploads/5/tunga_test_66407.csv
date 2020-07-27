@@ -1,0 +1,5 @@
+id,text,PREPROCESSED_text,SENTIMENT_PREPROCESSED_text,TOPIC_PREPROCESSED_text
+1,hangimiz sevmedik cilginlar gibi,hangimiz sevmedik çılgınlar,positive,1
+2,Bu ne boyle dayi neyi yanlis yapiyoz,böyle dayı neyi yanlış yapıyoruz,negative,0
+3,Benim mail adresim buraktahtaci@burak.com bana mail atabilirsiniz,mail adresim buraktahtacıburakcom mail atabilirsiniz,positive,1
+4,Peki sen ne dusunuyorsun hocam @buraktahtaci ???,peki düşünüyorsun hocam buraktahtacı,negative,0

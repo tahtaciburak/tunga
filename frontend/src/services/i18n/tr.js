@@ -161,7 +161,12 @@ export default {
     },
     visualization: {
         header: "Veri Görselleştirme",
-        choose_dataset: "Görselleştirmek istediğiniz verisetini seçin"
+        choose_dataset: "Görselleştirmek istediğiniz verisetini seçin",
+        sentiment:"Duygu Durum Analizi",
+        most_common_header: "En Sık Geçen Kelimeler",
+        word_count:"Kelime Sayısı",
+        topic_modelling_header: "Konu Modelleme",
+        word_cloud: "Kelime Bulutu"
     },
     configuration: {
         configuration_header: "Ayarlar",

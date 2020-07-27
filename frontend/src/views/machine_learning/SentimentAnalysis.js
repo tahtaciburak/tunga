@@ -68,7 +68,6 @@ class SentimentAnalysis extends React.Component {
   }
 
   handleSubmitButtonClick(event) {
-    console.log(this.state.selectedColumn)
 
 
     this.setState({ isWaiting: true })

@@ -77,9 +77,10 @@ export default [
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Metin Özetleme',
-        to: '/ml/summarization',
+        name: 'Varlık Adı Tanımlama',
+        to: '/ml/ner',
       },
+
       {
         _tag: 'CSidebarNavItem',
         name: 'Dil Tespiti',
@@ -92,8 +93,8 @@ export default [
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Varlık Adı Tanımlama',
-        to: '/ml/ner',
+        name: 'Metin Özetleme',
+        to: '/ml/summarization',
       },
     ],
   },
