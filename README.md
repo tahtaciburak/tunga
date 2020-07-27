@@ -50,17 +50,17 @@ geliştirilmiştir.
 ```
 
 ## Kullandığımız Kaynaklar
-For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
+For deasciify methods : ``` pip3 install git+https://github.com/emres/turkish-deasciifier.git```
 
-For asciify methods: git clone https://github.com/starlangsoftware/TurkishDeasciifier-Py.git
+For asciify methods: ``` git clone https://github.com/starlangsoftware/TurkishDeasciifier-Py.git```
 
-Turkish name list : https://gist.github.com/emrekgn/b4049851c88e328c065a
+Turkish name list : ``` https://gist.github.com/emrekgn/b4049851c88e328c065a```
 
-Stop word: https://github.com/ahmetax/trstop/blob/master/dosyalar/turkce-stop-words
+Stop word: ```https://github.com/ahmetax/trstop/blob/master/dosyalar/turkce-stop-words```
 
-Kufur tespit list: https://github.com/ooguz/turkce-kufur-karaliste/blob/master/karaliste.txt
+Kufur tespit list: ```https://github.com/ooguz/turkce-kufur-karaliste/blob/master/karaliste.txt```
 
-For Summary : https://github.com/Eruimdas/turkish_text_summarization/blob/master/Extraction_Based_Text_Summarization.ipynb
+For Summary : ```https://github.com/Eruimdas/turkish_text_summarization/blob/master/Extraction_Based_Text_Summarization.ipynb```
 
 ## 📝 License
 MIT
