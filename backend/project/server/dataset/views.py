@@ -2,7 +2,7 @@ import os
 import random
 import json
 
-from flask import Blueprint, request, make_response, jsonify
+from flask import Blueprint, request, make_response, jsonify, send_file
 from flask.views import MethodView
 from werkzeug.utils import secure_filename
 
@@ -105,6 +105,14 @@ class InspectDatasetAPI(MethodView):
                 "status": "error",
                 "reason": "dataset_not_found"
             }), 400
+
+
+class DownloadDatasetAPI(MethodView):
+    def get(self, dataset_id):
+        user = utils.get_user_from_header(request.headers)
+        dataset = Dataset.query.filter_by(id=dataset_id, user_id=user.id).first()
+        print(dataset.filepath)
+        return send_file(dataset.filepath, as_attachment=True,attachment_filename=dataset.filename)
 
 
 class TwitterHashtagAPI(MethodView):
@@ -344,6 +352,7 @@ get_dataset_inspection = InspectDatasetAPI.as_view('get_dataset_inspection_api')
 twitter_check = TwitterCheckAPI.as_view('twitter_check_api')
 twitter_username = TwitterUsernameAPI.as_view('twitter_username_api')
 twitter_hashtag = TwitterHashtagAPI.as_view('twitter_hashtag_api')
+download_dataset = DownloadDatasetAPI.as_view('download_dataset_api')
 
 dataset_blueprint.add_url_rule(
     '/dataset/<dataset_id>/columns',
@@ -357,6 +366,11 @@ dataset_blueprint.add_url_rule(
     methods=['GET']
 )
 
+dataset_blueprint.add_url_rule(
+    '/dataset/<dataset_id>/download',
+    view_func=download_dataset,
+    methods=['GET']
+)
 dataset_blueprint.add_url_rule(
     '/dataset/local',
     view_func=local_dataset_upload_view,

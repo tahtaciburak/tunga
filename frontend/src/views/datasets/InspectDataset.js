@@ -26,27 +26,28 @@ class InspectDataset extends React.Component {
       fields: [],
       selectedDatasetId: -1
     }
+
+    this.handleDownloadDatasetButton = this.handleDownloadDatasetButton.bind(this)
   }
 
   componentDidMount() {
     this.makeAPIcall();
   }
 
-	goTo(address){
-    alert('/#'+address);
-		this.props.history.push("/");
-	}
+  goTo(address) {
+    this.props.history.push(address);
+  }
 
   async makeAPIcall() {
     await APIService.requests
-      .get('dataset/'+ this.props.match.params.id + "/inspect")
+      .get('dataset/' + this.props.match.params.id + "/inspect")
       .then(fetchedData => {
         console.log(fetchedData)
         this.setState({ tableData: fetchedData.data })
         this.setState({ fields: fetchedData.columns })
-        this.setState({ datasetName: fetchedData.dataset_name})
-        this.setState({ datasetDescription: fetchedData.dataset_description})
-      
+        this.setState({ datasetName: fetchedData.dataset_name })
+        this.setState({ datasetDescription: fetchedData.dataset_description })
+
       })
       .catch(data => {
         console.log(data)
@@ -59,6 +60,25 @@ class InspectDataset extends React.Component {
       });
   }
 
+  handleDownloadDatasetButton(){
+    this.goTo("dataset/" + this.props.match.params.id  + "/download")
+    APIService.requests
+    .get('dataset/' + this.props.match.params.id  + "/download")
+    .then(fetchedData => {
+
+    })
+    .catch(data => {
+      console.log(data)
+      AlertService.Add({
+        type: 'alert',
+        //message: translate.getText('error.' + data.response.body.error.code),
+        level: 'error',
+        autoDismiss: 5
+      });
+    });
+
+  }
+
 
   render() {
     return (
@@ -69,21 +89,23 @@ class InspectDataset extends React.Component {
           </div>
           <div className="card-body">
             <CCol xs="12" lg="12">
-            <CCard>
+              <CCard>
                 <CCardHeader>
-                    {translate.translate("datasets.inspect_dataset.metadata")}
+                  {translate.translate("datasets.inspect_dataset.metadata")}
                 </CCardHeader>
                 <CCardBody>
                   <CLabel>{translate.translate("datasets.inspect_dataset.dataset_name")}: <b>{this.state.datasetName}</b>  </CLabel>
-                  <br/>
+                  <br />
                   <CLabel>{translate.translate("datasets.inspect_dataset.dataset_description")}: <b>{this.state.datasetDescription}</b></CLabel>
+                  <br />
+                  <CButton onClick={this.handleDownloadDatasetButton} color="primary">{translate.translate("datasets.inspect_dataset.download_dataset")}</CButton>
 
                 </CCardBody>
               </CCard>
 
               <CCard>
                 <CCardHeader>
-                    {translate.translate("datasets.inspect_dataset.data")}
+                  {translate.translate("datasets.inspect_dataset.data")}
                 </CCardHeader>
                 <CCardBody>
                   <CDataTable

@@ -41,11 +41,11 @@ export default [
         name: translate.translate("nav.data_ret.import_from_twitter"),
         to: '/retrieval/twitter',
       },
-      {
-        _tag: 'CSidebarNavItem',
-        name: translate.translate("nav.data_ret.import_from_api"),
-        to: '/retrieval/api',
-      },
+      //{
+      //  _tag: 'CSidebarNavItem',
+      //  name: translate.translate("nav.data_ret.import_from_api"),
+      //  to: '/retrieval/api',
+      //},
     ],
   },
   {

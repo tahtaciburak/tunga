@@ -26,7 +26,8 @@ export default {
             dataset_name: "Veriseti Adı",
             dataset_description: "Veriseti Açıklaması",
             metadata: "Veriseti Üstbilgileri",
-            data: "Veri"
+            data: "Veri",
+            download_dataset: "Verisetini İndir"
         }
     },
     retrieval: {

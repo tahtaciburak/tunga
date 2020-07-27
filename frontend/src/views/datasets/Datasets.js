@@ -76,7 +76,6 @@ class Datasets extends React.Component {
                   <CButton onClick={this.handleButtonClick} name="local" color="success">{translate.translate("datasets.import_from_local")}</CButton>
                   <CButton onClick={this.handleButtonClick} name="url" style={{ marginLeft: 10 }} color="warning">{translate.translate("datasets.import_from_url")}</CButton>
                   <CButton onClick={this.handleButtonClick} name="twitter" style={{ marginLeft: 10 }} color="primary">{translate.translate("datasets.import_from_twitter")}</CButton>
-                  <CButton onClick={this.handleButtonClick} name="api" style={{ marginLeft: 10 }} color="danger">{translate.translate("datasets.import_from_api")}</CButton>
 
                 </CCardHeader>
                 <CCardBody>
@@ -111,5 +110,6 @@ export default Datasets
                   <CButton style={{ marginLeft: 10 }} color="primary">{translate.translate("datasets.import_from_twitter")}</CButton>
                   <CButton style={{ marginLeft: 10 }} color="danger">{translate.translate("datasets.import_from_api")}</CButton>
 
+                  <CButton onClick={this.handleButtonClick} name="api" style={{ marginLeft: 10 }} color="danger">{translate.translate("datasets.import_from_api")}</CButton>
 
 */
