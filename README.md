@@ -45,6 +45,10 @@ geliştirilmiştir.
     $ pip install tunga
 ```
 
+``` shell 
+    $ git clone https://github.com/tahtaciburak/tunga.git
+```
+
 ## Kullandığımız Kaynaklar
 For deasciify methods : pip3 install git+https://github.com/emres/turkish-deasciifier.git
 
