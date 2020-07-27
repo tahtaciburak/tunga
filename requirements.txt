@@ -4,5 +4,5 @@ emoji
 tweepy
 TurkishStemmer
 textblob
-grpc
+grpcio
 price_parser
