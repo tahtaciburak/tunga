@@ -45,8 +45,10 @@ class Configuration extends React.Component {
   }
 
   handleSubmitButtonClick() {
-    console.log(this.state.configKey)
-    console.log(this.state.configValue)
+    if (this.state.configKey === "" || this.state.configValue===""){
+      alert("Lütfen anahtar ve değer ikilisini eksiksiz girin")
+      return 
+    }
     APIService.requests
       .post('configuration',{ 
         config_key:this.state.configKey,

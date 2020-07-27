@@ -7,13 +7,15 @@ from flask.views import MethodView
 from werkzeug.utils import secure_filename
 
 from project.server import db
-from project.server.models import Dataset
+from project.server.models import Dataset, Configuration
 from project.server import app
 
 from project.server import utils
 import pandas as pd
 import pymongo
 import subprocess
+
+from tunga.retrieval import Twitter as tw
 
 dataset_blueprint = Blueprint('dataset', __name__)
 
@@ -105,10 +107,137 @@ class InspectDatasetAPI(MethodView):
             }), 400
 
 
-class TwitterCrawlerAPI(MethodView):
+class TwitterHashtagAPI(MethodView):
     def post(self):
         user = utils.get_user_from_header(request.headers)
-        return True
+        post_data = request.get_json()
+        try:
+            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id).first().config_value
+            api_secret = Configuration.query.filter_by(config_key="TWITTER_API_SECRET",
+                                                       user_id=user.id).first().config_value
+            access_token = Configuration.query.filter_by(config_key="TWITTER_ACCESS_TOKEN",
+                                                         user_id=user.id).first().config_value
+            token_secret = Configuration.query.filter_by(config_key="TWITTER_TOKEN_SECRET",
+                                                         user_id=user.id).first().config_value
+            result = tw.read_tweets_from_hashtag(api_key,
+                                                 api_secret,
+                                                 access_token,
+                                                 token_secret,
+                                                 post_data["username"], "2020-03-18",
+                                                 100)
+            arr = []
+            for item in result:
+                arr.append(item["tweet_text"])
+
+            df = pd.DataFrame({
+                "tweet_text": pd.Series(arr)
+            })
+
+            dataset_name = post_data["dataset_name"]
+            dataset_description = post_data["dataset_description"]
+            try:
+                dataset = Dataset(
+                    filename=dataset_name,
+                    description=dataset_description,
+                    filepath=os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "twitter_" + str(
+                        random.randint(100, 999)) + ".csv",
+                    file_type="csv",
+                    size=0,  # TODO: fix here
+                    row_count=0,
+                    user_id=user.id,
+                )
+                db.session.add(dataset)
+                db.session.commit()
+                responseObject = {
+                    'status': 'success',
+                    'message': 'Successfully uploaded.',
+                }
+
+                return make_response(jsonify(responseObject)), 201
+
+            except Exception as e:
+                print(e)
+                responseObject = {
+                    'status': 'fail',
+                    'message': str(e)
+                }
+                return make_response(jsonify(responseObject)), 400
+
+        except Exception as e:
+            return jsonify({"status": "fail", "reason": str(e)})
+
+
+class TwitterUsernameAPI(MethodView):
+    def post(self):
+        user = utils.get_user_from_header(request.headers)
+        post_data = request.get_json()
+        try:
+            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id).first().config_value
+            api_secret = Configuration.query.filter_by(config_key="TWITTER_API_SECRET",
+                                                       user_id=user.id).first().config_value
+            access_token = Configuration.query.filter_by(config_key="TWITTER_ACCESS_TOKEN",
+                                                         user_id=user.id).first().config_value
+            token_secret = Configuration.query.filter_by(config_key="TWITTER_TOKEN_SECRET",
+                                                         user_id=user.id).first().config_value
+            result = tw.read_tweets_from_user(api_key,
+                                              api_secret,
+                                              access_token,
+                                              token_secret,
+                                              post_data["username"],
+                                              100)
+            arr = []
+            for item in result:
+                arr.append(item["tweet_text"])
+
+            df = pd.DataFrame({
+                "tweet_text": pd.Series(arr)
+            })
+
+            dataset_name = post_data["dataset_name"]
+            dataset_description = post_data["dataset_description"]
+            try:
+                dataset = Dataset(
+                    filename=dataset_name,
+                    description=dataset_description,
+                    filepath=os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "twitter_" + str(
+                        random.randint(100, 999)) + ".csv",
+                    file_type="csv",
+                    size=0,  # TODO: fix here
+                    row_count=0,
+                    user_id=user.id,
+                )
+                db.session.add(dataset)
+                db.session.commit()
+                responseObject = {
+                    'status': 'success',
+                    'message': 'Successfully uploaded.',
+                }
+
+                return make_response(jsonify(responseObject)), 201
+
+            except Exception as e:
+                print(e)
+                responseObject = {
+                    'status': 'fail',
+                    'message': str(e)
+                }
+                return make_response(jsonify(responseObject)), 400
+
+        except Exception as e:
+            return jsonify({"status": "fail", "reason": str(e)})
+
+
+class TwitterCheckAPI(MethodView):
+    def post(self):
+        user = utils.get_user_from_header(request.headers)
+        try:
+            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id).first()
+            api_secret = Configuration.query.filter_by(config_key="TWITTER_API_SECRET", user_id=user.id).first()
+            access_token = Configuration.query.filter_by(config_key="TWITTER_ACCESS_TOKEN", user_id=user.id).first()
+            token_secret = Configuration.query.filter_by(config_key="TWITTER_TOKEN_SECRET", user_id=user.id).first()
+            return jsonify({"status": "success"})
+        except Exception as e:
+            return jsonify({"status": "fail", "reason": str(e)})
 
 
 class RemoteFileFetchAPI(MethodView):
@@ -126,12 +255,6 @@ class RemoteFileFetchAPI(MethodView):
 
         dm = DatasetManager(upload_path)
         dm.analyze()
-
-        # records = json.loads(dm.df.T.to_json()).values()
-        # tungaclient = pymongo.MongoClient("mongodb://localhost:27017/")
-        # user_mongodb = tungaclient["db_" + str(user.id)]
-        # mycol = user_mongodb[dataset_name]
-        # mycol.insert(records)
 
         try:
             dataset = Dataset(
@@ -157,7 +280,7 @@ class RemoteFileFetchAPI(MethodView):
             print(e)
             responseObject = {
                 'status': 'fail',
-                'message': 'Some error occurred. Please try again.'
+                'message': str(e)
             }
             return make_response(jsonify(responseObject)), 400
 
@@ -218,6 +341,9 @@ remote_dataset_upload_view = RemoteFileFetchAPI.as_view('remote_dataset_upload_a
 get_user_datasets = GetUserDatasetsAPI.as_view('get_user_datasets_api')
 get_dataset_column_names = GetDatasetColumnNamesAPI.as_view('get_dataset_column_names_api')
 get_dataset_inspection = InspectDatasetAPI.as_view('get_dataset_inspection_api')
+twitter_check = TwitterCheckAPI.as_view('twitter_check_api')
+twitter_username = TwitterUsernameAPI.as_view('twitter_username_api')
+twitter_hashtag = TwitterHashtagAPI.as_view('twitter_hashtag_api')
 
 dataset_blueprint.add_url_rule(
     '/dataset/<dataset_id>/columns',
@@ -247,4 +373,22 @@ dataset_blueprint.add_url_rule(
     '/dataset/all',
     view_func=get_user_datasets,
     methods=['GET']
+)
+
+dataset_blueprint.add_url_rule(
+    '/dataset/twitter/check',
+    view_func=twitter_check,
+    methods=['POST']
+)
+
+dataset_blueprint.add_url_rule(
+    '/dataset/twitter/hashtag',
+    view_func=twitter_hashtag,
+    methods=['POST']
+)
+
+dataset_blueprint.add_url_rule(
+    '/dataset/twitter/username',
+    view_func=twitter_username,
+    methods=['POST']
 )

@@ -1,12 +1,10 @@
 import tweepy as tw
-from tunga.retrieval import config
-
-auth = tw.OAuthHandler(config.api_key, config.api_secret, )
-auth.set_access_token(config.access_token, config.token_secret)
-api = tw.API(auth)
 
 
-def read_tweets_from_user(username, max_tweet_count):
+def read_tweets_from_user(api_key, api_secret, access_token, token_secret, username, max_tweet_count):
+    auth = tw.OAuthHandler(api_key, api_secret, )
+    auth.set_access_token(access_token, token_secret)
+    api = tw.API(auth)
     user = api.user_timeline(username, count=max_tweet_count)
 
     user_tweet = []
@@ -17,7 +15,10 @@ def read_tweets_from_user(username, max_tweet_count):
     return user_tweet
 
 
-def read_tweets_from_hashtag(hashtag, date, max_tweet_count):
+def read_tweets_from_hashtag(api_key, api_secret, access_token, token_secret, hashtag, date, max_tweet_count):
+    auth = tw.OAuthHandler(api_key, api_secret, )
+    auth.set_access_token(access_token, token_secret)
+    api = tw.API(auth)
     search_words = hashtag + "-filter:retweets"
     date_since = date
 
@@ -33,7 +34,11 @@ def read_tweets_from_hashtag(hashtag, date, max_tweet_count):
     return date_tweet
 
 
-def read_tweets_from_mention(max_tweet_count):
+def read_tweets_from_mention(api_key, api_secret, access_token, token_secret, max_tweet_count):
+    auth = tw.OAuthHandler(api_key, api_secret, )
+    auth.set_access_token(access_token, token_secret)
+    api = tw.API(auth)
+
     user = api.mentions_timeline(count=max_tweet_count)
 
     user_tweet = []

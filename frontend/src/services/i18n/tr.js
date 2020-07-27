@@ -60,7 +60,14 @@ export default {
             dataset_description: "Veriseti Açıklaması:"
         },
         import_from_twitter: {
-            apikey_not_found: "API KEY bulunamadı Konfigürasyon sayfasından TWITTER_API_KEY değişkenini ekleyin."
+            apikey_not_found: "Entegrasyon için gerekli sistem değişkenleri bulunamadı. Lütfen TWITTER_API_KEY,TWITTER_API_SECRET,TWITTER_ACCESS_TOKEN,TWITTER_TOKEN_SECRET değişkenlerini Sistem Değişkenleri ekranına ekleyin.",
+            fetch_data_from_user: "Kullanıcıdan tweet çek",
+            twitter_username: "Kullanıcı adı",
+            twitter_username_placeholder: "@kullaniciadi",
+            fetch_data_from_hashtag: "Hashtag'den tweet çek",
+            fetch_data_from_hashtag_placeholder: "#hashtag",
+            fetch_from_user: "Kullanıcı'dan tweer çek"
+
         }
     },
     preprocessing: {
@@ -97,12 +104,12 @@ export default {
         sentiment: {
             header: "Duygu Durumu Analizi",
             dataset: "Veriseti",
-            choose_dataset:"Verisetini Seçin",
-            choose_column:"Kolonu Seçin",
-            please_choose:"Lütfen Seçin",
-            column:"Kolon",
-            choose_model:"Modeli Seçin",
-            get_result:"Çalıştır",
+            choose_dataset: "Verisetini Seçin",
+            choose_column: "Kolonu Seçin",
+            please_choose: "Lütfen Seçin",
+            column: "Kolon",
+            choose_model: "Modeli Seçin",
+            get_result: "Çalıştır",
             result: "Sonuç",
             success: "Başarılı.",
             waiting: "Çalışıyor..."
@@ -116,15 +123,12 @@ export default {
             column: "Kolon",
             result: "Sonuç",
             get_result: "Konu Modellemesini Başlat",
-            waiting:"Konu Modellemesi Yapılıyor...",
+            waiting: "Konu Modellemesi Yapılıyor...",
             hyperparameters: "Hiperparametreler",
             num_topics_label: "Konu Sayısı",
             num_topics_placeholder: "Bölmek istediğiniz konu sayısını giriniz.",
             num_keywords_label: "Konu Başına Anahtar Kelime",
             num_keywords_placeholder: "Konu başına üretilecek anahtar kelime sayısını giriniz."
-
-
-
         },
         keyword_extraction: {
             header: "Anahtar Kelime Çıkarımı",
@@ -162,9 +166,9 @@ export default {
     visualization: {
         header: "Veri Görselleştirme",
         choose_dataset: "Görselleştirmek istediğiniz verisetini seçin",
-        sentiment:"Duygu Durum Analizi",
+        sentiment: "Duygu Durum Analizi",
         most_common_header: "En Sık Geçen Kelimeler",
-        word_count:"Kelime Sayısı",
+        word_count: "Kelime Sayısı",
         topic_modelling_header: "Konu Modelleme",
         word_cloud: "Kelime Bulutu"
     },

@@ -27,17 +27,20 @@ class ImportFromTwitter extends React.Component {
       is_configured: true,
       dataset_name: "",
       dataset_description: "",
+      username: "",
+      hashtag: "",
       is_show_result_alert: false,
       is_upload_successful: false,
       file: null,
       upload_file_name: translate.translate("retrieval.import_from_local.choose_file")
     }
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
-    this.handleDatasetDescriptionChange = this.handleDatasetDescriptionChange.bind(this);
-    this.handleFileUploadChange = this.handleFileUploadChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleHashtagChange = this.handleHashtagChange.bind(this);
 
-    this.handleSubmitButtonClick = this.handleSubmitButtonClick.bind(this);
-    this.handleRefreshClick = this.handleRefreshClick.bind(this);
+    this.handleDatasetDescriptionChange = this.handleDatasetDescriptionChange.bind(this);
+    this.handleUsernameSubmitButtonClick = this.handleUsernameSubmitButtonClick.bind(this);
+    this.handleHashtagSubmitButtonClick = this.handleHashtagSubmitButtonClick.bind(this);
 
   }
 
@@ -45,35 +48,26 @@ class ImportFromTwitter extends React.Component {
     this.setState({ dataset_name: event.target.value });
   }
 
+  handleUsernameChange(event) {
+    this.setState({ username: event.target.value });
+  }
+
+  handleHashtagChange(event) {
+    this.setState({ hashtag: event.target.value });
+  }
+
   handleDatasetDescriptionChange(event) {
     this.setState({ dataset_description: event.target.value });
   }
 
-  handleFileUploadChange(event) {
-    this.setState({ file: event.target.files[0] });
-    this.setState({ upload_file_name: event.target.files[0].name })
-  }
 
-  handleRefreshClick(event) {
-    this.setState({
-      dataset_name: "",
-      dataset_description: "",
-      is_show_result_alert: false,
-      is_upload_successful: false,
-      file: null,
-      upload_file_name: translate.translate("retrieval.import_from_local.choose_file")
-    })
-  }
-
-  handleSubmitButtonClick(e) {
-    let formData = new FormData();
-    formData.append("file", this.state.file);
-    formData.append("dataset_name", this.state.dataset_name);
-    formData.append("dataset_description", this.state.dataset_description);
-
-    e.preventDefault();
+  handleUsernameSubmitButtonClick(e) {
     APIService.requests
-      .post('dataset/local', formData)
+      .post('dataset/twitter/username', {
+        dataset_name: this.state.dataset_name,
+        dataset_description: this.state.dataset_description,
+        username: this.state.username
+      })
       .then(data => {
         console.log(data);
         this.setState({ is_show_result_alert: true })
@@ -84,11 +78,58 @@ class ImportFromTwitter extends React.Component {
         alert("hata")
         AlertService.Add({
           type: 'alert',
-          //message: translate.getText('error.' + data.response.body.error.code),
           level: 'error',
           autoDismiss: 5
         });
       });
+
+  }
+
+  handleHashtagSubmitButtonClick(e) {
+    APIService.requests
+      .post('dataset/twitter/hashtag', {
+        dataset_name: this.state.dataset_name,
+        dataset_description: this.state.dataset_description,
+        hashtag: this.state.hashtag
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({ is_show_result_alert: true })
+        this.setState({ is_upload_successful: true })
+
+      })
+      .catch(data => {
+        alert("hata")
+        AlertService.Add({
+          type: 'alert',
+          level: 'error',
+          autoDismiss: 5
+        });
+      });
+
+  }
+
+  checkAPIKeys(){
+    APIService.requests
+    .post('dataset/twitter/check')
+    .then(data => {
+      console.log(data);
+      if (data.status === "success"){
+        this.setState({is_configured:true})
+      } else{
+        this.setState({is_configured:false})
+
+      }
+    })
+    .catch(data => {
+      alert("hata")
+      AlertService.Add({
+        type: 'alert',
+        level: 'error',
+        autoDismiss: 5
+      });
+    });
+
 
   }
 
@@ -99,7 +140,6 @@ class ImportFromTwitter extends React.Component {
           <CAlert color="danger">{translate.translate("retrieval.import_from_twitter.apikey_not_found")}</CAlert>
         </>
       )
-
     }
     else {
       return (
@@ -134,13 +174,13 @@ class ImportFromTwitter extends React.Component {
                   <CCardBody>
                     <CFormGroup>
                       <CLabel htmlFor="twitterUsername">{translate.translate("retrieval.import_from_twitter.twitter_username")}</CLabel>
-                      <CInput onChange={this.handleDatasetDescriptionChange} id="twitterUsername" placeholder={translate.translate("retrieval.import_from_twitter.twitter_username_placeholder")} />
+                      <CInput onChange={this.handleUsernameChange} id="twitterUsername" placeholder={translate.translate("retrieval.import_from_twitter.twitter_username_placeholder")} />
                     </CFormGroup>
 
                     <CFormGroup row>
 
                       <CCol xs="12" md="12">
-                        <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_from_user")}</CButton>
+                        <CButton onClick={this.handleUsernameSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_from_user")}</CButton>
                       </CCol>
                     </CFormGroup>
                   </CCardBody>
@@ -151,7 +191,6 @@ class ImportFromTwitter extends React.Component {
                     <CAlert hidden={this.state.is_upload_successful} color="danger">
                       {translate.translate("retrieval.import_from_local.file_upload_fail")}
                     </CAlert>
-                    <CButton onClick={this.handleRefreshClick} color="primary">{translate.translate("retrieval.import_from_twitter.fetch_data_from_user")}</CButton>
                   </CCol>
                 </CCard>
 
@@ -162,13 +201,13 @@ class ImportFromTwitter extends React.Component {
                   <CCardBody>
                     <CFormGroup>
                       <CLabel htmlFor="hashtag">{translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag")}</CLabel>
-                      <CInput onChange={this.handleDatasetDescriptionChange} id="hashtag" placeholder={translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag_placeholder")} />
+                      <CInput onChange={this.handleHashtagChange} id="hashtag" placeholder={translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag_placeholder")} />
                     </CFormGroup>
 
                     <CFormGroup row>
 
                       <CCol xs="12" md="12">
-                        <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag")}</CButton>
+                        <CButton onClick={this.handleHashtagSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag")}</CButton>
                       </CCol>
                     </CFormGroup>
                   </CCardBody>
