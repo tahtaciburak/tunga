@@ -8,7 +8,7 @@ hızlandıran web tabanlı ve açık kaynak bir SaaS uygulamasıdır. Bu proje A
 geliştirilmiştir.
 
 ## İçindekiler
-- [Kurulum İşlemleri](#installation)
+- [Kurulum İşlemi](#installation)
 - [Sistem Diyagramı](#Sistem Diyagramı)
 - [Kullandığımız Kaynaklar](#Kullandığımız Kaynaklar)
 
