@@ -14,6 +14,7 @@ import {
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
+import Loader from 'react-loader-spinner'
 
 import translate from '../../services/i18n/Translate';
 
@@ -31,6 +32,7 @@ class ImportFromTwitter extends React.Component {
       hashtag: "",
       is_show_result_alert: false,
       is_upload_successful: false,
+      is_waiting: false,
       file: null,
       upload_file_name: translate.translate("retrieval.import_from_local.choose_file")
     }
@@ -62,6 +64,15 @@ class ImportFromTwitter extends React.Component {
 
 
   handleUsernameSubmitButtonClick(e) {
+    if (this.state.dataset_description === "" || this.state.dataset_name === ""){
+      alert("Verseti bilgilerini eksiksiz giriniz.")
+      return
+    }
+    if (this.state.username.startsWith("@")){
+      let m_user = this.state.username
+      this.setState({username:m_user.replace("@","")})
+    }
+    this.setState({is_waiting: true})
     APIService.requests
       .post('dataset/twitter/username', {
         dataset_name: this.state.dataset_name,
@@ -72,9 +83,10 @@ class ImportFromTwitter extends React.Component {
         console.log(data);
         this.setState({ is_show_result_alert: true })
         this.setState({ is_upload_successful: true })
-
+        this.setState({is_waiting: false})
       })
       .catch(data => {
+        this.setState({is_waiting: false})
         alert("hata")
         AlertService.Add({
           type: 'alert',
@@ -86,6 +98,15 @@ class ImportFromTwitter extends React.Component {
   }
 
   handleHashtagSubmitButtonClick(e) {
+    if (this.state.dataset_description === "" || this.state.dataset_name === ""){
+      alert("Verseti bilgilerini eksiksiz giriniz.")
+      return
+    }
+    if (this.state.username.startsWith("#")){
+      let m_hash = this.state.hashtag
+      this.setState({hashtag:m_hash.replace("#","")})
+    }
+    this.setState({is_waiting: true})
     APIService.requests
       .post('dataset/twitter/hashtag', {
         dataset_name: this.state.dataset_name,
@@ -96,9 +117,12 @@ class ImportFromTwitter extends React.Component {
         console.log(data);
         this.setState({ is_show_result_alert: true })
         this.setState({ is_upload_successful: true })
+        this.setState({is_waiting: false})
+
 
       })
       .catch(data => {
+        this.setState({is_waiting: false})
         alert("hata")
         AlertService.Add({
           type: 'alert',
@@ -180,7 +204,17 @@ class ImportFromTwitter extends React.Component {
                     <CFormGroup row>
 
                       <CCol xs="12" md="12">
-                        <CButton onClick={this.handleUsernameSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_from_user")}</CButton>
+                        <CButton hidden={this.state.is_waiting} onClick={this.handleUsernameSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_from_user")}</CButton>
+                        <CButton disabled="true" hidden={!this.state.is_waiting} style={{ marginTop: 23 }} color="secondary">
+                          <Loader
+                            type="Bars"
+                            color="#00BFFF"
+                            height={20}
+                            width={20}
+                            timeout={300000}
+                          />
+                          {translate.translate("machine_learning.keyword_extraction.waiting")}
+                        </CButton>
                       </CCol>
                     </CFormGroup>
                   </CCardBody>
@@ -207,7 +241,18 @@ class ImportFromTwitter extends React.Component {
                     <CFormGroup row>
 
                       <CCol xs="12" md="12">
-                        <CButton onClick={this.handleHashtagSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag")}</CButton>
+                        <CButton hidden={this.state.is_waiting} onClick={this.handleHashtagSubmitButtonClick} color="success">{translate.translate("retrieval.import_from_twitter.fetch_data_from_hashtag")}</CButton>
+                        <CButton disabled="true" hidden={!this.state.is_waiting} style={{ marginTop: 23 }} color="secondary">
+                          <Loader
+                            type="Bars"
+                            color="#00BFFF"
+                            height={20}
+                            width={20}
+                            timeout={300000}
+                          />
+                          {translate.translate("machine_learning.keyword_extraction.waiting")}
+                        </CButton>
+
                       </CCol>
                     </CFormGroup>
                   </CCardBody>
@@ -218,7 +263,6 @@ class ImportFromTwitter extends React.Component {
                     <CAlert hidden={this.state.is_upload_successful} color="danger">
                       {translate.translate("retrieval.import_from_local.file_upload_fail")}
                     </CAlert>
-                    <CButton onClick={this.handleRefreshClick} color="primary">{translate.translate("retrieval.import_from_local.upload_new_file")}</CButton>
                   </CCol>
                 </CCard>
               </CCol>
