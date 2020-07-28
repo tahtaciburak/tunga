@@ -7,3 +7,4 @@ textblob
 grpcio
 price_parser
 zemberek_grpc
+multi_rake
