@@ -8,3 +8,5 @@ grpcio
 price_parser
 zemberek_grpc
 multi_rake
+sklearn
+transformers

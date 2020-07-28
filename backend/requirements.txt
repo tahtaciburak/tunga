@@ -1,4 +1,4 @@
-tunga==1.0.34
+tunga==1.0.35
 pandas
 tweepy
 alembic==0.8.9

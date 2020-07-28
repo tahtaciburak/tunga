@@ -1,12 +1,15 @@
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y \
-  git \
-  python3-dev \
-  python3-pip
+     python3-dev \
+     build-essential libssl-dev libffi-dev \
+     libxml2-dev libxslt1-dev zlib1g-dev swig \
+     python3-pip git
+RUN CFLAGS="-Wno-narrowing" pip3 install cld2-cffi
 
 ADD requirements.txt /tmp/
 RUN pip3 install -r /tmp/requirements.txt
 
+RUN pip3 install sklearn
 RUN mkdir /app
 
 COPY . /app
