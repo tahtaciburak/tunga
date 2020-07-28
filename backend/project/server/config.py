@@ -39,5 +39,5 @@ class ProductionConfig(BaseConfig):
     """Production configuration."""
     SECRET_KEY = 'my_precious'
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql:///example'
-    UPLOAD_PATH = "/home/burak/Desktop/Projects/tunga/backend/uploads"
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@postgres/' + database_name
+    UPLOAD_PATH = "/app/uploads"

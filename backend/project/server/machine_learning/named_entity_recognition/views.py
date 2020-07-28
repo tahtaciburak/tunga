@@ -5,13 +5,13 @@ from project.server import bcrypt, db
 from project.server.models import User, BlacklistToken, Dataset
 from project.server import utils
 
-from tunga.machine_learning.ner import bert
 
 named_entity_recognition_blueprint = Blueprint('named_entity_recognition', __name__)
 
 
 class NamedEntityRecognitionAPI(MethodView):
     def post(self):
+        from tunga.machine_learning.ner import bert
         user = utils.get_user_from_header(request.headers)
         post_data = request.get_json()
         dataset = Dataset.query.filter_by(id=post_data["datasetId"], user_id=user.id).first()

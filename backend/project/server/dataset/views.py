@@ -12,7 +12,6 @@ from project.server import app
 
 from project.server import utils
 import pandas as pd
-import pymongo
 import subprocess
 
 from tunga.retrieval import Twitter as tw

@@ -4,6 +4,8 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open("requirements.txt") as fd:
+    reqs = [item.strip() for item in fd.readlines()]
 try:
     build_version = str(os.environ["BUILD_VERSION"])
 except:
@@ -25,4 +27,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    install_requires= reqs
 )
