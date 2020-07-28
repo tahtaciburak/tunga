@@ -6,6 +6,7 @@ with open("README.md", "r") as fh:
 
 with open("requirements.txt") as fd:
     reqs = [item.strip() for item in fd.readlines()]
+
 try:
     build_version = str(os.environ["BUILD_VERSION"])
 except:
@@ -13,7 +14,7 @@ except:
 
 setuptools.setup(
     name="tunga",
-    version="1.0.0." + build_version,
+    version="1.0.0.build-" + str(build_version),
     author="Burak TAHTACI",
     author_email="tahtaiburak@gmail.com",
     description="Tunga Core Library",
@@ -27,5 +28,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    install_requires= reqs
+    install_requires=reqs
 )
