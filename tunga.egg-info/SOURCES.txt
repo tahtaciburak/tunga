@@ -8,6 +8,7 @@ tunga/__init__.py
 tunga.egg-info/PKG-INFO
 tunga.egg-info/SOURCES.txt
 tunga.egg-info/dependency_links.txt
+tunga.egg-info/requires.txt
 tunga.egg-info/top_level.txt
 tunga/extraction/__init__.py
 tunga/extraction/extraction.py

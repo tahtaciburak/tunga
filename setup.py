@@ -6,15 +6,15 @@ with open("README.md", "r") as fh:
 
 with open("requirements.txt") as fd:
     reqs = [item.strip() for item in fd.readlines()]
-
+    print(reqs)
 try:
-    build_version = str(os.environ["BUILD_VERSION"])
+    build_version = str(os.environ["BUILD_VERSION"]).split(".")[-1]
 except:
-    build_version = "local"
+    build_version = "local2"
 
 setuptools.setup(
     name="tunga",
-    version="1.0.0.build-" + str(build_version),
+    version="1.0." + str(build_version),
     author="Burak TAHTACI",
     author_email="tahtaiburak@gmail.com",
     description="Tunga Core Library",
