@@ -111,7 +111,6 @@ class DownloadDatasetAPI(MethodView):
     def get(self, dataset_id):
         user = utils.get_user_from_header(request.headers)
         dataset = Dataset.query.filter_by(id=dataset_id, user_id=user.id).first()
-        print(dataset.filepath)
         return send_file(dataset.filepath, mimetype='application/x-csv', as_attachment=True,
                          attachment_filename=dataset.filename)
 
@@ -121,19 +120,25 @@ class TwitterHashtagAPI(MethodView):
         user = utils.get_user_from_header(request.headers)
         post_data = request.get_json()
         try:
-            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id).first().config_value
+            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
             api_secret = Configuration.query.filter_by(config_key="TWITTER_API_SECRET",
-                                                       user_id=user.id).first().config_value
+                                                       user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
             access_token = Configuration.query.filter_by(config_key="TWITTER_ACCESS_TOKEN",
-                                                         user_id=user.id).first().config_value
+                                                         user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
             token_secret = Configuration.query.filter_by(config_key="TWITTER_TOKEN_SECRET",
-                                                         user_id=user.id).first().config_value
+                                                         user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
+
             result = tw.read_tweets_from_hashtag(api_key,
                                                  api_secret,
                                                  access_token,
                                                  token_secret,
-                                                 post_data["username"], "2020-03-18",
-                                                 100)
+                                                 post_data["hashtag"],
+                                                 500)
+
             arr = []
             for item in result:
                 arr.append(item["tweet_text"])
@@ -141,18 +146,22 @@ class TwitterHashtagAPI(MethodView):
             df = pd.DataFrame({
                 "tweet_text": pd.Series(arr)
             })
+            filename = os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "twitter_" + str(
+                random.randint(100, 999)) + ".csv"
 
+            df.to_csv(filename, index=None)
+            dm = DatasetManager(filename)
+            dm.analyze()
             dataset_name = post_data["dataset_name"]
             dataset_description = post_data["dataset_description"]
             try:
                 dataset = Dataset(
                     filename=dataset_name,
                     description=dataset_description,
-                    filepath=os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "twitter_" + str(
-                        random.randint(100, 999)) + ".csv",
+                    filepath=filename,
                     file_type="csv",
                     size=0,  # TODO: fix here
-                    row_count=0,
+                    row_count=dm.analytics_result["n_rows"],
                     user_id=user.id,
                 )
                 db.session.add(dataset)
@@ -181,19 +190,25 @@ class TwitterUsernameAPI(MethodView):
         user = utils.get_user_from_header(request.headers)
         post_data = request.get_json()
         try:
-            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id).first().config_value
+            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
             api_secret = Configuration.query.filter_by(config_key="TWITTER_API_SECRET",
-                                                       user_id=user.id).first().config_value
+                                                       user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
             access_token = Configuration.query.filter_by(config_key="TWITTER_ACCESS_TOKEN",
-                                                         user_id=user.id).first().config_value
+                                                         user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
             token_secret = Configuration.query.filter_by(config_key="TWITTER_TOKEN_SECRET",
-                                                         user_id=user.id).first().config_value
+                                                         user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
+
             result = tw.read_tweets_from_user(api_key,
                                               api_secret,
                                               access_token,
                                               token_secret,
                                               post_data["username"],
-                                              100)
+                                              500)
+
             arr = []
             for item in result:
                 arr.append(item["tweet_text"])
@@ -201,18 +216,22 @@ class TwitterUsernameAPI(MethodView):
             df = pd.DataFrame({
                 "tweet_text": pd.Series(arr)
             })
+            filename = os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "twitter_" + str(
+                random.randint(100, 999)) + ".csv"
 
+            df.to_csv(filename, index=None)
+            dm = DatasetManager(filename)
+            dm.analyze()
             dataset_name = post_data["dataset_name"]
             dataset_description = post_data["dataset_description"]
             try:
                 dataset = Dataset(
                     filename=dataset_name,
                     description=dataset_description,
-                    filepath=os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "twitter_" + str(
-                        random.randint(100, 999)) + ".csv",
+                    filepath=filename,
                     file_type="csv",
                     size=0,  # TODO: fix here
-                    row_count=0,
+                    row_count=dm.analytics_result["n_rows"],
                     user_id=user.id,
                 )
                 db.session.add(dataset)

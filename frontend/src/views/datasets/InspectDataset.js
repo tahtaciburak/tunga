@@ -69,7 +69,7 @@ class InspectDataset extends React.Component {
       const file = new Blob([response.text],    
           {type: 'text/csv;charset=utf-8'});
       element.href = URL.createObjectURL(file);
-      element.download = "tunga_dataset"+this.props.match.params.id+".txt";
+      element.download = "tunga_dataset"+this.props.match.params.id+".csv";
       document.body.appendChild(element);
       element.click();
 
