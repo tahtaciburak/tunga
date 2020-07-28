@@ -36,6 +36,11 @@ const responseBody = res => {
 	return res.body;
 };
 
+const response = res => {
+	return res;
+};
+
+
 const tokenPlugin = req => {
 	req.set('Access-Control-Allow-Origin', '*');
 	if (AuthStore.isLoggedIn()) {
@@ -80,6 +85,13 @@ const requests = {
 			.on('error', handleErrors)
 			.end(handleErrors)
 			.then(responseBody),
+	download: (url) =>
+		superagent
+			.get(`${API_ROOT}${url}`)
+			.use(tokenPlugin)
+			.on('error', handleErrors)
+			.end(handleErrors)
+			.then(response),
 };
 
 

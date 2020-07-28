@@ -2,7 +2,7 @@ import os
 import random
 import json
 
-from flask import Blueprint, request, make_response, jsonify, send_file
+from flask import Blueprint, request, make_response, jsonify, send_file, send_from_directory
 from flask.views import MethodView
 from werkzeug.utils import secure_filename
 
@@ -112,7 +112,8 @@ class DownloadDatasetAPI(MethodView):
         user = utils.get_user_from_header(request.headers)
         dataset = Dataset.query.filter_by(id=dataset_id, user_id=user.id).first()
         print(dataset.filepath)
-        return send_file(dataset.filepath, as_attachment=True,attachment_filename=dataset.filename)
+        return send_file(dataset.filepath, mimetype='application/x-csv', as_attachment=True,
+                         attachment_filename=dataset.filename)
 
 
 class TwitterHashtagAPI(MethodView):

@@ -61,20 +61,22 @@ class InspectDataset extends React.Component {
   }
 
   handleDownloadDatasetButton(){
-    this.goTo("dataset/" + this.props.match.params.id  + "/download")
     APIService.requests
-    .get('dataset/' + this.props.match.params.id  + "/download")
-    .then(fetchedData => {
+    .download('dataset/' + this.props.match.params.id  + "/download")
+    .then(response => {
+      const element = document.createElement("a");
+      console.log(response)
+      const file = new Blob([response.text],    
+          {type: 'text/csv;charset=utf-8'});
+      element.href = URL.createObjectURL(file);
+      element.download = "tunga_dataset"+this.props.match.params.id+".txt";
+      document.body.appendChild(element);
+      element.click();
+
 
     })
     .catch(data => {
       console.log(data)
-      AlertService.Add({
-        type: 'alert',
-        //message: translate.getText('error.' + data.response.body.error.code),
-        level: 'error',
-        autoDismiss: 5
-      });
     });
 
   }
