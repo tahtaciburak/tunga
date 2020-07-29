@@ -1,9 +1,0 @@
-TurkishStemmer
-bs4
-emoji
-grpcio
-pandas
-price_parser
-textblob
-tweepy
-zemberek_grpc
