@@ -11,7 +11,8 @@ import {
     CInputGroup,
     CInputGroupPrepend,
     CInputGroupText,
-    CRow
+    CRow,
+    CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -115,8 +116,8 @@ class Register extends React.Component {
                             <CCard className="mx-4">
                                 <CCardBody className="p-4">
                                     <CForm>
-                                        <h1>Register</h1>
-                                        <p className="text-muted">Create your account</p>
+                                        <h1>Yeni Hesap Oluşturma</h1>
+                                        <p className="text-muted">Aşağıdaki alanları doldurarak hemen ücretsiz hesabınızı oluşturabilirsiniz.</p>
                                         <CInputGroup className="mb-3">
                                             <CInputGroupPrepend>
                                                 <CInputGroupText>
@@ -124,7 +125,7 @@ class Register extends React.Component {
                                                 </CInputGroupText>
                                             </CInputGroupPrepend>
                                             <CInput type="text" onChange={this.handleUsernameChange}
-                                                    value={this.state.username} placeholder="Username"
+                                                    value={this.state.username} placeholder="Kullanıcı Adı"
                                                     autoComplete="username"/>
                                         </CInputGroup>
                                         <CInputGroup className="mb-3">
@@ -141,7 +142,7 @@ class Register extends React.Component {
                                                 </CInputGroupText>
                                             </CInputGroupPrepend>
                                             <CInput type="password" onChange={this.handlePasswordChange} 
-                                                    value={this.state.password} placeholder="Password" autoComplete="new-password"/>
+                                                    value={this.state.password} placeholder="Parola" autoComplete="new-password"/>
                                         </CInputGroup>
                                         <CInputGroup className="mb-4">
                                             <CInputGroupPrepend>
@@ -150,10 +151,10 @@ class Register extends React.Component {
                                                 </CInputGroupText>
                                             </CInputGroupPrepend>
                                             <CInput type="password" onChange={this.handlePasswordRepeatChange}
-                                                    value = {this.state.password_repeat} placeholder="Repeat password"
+                                                    value = {this.state.password_repeat} placeholder="Parolayı Tekrarlayın"
                                                     autoComplete="new-password"/>
                                         </CInputGroup>
-                                        <CButton color="success" onClick={this.handleSubmitButtonClick} block>Create Account</CButton>
+                                        <CButton color="success" onClick={this.handleSubmitButtonClick} block>Kayıt Ol</CButton>
                                     </CForm>
                                 </CCardBody>
                             </CCard>

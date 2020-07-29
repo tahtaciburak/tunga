@@ -81,8 +81,8 @@ class Login extends React.Component {
                 <CCard className="p-4">
                   <CCardBody>
                     <CForm>
-                      <h1>Login</h1>
-                      <p className="text-muted">Sign In to your account</p>
+                      <h1>Giriş Yap</h1>
+                      <p className="text-muted">Hesabınıza Giriş Yapın...</p>
                       <CInputGroup className="mb-3">
                         <CInputGroupPrepend>
                           <CInputGroupText>
@@ -101,10 +101,7 @@ class Login extends React.Component {
                       </CInputGroup>
                       <CRow>
                         <CCol xs="6">
-                          <CButton onClick={this.handleClick} color="primary" className="px-4">Login</CButton>
-                        </CCol>
-                        <CCol xs="6" className="text-right">
-                          <CButton color="link" className="px-0">Forgot password?</CButton>
+                          <CButton onClick={this.handleClick} color="primary" className="px-4">Giriş Yap</CButton>
                         </CCol>
                       </CRow>
                     </CForm>
@@ -113,11 +110,10 @@ class Login extends React.Component {
                 <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CCardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+                      <h2>Kayıt Ol</h2>
+                      <p>Hesabınız yoksa hemen ücretsiz bir şekilde kayıt olabilirsiniz.</p>
                       <Link to="/register">
-                        <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
+                        <CButton color="primary" className="mt-3" active tabIndex={-1}>Hemen Kaydol!</CButton>
                       </Link>
                     </div>
                   </CCardBody>

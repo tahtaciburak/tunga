@@ -42,16 +42,10 @@ const TheHeader = () => {
           routes={routes} 
         />
           <div className="d-md-down-none mfe-2 c-subheader-nav">
-            <CLink className="c-subheader-nav-link"href="#">
-              <CIcon name="cil-speech" alt="Documentation" />&nbsp;Documentation
+            <CLink className="c-subheader-nav-link"href="https://github.com/tahtaciburak/tunga">
+              <CIcon name="cil-speech" alt="Documentation" />&nbsp;Dokümantasyon
             </CLink>
-            <CLink 
-              className="c-subheader-nav-link" 
-              aria-current="page" 
-              to="/dashboard"
-            >
-              <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
-            </CLink>
+
           </div>
       </CSubheader>
     </CHeader>

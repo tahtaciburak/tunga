@@ -1,15 +1,6 @@
 import translate from '../services/i18n/Translate';
 export default [
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: 'cil-speedometer',
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    }
-  },
+
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Tunga']
@@ -356,6 +347,19 @@ export default [
   {
     _tag: 'CSidebarNavDivider',
     className: 'm-2'
-  }*/
+  }
+    {
+    _tag: 'CSidebarNavItem',
+    name: 'Dashboard',
+    to: '/dashboard',
+    icon: 'cil-speedometer',
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    }
+  },
+  */
+
+  
 ]
 

@@ -9,6 +9,7 @@ import {
   CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
+  CLabel,
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -24,16 +25,7 @@ const TheSidebar = () => {
       onShowChange={console.log(1)}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        />
-        <CIcon
-          className="c-sidebar-brand-minimized"
-          name="sygnet"
-          height={35}
-        />
+        <CLabel className="h3" >TUNGA</CLabel>
       </CSidebarBrand>
       <CSidebarNav>
 
@@ -53,3 +45,17 @@ const TheSidebar = () => {
 }
 
 export default React.memo(TheSidebar)
+/**
+ * 
+ * 
+ *         <CIcon
+          className="c-sidebar-brand-full"
+          name="logo-negative"
+          height={35}
+        />
+        <CIcon
+          className="c-sidebar-brand-minimized"
+          name="sygnet"
+          height={35}
+        />
+ */

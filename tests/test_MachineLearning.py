@@ -7,6 +7,12 @@ class TestMachineLearning(unittest.TestCase):
         res = bert_sentiment("çok iyi bir yorum yapacağım")
         self.assertIsNotNone(res)
 
+    def test_product_sentiment(self):
+        from tunga.machine_learning.sentiment_analysis import product_sentiment
+        res = product_sentiment.get_sentiment("harika bir araba")
+        print(res)
+        self.assertTrue(True)
+
     def test_keyword_extraction(self):
         from tunga.machine_learning.keyword_extraction import rake
         res = rake("bu bir test cümlesidir.")
