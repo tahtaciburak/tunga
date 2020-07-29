@@ -6,7 +6,6 @@ with open("tunga/README_CORE.md", "r") as fh:
 
 with open("requirements.txt") as fd:
     reqs = [item.strip() for item in fd.readlines()]
-    print(reqs)
 try:
     build_version = str(os.environ["BUILD_VERSION"]).split(".")[-1]
 except:
