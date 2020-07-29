@@ -1,11 +1,9 @@
 from bs4 import BeautifulSoup
-import os
 import re
 import sys
-# from Dictionary.Word import Word
-# from turkish.deasciifier import Deasciifier
-# from Deasciifier.SimpleAsciifier import SimpleAsciifier
+from turkish.deasciifier import Deasciifier
 from TurkishStemmer import TurkishStemmer
+
 import grpc
 import zemberek_grpc.preprocess_pb2_grpc as z_preprocess_g
 import zemberek_grpc.preprocess_pb2 as z_preprocess
@@ -22,27 +20,48 @@ morphology_stub = z_morphology_g.MorphologyServiceStub(channel)
 langid_stub = z_langid_g.LanguageIdServiceStub(channel)
 normalization_stub = z_normalization_g.NormalizationServiceStub(channel)
 
-__remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
-__remove_digits = str.maketrans('', '', '0123456789')
-
 stopwords = []
 try:
-    with open("../datasets/stopwords.txt", "r") as f:
+    with open("../models/stopwords.txt", "r") as f:
         for line in f.readlines():
             stopwords.append(line.strip())
 except:
-    print("stopwords not found download it from web")
-    pass
+    print("Stopwords not found download it from web")
 
-name = []
-try:
-    with open("../datasets/name.txt", "r") as f:
-        for line in f.readlines():
-            line = line.lower()
-            name.append(line.strip())
-except:
-    print("not use person name")
-    pass
+
+def correct_typo(text):
+    """
+    Find and fix typos in given text
+    :param text: arbitrary string
+    :return: corrected string
+    """
+    try:
+        normalization_input = fix_decode(text)
+        n_response = __normalize(normalization_input)
+        if n_response.normalized_input:
+            return n_response.normalized_input
+        else:
+            return text
+    except:
+        return text
+
+
+def lowercase(text):
+    """
+    Lowercase given text
+    :param text:
+    :return: lower text
+    """
+    return text.lower()
+
+
+def uppercase(text):
+    """
+    Uppercase given text
+    :param text:
+    :return: uppercase text
+    """
+    return text.upper()
 
 
 def remove_stopwords(text):
@@ -59,12 +78,23 @@ def remove_stopwords(text):
 
 
 def remove_digits(text):
-    # TODO: Add docstring...
+    """
+    Remove digits in given text
+    :param text: arbitrary string
+    :return: digit removed text
+    """
     text = str(text)
+    __remove_digits = str.maketrans('', '', '0123456789')
     return text.translate(__remove_digits).strip()
 
 
 def remove_punctuations(text):
+    """
+    Remove punctuation characters in given string
+    :param text: arbitrary string
+    :return: punctuation removed text
+    """
+    __remove_punctuations = str.maketrans('', '', '.,-*!?%\t\n/][₺;_')
     text = str(text)
     if len(text) == 0:
         return text
@@ -76,10 +106,20 @@ def remove_punctuations(text):
 
 
 def remove_html_tags(text):
+    """
+    Remove HTML tags in given string.
+    :param text:
+    :return:
+    """
     return BeautifulSoup(text, "lxml").text
 
 
 def remove_emojis(text):
+    """
+    Remove emojis in given string.
+    :param text:
+    :return:
+    """
     regrex_pattern = re.compile(pattern="["
                                         u"\U0001F600-\U0001F64F"  # emoticons
                                         u"\U0001F300-\U0001F5FF"  # symbols & pictographs
@@ -107,15 +147,6 @@ def remove_email(text):
     return text
 
 
-def remove_person_names(text):
-    new_names = []
-    for names in text.split(" "):
-        names = names.lower()
-        if names.strip() not in name:
-            new_names.append(names.strip())
-    return " ".join(new_names).strip()
-
-
 def remove_url(text):
     text = re.sub(r'http\S+', '', text)
     return text
@@ -129,19 +160,6 @@ def remove_mentions(text):
 def remove_hashtag(text):
     text = re.sub(r'#\S+', '', text)
     return text
-
-
-def remove_price(text):
-    text = re.sub(r'\d+', '', text)
-    return text
-
-
-def asciify(text):
-    asciifier = SimpleAsciifier()
-    result = []
-    for word in text.split(" "):
-        result.append(asciifier.asciifyWord(Word(word)))
-    return " ".join(result)
 
 
 def syllable(sentence):
@@ -222,6 +240,11 @@ def __letter_count_for_last_syllable(chrs, end_index):
 
 
 def stem(text):
+    """
+    Remove postfixes from given words
+    :param text: arbitrary string
+    :return: postfix removed string
+    """
     turkStem = TurkishStemmer()
     result = []
     for word in text.split(" "):
@@ -230,28 +253,24 @@ def stem(text):
 
 
 def deasciify(text):
+    """
+    Replace ascii characters with correct turkish ones.
+    :param text: arbitrary string
+    :return: corrected text
+    """
+
     deasci = Deasciifier(text)
     result = deasci.convert_to_turkish()
     return result
 
 
-def deduplication(text):
-    result = []
-    for word in text.split(" "):
-        result.append(word)
-    new_text = list(dict.fromkeys(result))
-    return " ".join(new_text)
-
-
-def remove_outlier(min, max, text):
-    counter = len(text)
-    if counter > min and counter < max:
-        return text
-    else:
-        return "Metin istediğiniz karakter boyutunda değil"
-
-
 def custom_regex_removal(regex, text):
+    """
+    Find and substitue given regex in given text
+    :param regex: regex that removed
+    :param text: arbitrary string
+    :return: clean string
+    """
     text = re.sub(r'{}'.format(regex), '', text)
     return text
 
@@ -304,21 +323,3 @@ def find_lang(text):
 def __normalize(text):
     response = normalization_stub.Normalize(z_normalization.NormalizationRequest(input=text))
     return response
-
-
-def correct_typo(text):
-    normalization_input = fix_decode(text)
-    n_response = __normalize(normalization_input)
-    if n_response.normalized_input:
-        return n_response.normalized_input
-    else:
-        print("err")
-        return text
-
-
-def lowercase(text):
-    return text.lower()
-
-
-def uppercase(text):
-    return text.upper()

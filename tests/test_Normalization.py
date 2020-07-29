@@ -76,27 +76,6 @@ class TestNormalization(unittest.TestCase):
         expected = "  "
         self.assertEqual(actual, expected)
 
-    def test_mail_cleaner(self):
-        actual = normalization.mail_cleaner(
-            "From: 'Beyza Canbay' <beyza@gmail.com>To: 'Burak Tahtacı' <burak@gmail.com> Subject: RE:Hello! Merhaba demek için mail atıyorum From: 'Edgar Allen Poe' <eap@gmail.com>To: 'Mark Twain' <mark.twain@gmail.com>Subject: RE: Hello!")
-        expected = "Merhaba demek için mail atıyorum"
-
-        self.assertEqual(actual, expected)
-
-    def test_remove_person_names(self):
-        actual = normalization.remove_person_names("Beyza bilgisayar mühendisi")
-        expected = "bilgisayar mühendisi"
-        self.assertEqual(actual, expected)
-
-        actual = normalization.remove_person_names("Ayşe Ahmet ve Mehmet yakın arkadaş")
-        expected = "ve yakın arkadaş"
-        self.assertEqual(actual, expected)
-
-        actual = normalization.remove_person_names(
-            "fatma arkadaşları gül birlikte oyun oynarken düştü annesi hastaneye götürdü")
-        expected = "arkadaşları birlikte oyun oynarken düştü annesi hastaneye götürdü"
-        self.assertEqual(actual, expected)
-
     def test_remove_url(self):
         actual = normalization.remove_url("beyzanın internet adresi http:beyzacanbay")
         expected = "beyzanın internet adresi "
@@ -118,20 +97,6 @@ class TestNormalization(unittest.TestCase):
 
         actual = normalization.remove_hashtag("dışarıda #kar ve #yağmur var")
         expected = "dışarıda  ve  var"
-        self.assertEqual(actual, expected)
-
-    def test_remove_price(self):
-        actual = normalization.remove_price("250 liraya parfüm aldım")
-        expected = " liraya parfüm aldım"
-        self.assertEqual(actual, expected)
-
-    def test_asciify(self):
-        actual = normalization.asciify("çok çalışmak")
-        expected = "cok calismak"
-        self.assertEqual(actual, expected)
-
-        actual = normalization.asciify("Koşarcasına eğlenen çocuklar gibi şendik")
-        expected = "Kosarcasina eglenen cocuklar gibi sendik"
         self.assertEqual(actual, expected)
 
     def test_deasciify(self):
@@ -164,24 +129,6 @@ class TestNormalization(unittest.TestCase):
 
         actual = normalization.stem("aşağıdakilerden biri midir")
         expected = "aşağı bir mi"
-        self.assertEqual(actual, expected)
-
-    def test_deduplication(self):
-        actual = normalization.deduplication("merhaba merhaba nasılsın")
-        expected = "merhaba nasılsın"
-        self.assertEqual(actual, expected)
-
-        actual = normalization.deduplication("hep ama hep bunu izlerim")
-        expected = "hep ama bunu izlerim"
-        self.assertEqual(actual, expected)
-
-    def test_remove_outlier(self):
-        actual = normalization.remove_outlier(1, 2, "Merhaba bugün hava çok güzel")
-        expected = "Metin istediğiniz karakter boyutunda değil"
-        self.assertEqual(actual, expected)
-
-        actual = normalization.remove_outlier(15, 35, "Merhaba bugün hava çok güzel")
-        expected = "Merhaba bugün hava çok güzel"
         self.assertEqual(actual, expected)
 
     def test_custom_regex_removal(self):
