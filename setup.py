@@ -1,7 +1,7 @@
 import os
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("tunga/README_CORE.md", "r") as fh:
     long_description = fh.read()
 
 with open("requirements.txt") as fd:
