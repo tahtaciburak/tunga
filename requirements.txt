@@ -9,8 +9,7 @@ price_parser
 zemberek_grpc
 multi_rake
 sklearn
-pytorch-transformers==1.2.0
 torch==1.6.0+cpu
 torchvision==0.7.0+cpu
 transformers==2.9.0
-
+pytorch-transformers==1.2.0
