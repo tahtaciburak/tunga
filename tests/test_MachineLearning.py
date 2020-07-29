@@ -15,8 +15,10 @@ class TestMachineLearning(unittest.TestCase):
 
     def test_keyword_extraction(self):
         from tunga.machine_learning.keyword_extraction import rake
-        res = rake("bu bir test cümlesidir.")
-        self.assertIsNotNone(res)
+        actual = rake.extract_keywords("yemeğin tadı mükemmeldi ama fiyatlar çok yüksek")
+        self.assertIsNotNone(actual)
+        expected = "yemeğin tadı mükemmeldi ; fiyatlar ; yüksek"
+        self.assertEqual(expected, actual)
 
     def test_topic_modelling(self):
         from tunga.machine_learning.topic_modelling import topic_modeller
