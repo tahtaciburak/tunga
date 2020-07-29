@@ -17,9 +17,10 @@ ENV IN_DOCKER_CONTAINER True
 ENV APP_SETTINGS "project.server.config.ProductionConfig"
 
 WORKDIR /app
-RUN ["python3","manage.py","create_db"]
-RUN ["python3","manage.py","init"]
-RUN ["python3","manage.py","migrate"]
+CMD ["python3" ,"-c ","from tunga.machine_learning.sentiment_analysis import bert_sentiment;print(bert_sentiment.get_sentiment('çok güzel'))"]
+CMD ["python3","manage.py","create_db"]
+CMD ["python3","manage.py","db init"]
+CMD ["python3","manage.py","db migrate"]
 
 EXPOSE 8080
-ENTRYPOINT ["python3","manage.py","runserver","-p 8080"]
+CMD ["python3","manage.py","runserver","-p","8080","-h","0.0.0.0"]
