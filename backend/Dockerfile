@@ -23,4 +23,4 @@ CMD ["python3","manage.py","db init"]
 CMD ["python3","manage.py","db migrate"]
 
 EXPOSE 8080
-CMD ["python3","manage.py","runserver","-p","8080","-h","0.0.0.0"]
+ENTRYPOINT ["python3","manage.py","runserver","-p","8080","-h","0.0.0.0"]

@@ -28,5 +28,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    install_requires=reqs
+    install_requires=reqs,
+    package_data={
+        "models": ["*"]
+    }
 )
