@@ -43,10 +43,10 @@ class PreprocessingControllerAPI(MethodView):
                         'remove_non_turkish_words': False,
                         'correct_typos': preprocessing.correct_typo,
                         'lemmatize': preprocessing.lemmatization,
-                        'stem': False,
+                        'stem': preprocessing.stem,
                         'asciify': False,
-                        'deasciify': False}
-
+                        'deasciify': preprocessing.deasciify}
+        print(steps)
         for key in steps.keys():
             if steps[key]:
                 try:

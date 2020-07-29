@@ -145,7 +145,7 @@ class TwitterHashtagAPI(MethodView):
             df = pd.DataFrame({
                 "tweet_text": pd.Series(arr)
             })
-            filename = os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "twitter_" + str(
+            filename = os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "/twitter_" + str(
                 random.randint(100, 999)) + ".csv"
 
             df.to_csv(filename, index=None)
@@ -215,7 +215,7 @@ class TwitterUsernameAPI(MethodView):
             df = pd.DataFrame({
                 "tweet_text": pd.Series(arr)
             })
-            filename = os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "twitter_" + str(
+            filename = os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "/twitter_" + str(
                 random.randint(100, 999)) + ".csv"
 
             df.to_csv(filename, index=None)
