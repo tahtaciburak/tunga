@@ -9,4 +9,5 @@ price_parser
 zemberek_grpc
 multi_rake
 sklearn
-transformers
+tensorflow==2.0
+transformers==2.9.0

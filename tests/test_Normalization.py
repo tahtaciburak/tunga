@@ -238,5 +238,6 @@ class TestNormalization(unittest.TestCase):
         expected = "en"
         self.assertEqual(actual, expected)
 
+
 if __name__ == '__main__':
     unittest.main()

@@ -27,13 +27,10 @@ __remove_digits = str.maketrans('', '', '0123456789')
 
 stopwords = []
 try:
-    with open("~/tunga/datasets/stopwords.txt", "r") as f:
+    with open("../datasets/stopwords.txt", "r") as f:
         for line in f.readlines():
             stopwords.append(line.strip())
 except:
-    os.makedirs("~/tunga")
-    os.makedirs("~/tunga/datasets")
-
     print("stopwords not found download it from web")
     pass
 
