@@ -22,7 +22,7 @@ services:
       - zemberek
       - postgres
   frontend:
-    image: "tahtaciburak/tunga-frontend:v1"
+    image: "tahtaciburak/tunga-frontend-prod:v1"
     ports:
       - "3000:80"
     
