@@ -67,7 +67,9 @@ Stop word: ```https://github.com/ahmetax/trstop/blob/master/dosyalar/turkce-stop
 Kufur tespit list: ```https://github.com/ooguz/turkce-kufur-karaliste/blob/master/karaliste.txt```
 
 For Summary : ```https://github.com/Eruimdas/turkish_text_summarization/blob/master/Extraction_Based_Text_Summarization.ipynb```
-
+## Ekip Üyeleri
+* **Burak Tahtacı**
+* **Beyza Canbay**
 ## 📝 License
 MIT
 
