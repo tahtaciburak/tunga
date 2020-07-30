@@ -12,16 +12,10 @@ else:
     ssl._create_default_https_context = _create_unverified_https_context
 
 nltk.download('punkt')
-nltk.data.load('../../../datasets/turkish.pickle')
+nltk.data.load("/Users/beyzacanbay/Desktop/tunga/tunga/machine_learning/summarization/punkt/turkish.pickle")
 
+def summarize(words,sentences):
 
-
-
-def summarize(path, delimeter,words, sentences):
-    all_news = pd.read_csv(path, sep=delimeter)
-
-    all_news['Tokenized_Text'] = all_news['text'].apply(word_tokenize)
-    all_news['Tokenized_Sentence'] = all_news['text'].apply(sent_tokenize)
     word2count = {}
     for word in words:
         if word.lower() not in word2count.keys():
@@ -46,4 +40,3 @@ def summarize(path, delimeter,words, sentences):
 
     best_sentences = heapq.nlargest(5, sent2score, key=sent2score.get)
     return [' '.join(best_sentences)]
-
