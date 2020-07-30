@@ -14,3 +14,15 @@ services:
     volumes:
       #- "~/data/docker/postgres:/var/lib/postgresql/data"
       - "./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh"
+  backend:
+    image: "tahtaciburak/tunga-backend:v1"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - zemberek
+      - postgres
+  frontend:
+    image: "tahtaciburak/tunga-frontend:v1"
+    ports:
+      - "3000:80"
+    

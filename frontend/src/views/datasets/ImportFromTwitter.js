@@ -19,7 +19,6 @@ import Loader from 'react-loader-spinner'
 import translate from '../../services/i18n/Translate';
 
 import APIService from '../../services/APIService'
-import AlertService from '../../services/AlertService'
 
 class ImportFromTwitter extends React.Component {
   constructor(props) {
@@ -30,6 +29,7 @@ class ImportFromTwitter extends React.Component {
       dataset_description: "",
       username: "",
       hashtag: "",
+      is_configured:false,
       is_show_result_alert: false,
       is_upload_successful: false,
       is_waiting: false,
@@ -44,6 +44,10 @@ class ImportFromTwitter extends React.Component {
     this.handleUsernameSubmitButtonClick = this.handleUsernameSubmitButtonClick.bind(this);
     this.handleHashtagSubmitButtonClick = this.handleHashtagSubmitButtonClick.bind(this);
 
+  }
+
+  componentDidMount(){
+    this.checkAPIKeys()
   }
 
   handleDatasetNameChange(event) {
@@ -88,11 +92,6 @@ class ImportFromTwitter extends React.Component {
       .catch(data => {
         this.setState({is_waiting: false})
         alert("hata")
-        AlertService.Add({
-          type: 'alert',
-          level: 'error',
-          autoDismiss: 5
-        });
       });
 
   }
@@ -124,20 +123,14 @@ class ImportFromTwitter extends React.Component {
       .catch(data => {
         this.setState({is_waiting: false})
         alert("hata")
-        AlertService.Add({
-          type: 'alert',
-          level: 'error',
-          autoDismiss: 5
-        });
       });
 
   }
 
-  checkAPIKeys(){
-    APIService.requests
+  async checkAPIKeys(){
+    await APIService.requests
     .post('dataset/twitter/check')
     .then(data => {
-      console.log(data);
       if (data.status === "success"){
         this.setState({is_configured:true})
       } else{
@@ -147,18 +140,13 @@ class ImportFromTwitter extends React.Component {
     })
     .catch(data => {
       alert("hata")
-      AlertService.Add({
-        type: 'alert',
-        level: 'error',
-        autoDismiss: 5
-      });
     });
 
 
   }
 
   render() {
-    if (!this.state.is_configured) {
+    if (this.state.is_configured === false) {
       return (
         <>
           <CAlert color="danger">{translate.translate("retrieval.import_from_twitter.apikey_not_found")}</CAlert>

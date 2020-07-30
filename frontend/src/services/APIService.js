@@ -5,7 +5,8 @@ import AlertService from './AlertService';
 
 const superagent = superagentPromise(_superagent, Promise);
 
-const API_ROOT = 'http://localhost:8080/';
+//const API_ROOT = 'http://localhost:8080/';
+const API_ROOT = process.env.REACT_APP_API_ROOT
 
 const handleErrors = res => {
 	if (res !== null){
