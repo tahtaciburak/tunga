@@ -65,7 +65,7 @@ ReactJS ile geliştirilmiş bir web uygulamasıdır. Kullanıcıların kütüpha
 
 Projenin çalışan bir örneği [websitemizde](http://tunga.ml) adresinde yer almaktadır. [Bu adresten](http://tunga.ml:3000/register) hemen üye olup kullanmaya başlayabilirsiniz. Aşağıdaki youtube videoları sistemi tanımanıa ve kullanmanıza yardımcı olacaktır.
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[![TUNGA Dataset Import](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=L7LGjKICRmI)
 
 ## :construction: Kurulum
 Projenin alt modüllerinin erişim bilgileri aşağıdaki gibidir.
