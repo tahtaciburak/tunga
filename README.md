@@ -29,7 +29,8 @@ geliştirilmiştir. www.acikhack.com
     - [:book: Kütüphane](#book-kütüphane)
     - [:satellite: Backend](#satellite-backend)
     - [:tada: Frontend](#tada-frontend)
-  - [Kullandığımız Kaynaklar](#kullandığımız-kaynaklar)
+  - [:wrench: Kullanım](#wrench-kullanım)
+  - [:construction: Kurulum](#construction-kurulum)
   - [📝 Lisans](#-lisans)
 
 ## :question: Problem Tanımı
@@ -63,17 +64,38 @@ Flask ile kodlanmış bir REST web servisidir. Tunga kütüphanesindeki metodlar
 ### :tada: Frontend
 ReactJS ile geliştirilmiş bir web uygulamasıdır. Kullanıcıların kütüphanedeki metodlara verilerini gönderip işlemesi için gerekli önyüz bileşenleri içermektedir. Ön yüz elemanlarının kullanımlarını incelemek için youtube kanalımızdaki videolara göz atabilirsiniz.
 
-## Kullandığımız Kaynaklar
-For deasciify methods : ``` pip3 install git+https://github.com/emres/turkish-deasciifier.git```
+## :wrench: Kullanım
 
-For asciify methods: ``` git clone https://github.com/starlangsoftware/TurkishDeasciifier-Py.git```
+Projenin çalışan bir örneği [websitemizde](http://tunga.ml) adresinde yer almaktadır. [Bu adresten](http://tunga.ml:3000/register) hemen üye olup kullanmaya başlayabilirsiniz. Aşağıdaki youtube videoları sistemi tanımanıa ve kullanmanıza yardımcı olacaktır.
 
-Turkish name list : ``` https://gist.github.com/emrekgn/b4049851c88e328c065a```
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 
-Stop word: ```https://github.com/ahmetax/trstop/blob/master/dosyalar/turkce-stop-words```
+## :construction: Kurulum
+Projenin alt modüllerinin erişim bilgileri aşağıdaki gibidir.
 
-Kufur tespit list: ```https://github.com/ooguz/turkce-kufur-karaliste/blob/master/karaliste.txt```
+| Modül                     | Platforms                                              |
+| ------------------------ | ------------------------------------------------------ |
+| :book: **Kütüphane**         | [tunga · PyPI](https://pypi.org/project/tunga/)        |
+| :satellite: **Backend**      | [tunga-backend:v1 DockerHub](https://hub.docker/tahtaciburak)|
+| :tada: **Frontend**   | [tunga-frontend:v1 DockerHub](https://hub.docker/tahtaciburak)|
 
-For Summary : ```https://github.com/Eruimdas/turkish_text_summarization/blob/master/Extraction_Based_Text_Summarization.ipynb```
+Tüm sistemi kendi makinenizde çalıştırmak isterseniz aşağıdaki komut dizisini çalıştırabilirisiniz.
+
+> Geliştirme Versiyonu
+```bash
+git clone https://github.com/tahtaciburak/tunga
+cd tunga
+docker-compose up
+```
+
+> Production Versiyonu
+```bash
+git clone https://github.com/tahtaciburak/tunga
+cd tunga
+docker-compose -f docker-compose.prod.yml up
+```
+
+
 ## 📝 Lisans
 MIT
+
