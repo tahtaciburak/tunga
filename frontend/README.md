@@ -8,6 +8,7 @@ Tunga ön yüz uygulaması CoreUI isimli ReactJS teması üzerinde geliştirilmi
   - [İçindekiler](#i̇çindekiler)
   - [Kullanılan Teknolojiler](#kullanılan-teknolojiler)
   - [Ekran Görüntüleri](#ekran-görüntüleri)
+  - [Kurulum](#kurulum)
 
 ## Kullanılan Teknolojiler
 
@@ -29,3 +30,10 @@ Tunga ön yüz uygulaması CoreUI isimli ReactJS teması üzerinde geliştirilmi
 <img src="../images/ss/ss4.png"></img>
 </div>
 
+## Kurulum
+
+Projeyi docker kullanarak kendi bilgisayarınızda çalışıtrabilirsiniz. Bunun için aşağıdaki komutu çalıştırmanız yeterlidir.
+
+```bash
+docker run -it --rm -p 3000:80 tunga-frontend:v1
+```
