@@ -26,6 +26,9 @@ try:
         for line in f.readlines():
             stopwords.append(line.strip())
 except:
+    with open("~/tunga/models/stopwords.txt", "r") as f:
+        for line in f.readlines():
+            stopwords.append(line.strip())
     print("Stopwords not found download it from web")
 
 

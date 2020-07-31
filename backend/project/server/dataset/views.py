@@ -258,10 +258,17 @@ class TwitterCheckAPI(MethodView):
     def post(self):
         user = utils.get_user_from_header(request.headers)
         try:
-            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id)
-            api_secret = Configuration.query.filter_by(config_key="TWITTER_API_SECRET", user_id=user.id)
-            access_token = Configuration.query.filter_by(config_key="TWITTER_ACCESS_TOKEN", user_id=user.id)
-            token_secret = Configuration.query.filter_by(config_key="TWITTER_TOKEN_SECRET", user_id=user.id)
+            api_key = Configuration.query.filter_by(config_key="TWITTER_API_KEY", user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
+            api_secret = Configuration.query.filter_by(config_key="TWITTER_API_SECRET",
+                                                       user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
+            access_token = Configuration.query.filter_by(config_key="TWITTER_ACCESS_TOKEN",
+                                                         user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
+            token_secret = Configuration.query.filter_by(config_key="TWITTER_TOKEN_SECRET",
+                                                         user_id=user.id).order_by(
+                Configuration.id.desc()).first().config_value
             if len(api_key)>0 and len(api_secret)>0 and len(access_token)>0 and len(token_secret)>0:
                 return jsonify({"status": "success"})
             else:
