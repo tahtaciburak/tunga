@@ -1,51 +1,49 @@
-# Flask JWT Auth
+# Tunga Backend
 
-[![Build Status](https://travis-ci.org/realpython/flask-jwt-auth.svg?branch=master)](https://travis-ci.org/realpython/flask-jwt-auth)
+## Kurulum - Docker
 
-## Want to learn how to build this project?
+```bash
+docker run -p 8080:8080 tahtaciburak/tunga-backend:v1
+```
 
-Check out the [blog post](https://realpython.com/blog/python/token-based-authentication-with-flask/).
-
-## Want to use this project?
-
-### Basics
+## Kurulum - Native
+### Temel Adımlar
 
 1. Fork/Clone
-1. Activate a virtualenv
-1. Install the requirements
+1. Yeni bir virtualenv oluşturun
+1. Gerekli paketleri yükleyin
 
-### Set Environment Variables
+### Çalışmak İstediğiniz Ortamı Seçin
 
-Update *project/server/config.py*, and then run:
 
 ```sh
 $ export APP_SETTINGS="project.server.config.DevelopmentConfig"
 ```
 
-or
+veya
 
 ```sh
 $ export APP_SETTINGS="project.server.config.ProductionConfig"
 ```
 
-Set a SECRET_KEY:
+Bir SECRET_KEY belirleyin:
 
 ```sh
-$ export SECRET_KEY="change_me"
+$ export SECRET_KEY="c0k_6i2iLiyM_BuL4m4n_b3ni"
 ```
 
-### Create DB
+### Veritabanını Oluşturun
 
-Create the databases in `psql`:
+Veritabanı olarak postgresql kullanılmaktadır. Bu bağlamda sisteminizde çalışan bir postgres olduğundan emin olun.
 
 ```sh
 $ psql
-# create database flask_jwt_auth
+# create database tunga
 # create database flask_jwt_auth_test
 # \q
 ```
 
-Create the tables and run the migrations:
+Aşağıdaki komutları çalıştırarak veritabanı şemalarını oluşturun:
 
 ```sh
 $ python manage.py create_db
@@ -53,30 +51,8 @@ $ python manage.py db init
 $ python manage.py db migrate
 ```
 
-### Run the Application
-
-```sh
-$ python manage.py runserver
-```
-
-Access the application at the address [http://localhost:5000/](http://localhost:5000/)
-
-> Want to specify a different port?
+### Uygulamayı Çalıştırın
 
 > ```sh
 > $ python manage.py runserver -h 0.0.0.0 -p 8080
 > ```
-
-### Testing
-
-Without coverage:
-
-```sh
-$ python manage.py test
-```
-
-With coverage:
-
-```sh
-$ python manage.py cov
-```
