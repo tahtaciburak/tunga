@@ -11,13 +11,10 @@ geliştirilmiştir. www.acikhack.com
 
 
 
-<a href="https://github.com/badges/tunga/graphs/contributors" alt="Contributors">
-<img src="https://img.shields.io/github/contributors/badges/shields" /></a>
-<img src="https://travis-ci.com/tahtaciburak/tunga.svg?token=nnqL1e1pEDHAHFsZzkNx&branch=master"></img>    
+  
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/) [![Python Version](https://img.shields.io/pypi/pyversions/tunga?style=plastic)](https://img.shields.io/pypi/pyversions/sadedegel) [![pypi Version](https://img.shields.io/pypi/v/tunga?style=plastic&logo=PyPI)](https://pypi.org/project/tunga/) [![License](https://img.shields.io/pypi/l/tunga)](https://github.com/GlobalMaksimum/sadedegel/blob/master/LICENSE)
-
-</div>
+<img src="https://travis-ci.com/tahtaciburak/tunga.svg?token=nnqL1e1pEDHAHFsZzkNx&branch=master"></img>  
 
 ## İçindekiler
 - [TUNGA: Agile Text Analytics Platform](#tunga-agile-text-analytics-platform)
@@ -44,7 +41,7 @@ Kurumsal ihtiyaçlara cevap verebilen ve neredeyse hiç kod yazmadan düzensiz v
 **Burak Tahtacı**  
 Bilgisayar Mühendisliği mezunu ve ARGE işleriyle uğraşan bir mühendis. Uğraş aşanları `Backend Development`, `Machine Learning`,`DevOps`,`NLP`,`Anomaly Detection`
 
-**Beyzanur Canbay**
+**Beyzanur Canbay**  
 Bilgisayar Mühendisliği öğrencisi. Uğraş alanları `Deep Learning`,`Machine Learning`,`NLP`,`Text Cleaning`
 
 ## :house: Projenin Teknik Mimarisi
