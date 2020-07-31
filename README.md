@@ -73,8 +73,8 @@ Projenin alt modüllerinin erişim bilgileri aşağıdaki gibidir.
 | Modül                     | Platforms                                              |
 | ------------------------ | ------------------------------------------------------ |
 | :book: **Kütüphane**         | [tunga · PyPI](https://pypi.org/project/tunga/)        |
-| :satellite: **Backend**      | [tunga-backend:v1 DockerHub](https://hub.docker/tahtaciburak)|
-| :tada: **Frontend**   | [tunga-frontend:v1 DockerHub](https://hub.docker/tahtaciburak)|
+| :satellite: **Backend**      | [tunga-backend:v1 DockerHub](https://hub.docker.com/u/tahtaciburak)|
+| :tada: **Frontend**   | [tunga-frontend:v1 DockerHub](https://hub.docker.com/u/tahtaciburak)|
 
 Tüm sistemi kendi makinenizde çalıştırmak isterseniz aşağıdaki komut dizisini çalıştırabilirisiniz.
 
