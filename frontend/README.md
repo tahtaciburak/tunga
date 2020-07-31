@@ -20,12 +20,12 @@ Tunga ön yüz uygulaması CoreUI isimli ReactJS teması üzerinde geliştirilmi
 
 ## Ekran Görüntüleri
 <div align="center">
-<img src="../images/ss/ss1.png" width="8500"></img>
+<img src="../images/ss/ss1.png" ></img>
 
-<img src="../images/ss/ss2.png" width="800"></img>
+<img src="../images/ss/ss2.png"></img>
 
-<img src="../images/ss/ss3.png" width="800"></img>
+<img src="../images/ss/ss3.png"></img>
 
-<img src="../images/ss/ss4.png" width="800"></img>
+<img src="../images/ss/ss4.png"></img>
 </div>
 
