@@ -1,4 +1,6 @@
-<img src="images/tunga.png" width="500" height="200" align="center" />
+<p align="center">
+    <img src="images/tunga.png" width="300" height="150" />
+</p>
 
 
 # TUNGA: Agile Text Analytics Platform
@@ -9,53 +11,57 @@ geliştirilmiştir. www.acikhack.com
 
 
 
-<div align="center">
-    <a href="https://github.com/badges/shields/graphs/contributors" alt="Contributors">
-    <img src="https://img.shields.io/github/contributors/badges/shields" /></a>
+<a href="https://github.com/badges/tunga/graphs/contributors" alt="Contributors">
+<img src="https://img.shields.io/github/contributors/badges/shields" /></a>
+<img src="https://travis-ci.com/tahtaciburak/tunga.svg?token=nnqL1e1pEDHAHFsZzkNx&branch=master"></img>    
+
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/) [![Python Version](https://img.shields.io/pypi/pyversions/tunga?style=plastic)](https://img.shields.io/pypi/pyversions/sadedegel) [![pypi Version](https://img.shields.io/pypi/v/tunga?style=plastic&logo=PyPI)](https://pypi.org/project/tunga/) [![License](https://img.shields.io/pypi/l/tunga)](https://github.com/GlobalMaksimum/sadedegel/blob/master/LICENSE)
+
 </div>
 
-[![Build Status](https://travis-ci.com/tahtaciburak/tunga.svg?token=nnqL1e1pEDHAHFsZzkNx&branch=master)](https://travis-ci.com/tahtaciburak/tunga)
-
 ## İçindekiler
-- [Docker İle Kurulum İşlemi](#Docker-İle-Kurulum-İşlemi)
-- [Sistem Diyagramı](#Sistem-Diyagramı)
-- [Kullandığımız Kaynaklar](#Kullandığımız-Kaynaklar)
-- [Örnek Kullanım](#Örnek-Kullanım)
+- [TUNGA: Agile Text Analytics Platform](#tunga-agile-text-analytics-platform)
+  - [İçindekiler](#i̇çindekiler)
+  - [:question: Problem Tanımı](#question-problem-tanımı)
+  - [:gear: Çözüm Önerisi](#gear-çözüm-önerisi)
+  - [:dancers: Takım](#dancers-takım)
+  - [:house: Projenin Teknik Mimarisi](#house-projenin-teknik-mimarisi)
+    - [:book: Kütüphane](#book-kütüphane)
+    - [:satellite: Backend](#satellite-backend)
+    - [:tada: Frontend](#tada-frontend)
+  - [Kullandığımız Kaynaklar](#kullandığımız-kaynaklar)
+  - [📝 Lisans](#-lisans)
 
-## Docker İle Kurulum İşlemi
-1. ```docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 -v ~/data/docker/postgres:/var/lib/postgresql/data postgres```
-2. Veritabanı işlemleri için aşağıdaki sıra takip edilmelidir.
-    1. ```db create```
-    2. ```db init```
-    3. ```db migrate```
-3. ```docker exec -it docker-postgres /bin/bash```
-4. ```su postgres```
-5. ```psql```
-6. ```create database tunga;```
-7. ```create database tunga_test;```
-- Backend dizininde
-``` shell 
-    $ python3 manage.py runserver -p 8080
-```
-- Frontend dizininde
+## :question: Problem Tanımı
+Doğal dil işleme, sosyal medyanın da etkisiyle artık her kurumun büyük bir ihtiyacı haline gelmiş durumda. Özellikle B2C(İşletmeden tüketiciye)  iş modellerinde müşterileri ve trendleri anlamak kritik bir öneme sahip. Bu bağlamda işletmelerin metin verilerinden öngörüler oluşturmalı ve anlam çıkarmaları gerek. Tüm bu süreçte çevik olunmalı ve değişen veri ve model ihtiyaçları hızlıca giderilebilmelidir.
 
-```shell 
-    $ npm start
-```
+## :gear: Çözüm Önerisi
+Kurumsal ihtiyaçlara cevap verebilen ve neredeyse hiç kod yazmadan düzensiz verisetlerinde sık kullanılan doğal dil işleme işlevlerinin çalıştırılabileceği düşük masraflı, açık kaynak bir SaaS (Software as a Service) platformu oluşturmaktır. Bu platformda sık kullanılan ve state-of-the-art düzeyindeki algoritmaların birkaç tık ile çalıştırılmasıyla bu alana ayrılan insan kaynağının azaltılması da hedeflenmektedir.
 
-## Sistem Diyagramı
+## :dancers: Takım
+
+**Burak Tahtacı**  
+Bilgisayar Mühendisliği mezunu ve ARGE işleriyle uğraşan bir mühendis. Uğraş aşanları `Backend Development`, `Machine Learning`,`DevOps`,`NLP`,`Anomaly Detection`
+
+**Beyzanur Canbay**
+Bilgisayar Mühendisliği öğrencisi. Uğraş alanları `Deep Learning`,`Machine Learning`,`NLP`,`Text Cleaning`
+
+## :house: Projenin Teknik Mimarisi
+
+Proje temel olarak üç bileşenden oluşmaktadır. `Kütüphane`, `Backend` ve `Frontend` isimlerinde üç temel alt proje geliştirilmiştir. 
+
 <p align="center">
     <img src="images/tunga_system_diagram.png" width="480"\>
 </p>
 
-## Örnek Kullanım
-``` shell 
-    $ pip install tunga
-```
+### :book: Kütüphane
+Bu kısım bir python modülü, makine öğrenmesi ve doğal dil işleme hakkındaki tüm fonksiyonlar bu modülün içinde yer almaktadır. Kütüphane modülü hakkında daha fazla bilgi almak için tunga dizinine gidebilir ya da PyPi'daki proje sayfasını ziyaret edebilirsiniz.
 
-``` shell 
-    $ git clone https://github.com/tahtaciburak/tunga.git
-```
+### :satellite: Backend
+Flask ile kodlanmış bir REST web servisidir. Tunga kütüphanesindeki metodları kapsayan ve HTTP methodları sayesinde dışarıya açan bir yapıdadır. Aynı zamanda kendi içerisinde kullanıcı doğrulama ve konfigürasyon kaydetme modülü de bulunmaktadır.
+
+### :tada: Frontend
+ReactJS ile geliştirilmiş bir web uygulamasıdır. Kullanıcıların kütüphanedeki metodlara verilerini gönderip işlemesi için gerekli önyüz bileşenleri içermektedir. Ön yüz elemanlarının kullanımlarını incelemek için youtube kanalımızdaki videolara göz atabilirsiniz.
 
 ## Kullandığımız Kaynaklar
 For deasciify methods : ``` pip3 install git+https://github.com/emres/turkish-deasciifier.git```
@@ -69,9 +75,5 @@ Stop word: ```https://github.com/ahmetax/trstop/blob/master/dosyalar/turkce-stop
 Kufur tespit list: ```https://github.com/ooguz/turkce-kufur-karaliste/blob/master/karaliste.txt```
 
 For Summary : ```https://github.com/Eruimdas/turkish_text_summarization/blob/master/Extraction_Based_Text_Summarization.ipynb```
-## Ekip Üyeleri
-* **Burak Tahtacı**
-* **Beyza Canbay**
-## 📝 License
+## 📝 Lisans
 MIT
-
