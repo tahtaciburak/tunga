@@ -1,16 +1,18 @@
-<img src="images/tunga.png" width="700" height="300" align="center" />
+<img src="images/tunga.png" width="500" height="200" align="center" />
 
 
 # TUNGA: Agile Text Analytics Platform
-> Tunga, düzensiz metin veri setlerinden değerli bilgiler üretebilmek için geliştirilmiş ve tüm metin işleme sürecini 
-hızlandıran web tabanlı ve açık kaynak bir SaaS uygulamasıdır. Bu proje Açık Kaynak Doğal Dil İşleme Hackathon'u sürecinde
+Tunga, düzensiz metin veri setlerinden değerli bilgiler üretebilmek için geliştirilmiş ve tüm metin işleme sürecini 
+hızlandıran web tabanlı ve açık kaynak bir SaaS uygulamasıdır. 
+> Bu proje Açık Kaynak Doğal Dil İşleme Hackathon'u sürecinde
 geliştirilmiştir. www.acikhack.com
 
 
 
-
-<a href="https://github.com/badges/shields/graphs/contributors" alt="Contributors">
-<img src="https://img.shields.io/github/contributors/badges/shields" /></a>
+<div align="center">
+    <a href="https://github.com/badges/shields/graphs/contributors" alt="Contributors">
+    <img src="https://img.shields.io/github/contributors/badges/shields" /></a>
+</div>
 
 [![Build Status](https://travis-ci.com/tahtaciburak/tunga.svg?token=nnqL1e1pEDHAHFsZzkNx&branch=master)](https://travis-ci.com/tahtaciburak/tunga)
 
