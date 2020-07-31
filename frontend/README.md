@@ -35,5 +35,5 @@ Tunga ön yüz uygulaması CoreUI isimli ReactJS teması üzerinde geliştirilmi
 Projeyi docker kullanarak kendi bilgisayarınızda çalışıtrabilirsiniz. Bunun için aşağıdaki komutu çalıştırmanız yeterlidir.
 
 ```bash
-docker run -it --rm -p 3000:80 tunga-frontend:v1
+docker run -it --rm -p 3000:80 tahtaciburak/tunga-frontend:v1
 ```
