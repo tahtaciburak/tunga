@@ -1,11 +1,8 @@
 import React from 'react'
 import {
   CHeader,
-  CToggler,
   CHeaderBrand,
   CHeaderNav,
-  CHeaderNavItem,
-  CHeaderNavLink,
   CSubheader,
   CBreadcrumbRouter,
   CLink
@@ -17,9 +14,6 @@ import routes from '../routes'
 
 import { 
   TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
 }  from './index'
 
 const TheHeader = () => {
@@ -53,14 +47,3 @@ const TheHeader = () => {
 }
 
 export default TheHeader
-
-/**
- * 
- * 
- * 
- *         
- *      <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/>
-
- */

@@ -1,24 +1,21 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React, {  } from "react";
 import {
-  CCol, CBadge,
+  CCol,
   CCard,
   CCardBody,
   CCardHeader,
   CDataTable,
   CButton,
-  CRow,
   CFormGroup,
   CLabel,
   CInput,
-  CFormText
-} from '@coreui/react'
+} from "@coreui/react";
 
-//import usersData from '../users/UsersData'
-import APIService from '../../services/APIService'
-import AlertService from '../../services/AlertService'
+import APIService from "../../services/APIService";
+import AlertService from "../../services/AlertService";
 
-import translate from '../../services/i18n/Translate';
-const fields = ['config_key', "config_value"]
+import translate from "../../services/i18n/Translate";
+const fields = ["config_key", "config_value"];
 
 class Configuration extends React.Component {
   constructor(props) {
@@ -26,8 +23,8 @@ class Configuration extends React.Component {
     this.state = {
       configurations: [],
       configKey: "",
-      configValue: ""
-    }
+      configValue: "",
+    };
 
     this.handleConfigKeyChange = this.handleConfigKeyChange.bind(this);
     this.handleConfigValueChange = this.handleConfigValueChange.bind(this);
@@ -36,62 +33,57 @@ class Configuration extends React.Component {
 
   handleConfigKeyChange(event) {
     this.setState({ configKey: event.target.value });
-
   }
 
   handleConfigValueChange(event) {
     this.setState({ configValue: event.target.value });
-
   }
 
   handleSubmitButtonClick() {
-    if (this.state.configKey === "" || this.state.configValue===""){
-      alert("Lütfen anahtar ve değer ikilisini eksiksiz girin")
-      return 
+    if (this.state.configKey === "" || this.state.configValue === "") {
+      alert("Lütfen anahtar ve değer ikilisini eksiksiz girin");
+      return;
     }
     APIService.requests
-      .post('configuration',{ 
-        config_key:this.state.configKey,
-        config_value:this.state.configValue
+      .post("configuration", {
+        config_key: this.state.configKey,
+        config_value: this.state.configValue,
       })
-      .then(data => {
+      .then(() => {
         window.location.reload(false);
       })
-      .catch(data => {
-        console.log(data)
+      .catch((data) => {
+        console.log(data);
         AlertService.Add({
-          type: 'alert',
+          type: "alert",
           //message: translate.getText('error.' + data.response.body.error.code),
-          level: 'error',
-          autoDismiss: 5
+          level: "error",
+          autoDismiss: 5,
         });
       });
-
   }
 
   componentDidMount() {
     this.fetchConfigurations();
   }
 
-
   async fetchConfigurations() {
     await APIService.requests
-      .get('configuration')
-      .then(data => {
-        console.log(data)
-        this.setState({ configurations: data.configs })
+      .get("configuration")
+      .then((data) => {
+        console.log(data);
+        this.setState({ configurations: data.configs });
       })
-      .catch(data => {
-        console.log(data)
+      .catch((data) => {
+        console.log(data);
         AlertService.Add({
-          type: 'alert',
+          type: "alert",
           //message: translate.getText('error.' + data.response.body.error.code),
-          level: 'error',
-          autoDismiss: 5
+          level: "error",
+          autoDismiss: 5,
         });
       });
   }
-
 
   render() {
     return (
@@ -105,27 +97,49 @@ class Configuration extends React.Component {
               <CCard>
                 <CCardHeader>
                   {translate.translate("configuration.add_new_configuration")}
-
                 </CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="config-key">{translate.translate("configuration.key")}</CLabel>
+                      <CLabel htmlFor="config-key">
+                        {translate.translate("configuration.key")}
+                      </CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
-                      <CInput id="config-key" onChange={this.handleConfigKeyChange} name="text-input" placeholder={translate.translate("configuration.key_placeholder")} />
+                      <CInput
+                        id="config-key"
+                        onChange={this.handleConfigKeyChange}
+                        name="text-input"
+                        placeholder={translate.translate(
+                          "configuration.key_placeholder"
+                        )}
+                      />
                     </CCol>
                   </CFormGroup>
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="config-value">{translate.translate("configuration.value")}</CLabel>
+                      <CLabel htmlFor="config-value">
+                        {translate.translate("configuration.value")}
+                      </CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
-                      <CInput id="config-value" onChange={this.handleConfigValueChange} name="text-input" placeholder={translate.translate("configuration.value_placeholder")} />
+                      <CInput
+                        id="config-value"
+                        onChange={this.handleConfigValueChange}
+                        name="text-input"
+                        placeholder={translate.translate(
+                          "configuration.value_placeholder"
+                        )}
+                      />
                     </CCol>
                   </CFormGroup>
 
-                  <CButton onClick={this.handleSubmitButtonClick} color="success">{translate.translate("configuration.add_config")}</CButton>
+                  <CButton
+                    onClick={this.handleSubmitButtonClick}
+                    color="success"
+                  >
+                    {translate.translate("configuration.add_config")}
+                  </CButton>
                 </CCardBody>
               </CCard>
               <CCard>
@@ -140,16 +154,14 @@ class Configuration extends React.Component {
                     itemsPerPage={10}
                     pagination
                   />
-
                 </CCardBody>
               </CCard>
-
             </CCol>
           </div>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default Configuration
+export default Configuration;

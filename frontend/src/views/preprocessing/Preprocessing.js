@@ -1,11 +1,10 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React from 'react'
 import {
-  CCol, CBadge,
+  CCol,
   CAlert,
   CCard,
   CCardBody,
   CCardHeader,
-  CDataTable,
   CButton,
   CRow,
   CSelect,
@@ -20,7 +19,7 @@ import APIService from '../../services/APIService'
 import AlertService from '../../services/AlertService'
 
 import translate from '../../services/i18n/Translate';
-const fields = ['filename', 'description', 'row_count', 'filetype', 'created_at']
+//const fields = ['filename', 'description', 'row_count', 'filetype', 'created_at']
 
 class Preprocessing extends React.Component {
   constructor(props) {
@@ -107,7 +106,7 @@ class Preprocessing extends React.Component {
 
   handleSubmitButtonClick(event) {
     this.setState({ isWaiting: true })
-    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId == -1) {
+    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId === -1) {
       alert("İşleme başlamadan önce lütfen verisetini ve ilgili kolonu seçin !")
       this.setState({ isWaiting: false })
       return

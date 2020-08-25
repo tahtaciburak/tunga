@@ -1,14 +1,11 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React from 'react'
 import {
-  CCol, CBadge,
+  CCol,
   CCard,
   CCardBody,
   CCardHeader,
-  CDataTable,
   CButton,
-  CRow,
   CSelect,
-  CInputCheckbox,
   CLabel,
   CFormGroup
 } from '@coreui/react'

@@ -3,7 +3,6 @@ import {
     CButton,
     CCard,
     CCardBody,
-    CCardFooter,
     CCol,
     CContainer,
     CForm,
@@ -12,7 +11,6 @@ import {
     CInputGroupPrepend,
     CInputGroupText,
     CRow,
-    CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 

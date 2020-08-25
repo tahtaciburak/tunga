@@ -4,8 +4,13 @@ import en from './en';
 export default {
     translate: function(key,extras){
         let splittedKeys = key.split('.');
-        
-        let target = tr; // set your langugage
+        let selectedLanguage = "tr";
+        let target = null;
+        if (selectedLanguage === "tr"){
+            target = tr;
+        } else{
+            target = en; // set your langugage
+        }
 
         splittedKeys.forEach(element => {
             target = target[element];      

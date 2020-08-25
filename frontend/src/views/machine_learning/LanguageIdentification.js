@@ -1,15 +1,12 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React from 'react'
 import {
-  CCol, CBadge,
+  CCol,
   CCard,
   CCardBody,
   CCardHeader,
-  CDataTable,
   CAlert,
   CButton,
-  CRow,
   CSelect,
-  CInputCheckbox,
   CLabel,
   CFormGroup
 } from '@coreui/react'
@@ -70,7 +67,7 @@ class LanguageIdentification extends React.Component {
 
   handleSubmitButtonClick(event){
     this.setState({ isWaiting: true })
-    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId == -1) {
+    if (this.state.selectedColumnId === -1 && this.state.selectedDatasetId === -1) {
       alert("İşleme başlamadan önce lütfen verisetini ve ilgili kolonu seçin !")
       this.setState({ isWaiting: false })
       return

@@ -1,19 +1,15 @@
-import React, { } from 'react'
+import React from 'react'
 import {
   CCol, CCard,
   CCardBody,
   CCardHeader,
-  CWidgetProgressIcon,
   CButton,
   CFormGroup,
   CInput,
-  CInputFile,
   CLabel,
-  CRow,
   CAlert
 } from '@coreui/react'
 
-import CIcon from '@coreui/icons-react'
 import Loader from 'react-loader-spinner'
 
 import translate from '../../services/i18n/Translate';
@@ -24,7 +20,6 @@ class ImportFromTwitter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      is_configured: true,
       dataset_name: "",
       dataset_description: "",
       username: "",

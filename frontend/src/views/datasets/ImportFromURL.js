@@ -3,17 +3,13 @@ import {
   CCol, CCard,
   CCardBody,
   CCardHeader,
-  CWidgetProgressIcon,
   CButton,
   CFormGroup,
   CInput,
-  CInputFile,
   CLabel,
-  CRow,
   CAlert
 } from '@coreui/react'
 
-import CIcon from '@coreui/icons-react'
 
 import translate from '../../services/i18n/Translate';
 
@@ -29,7 +25,7 @@ class ImportFromURL extends React.Component {
       dataset_url: "",
       is_show_result_alert: false,
       is_upload_successful: false,
-    }
+    };
 
     this.handleDatasetNameChange = this.handleDatasetNameChange.bind(this);
     this.handleDatasetDescriptionChange = this.handleDatasetDescriptionChange.bind(this);

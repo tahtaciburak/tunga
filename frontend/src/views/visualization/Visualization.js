@@ -1,25 +1,19 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React from 'react'
 import {
-  CCol, CBadge,
+  CCol,
   CCard,
   CCardBody,
   CCardHeader,
   CAlert,
-  CDataTable,
-  CButton,
   CRow,
   CSelect,
-  CInputCheckbox,
   CLabel,
   CFormGroup
 } from '@coreui/react'
 import {
   CChartBar,
-  CChartLine,
-  CChartDoughnut,
   CChartRadar,
   CChartPie,
-  CChartPolarArea
 } from '@coreui/react-chartjs'
 //import usersData from '../users/UsersData'
 import APIService from '../../services/APIService'

@@ -1,13 +1,12 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React from 'react'
 import {
-  CCol, CBadge,
+  CCol,
   CCard,
   CCardBody,
   CCardHeader,
   CDataTable,
   CButton,
   CLabel,
-  CRow
 } from '@coreui/react'
 
 //import usersData from '../users/UsersData'
@@ -15,7 +14,7 @@ import APIService from '../../services/APIService'
 import AlertService from '../../services/AlertService'
 
 import translate from '../../services/i18n/Translate';
-const fields = ['filename', 'description', 'row_count', 'filetype', 'created_at']
+//const fields = ['filename', 'description', 'row_count', 'filetype', 'created_at']
 
 class InspectDataset extends React.Component {
   constructor(props) {
