@@ -22,13 +22,13 @@ normalization_stub = z_normalization_g.NormalizationServiceStub(channel)
 
 stopwords = []
 try:
-    with open("../models/stopwords.txt", "r") as f:
-        for line in f.readlines():
-            stopwords.append(line.strip())
+    stopwords_paths = ["../models/stopwords.txt", "~/tunga/models/stopwords.txt"]
+    for item in stopwords_paths:
+        with open("../models/stopwords.txt", "r") as f:
+            for line in f.readlines():
+                stopwords.append(line.strip())
+    stopwords = list(set(stopwords))
 except:
-    with open("~/tunga/models/stopwords.txt", "r") as f:
-        for line in f.readlines():
-            stopwords.append(line.strip())
     print("Stopwords not found download it from web")
 
 
