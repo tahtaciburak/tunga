@@ -269,7 +269,7 @@ class TwitterCheckAPI(MethodView):
             token_secret = Configuration.query.filter_by(config_key="TWITTER_TOKEN_SECRET",
                                                          user_id=user.id).order_by(
                 Configuration.id.desc()).first().config_value
-            if len(api_key)>0 and len(api_secret)>0 and len(access_token)>0 and len(token_secret)>0:
+            if len(api_key) > 0 and len(api_secret) > 0 and len(access_token) > 0 and len(token_secret) > 0:
                 return jsonify({"status": "success"})
             else:
                 return jsonify({"status": "fail"})
@@ -297,7 +297,7 @@ class RemoteFileFetchAPI(MethodView):
             dataset = Dataset(
                 filename=dataset_name,
                 description=dataset_description,
-                filepath=os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + file_name,
+                filepath=os.path.join(app.config['UPLOAD_PATH'], str(user.id)) + "/" + file_name,
                 file_type=dm.dataset_file_type,
                 size=0,  # TODO: fix here
                 row_count=dm.analytics_result["n_rows"],
